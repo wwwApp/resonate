@@ -1,21 +1,70 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
 
-export default class App extends React.Component {
+import React, { Component } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import Playlist from "./app/views/Playlist";
+import Player from "./app/views/Player";
+import { Colors } from "./app/styles/Colors";
+
+/**
+ * Some random pages for tab navigation demo
+ */
+class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+      <View>
+        <Text style={{ fontSize: 50, marginTop: 300, textAlign: "center" }}>
+          {" "}
+          HOME PAGE{" "}
+        </Text>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+class First extends Component {
+  render() {
+    return (
+      <View>
+        <Text style={{ fontSize: 50, marginTop: 300, textAlign: "center" }}>
+          {" "}
+          FIRST PAGE{" "}
+        </Text>
+      </View>
+    );
+  }
+}
+
+/**
+ * Tab Navigation Config.
+ */
+
+const BottomNav = createBottomTabNavigator(
+  {
+    Home: { screen: Home },
+    First: { screen: First },
+    Playlist: { screen: Playlist },
+    Player: { screen: Player }
   },
-});
+  {
+    tabBarOptions: {
+      activeTintColor: "#F8F8F8",
+      inactiveTintColor: Colors.tabIconInactive,
+      style: {
+        backgroundColor: Colors.tabNav
+      }
+    }
+  }
+);
+
+const App = createAppContainer(BottomNav);
+export default App;
+
+const styles = StyleSheet.create({});
