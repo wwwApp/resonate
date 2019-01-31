@@ -17,12 +17,36 @@ import { Colors } from "./app/styles/Colors";
  * Some random pages for tab navigation demo
  */
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { dataSource: "test" };
+
+  }
+
+  componentDidMount(){
+    return fetch('http://resonate.openode.io/api/playlists')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        this.setState({
+          dataSource: JSON.stringify(responseJson),
+        }, function(){
+
+        });
+
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+  }
+
   render() {
     return (
       <View>
-        <Text style={{ fontSize: 50, marginTop: 300, textAlign: "center" }}>
+        <Text style={{ fontSize: 16, marginTop: 0}}>
           {" "}
-          HOME PAGE{" "}
+          HOME PAGE
+          {this.state.dataSource}
         </Text>
       </View>
     );
@@ -66,5 +90,6 @@ const BottomNav = createBottomTabNavigator(
 
 const App = createAppContainer(BottomNav);
 export default App;
+
 
 const styles = StyleSheet.create({});
