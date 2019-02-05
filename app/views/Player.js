@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "./../components/Button";
 import { AlbumVis } from "./../components/AlbumVis";
+import { PlayControl } from "./../components/PlayControl";
 import { Colors } from "../styles/Colors";
 
 class Player extends Component {
@@ -44,6 +45,8 @@ class Player extends Component {
             {this.state.currentTrack.artist}
           </Text>
         </View>
+
+        <PlayControl />
       </View>
     );
   }

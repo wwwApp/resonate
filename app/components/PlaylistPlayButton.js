@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Alert } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
-class PlayButton extends Component {
+class PlaylistPlayButton extends Component {
   /**
    *
    * @param {required} props
@@ -12,7 +12,7 @@ class PlayButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggle: false,
+      isPlaying: false,
       toggleIcon: "ios-play"
     };
   }
@@ -20,14 +20,14 @@ class PlayButton extends Component {
   /**
    * Handle the play/pause button press event.
    */
-  onPress() {
+  play() {
     /**
      * If you name your variables the same name as your state
      * properties, you can simplify your setState call.
      */
-    const toggle = !this.state.toggle;
-    const toggleIcon = toggle ? "ios-pause" : "ios-play";
-    this.setState({ toggle, toggleIcon });
+    const isPlaying = !this.state.isPlaying;
+    const toggleIcon = isPlaying? "ios-pause" : "ios-play";
+    this.setState({ isPlaying, toggleIcon });
   }
 
   render() {
@@ -39,14 +39,14 @@ class PlayButton extends Component {
            * ✨ You have to bind the context in order for the
            * method to have access to the state object.
            */
-          onPress={this.onPress.bind(this)}
+          onPress={this.play.bind(this)}
         >
           <Icon
             style={[
                 /**
                  * toggle between {pause_styleSheet} : {play_styleSheet}
                  */
-              this.state.toggle
+              this.state.isPlaying
                 ? { marginTop: 5 }
                 : { marginLeft: 5, marginTop: 5 }
             ]}
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   iconStyle: {}
 });
 
-export { PlayButton };
+export { PlaylistPlayButton };

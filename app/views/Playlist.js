@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { TrackList } from "./../components/TrackList";
 import { Button } from "./../components/Button";
 import { Tag } from "./../components/Tag";
-import { PlayButton } from "./../components/PlayButton";
+import { PlaylistPlayButton } from "./../components/PlaylistPlayButton";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
 
@@ -52,7 +52,7 @@ class Playlist extends Component {
         colors={[Colors.tintTopGradient, Colors.tintBottomGradient]}
       >
         <View style={styles.playButton}>
-          <PlayButton />
+          <PlaylistPlayButton />
         </View>
         <View style={styles.topIconGroup}>
           <Button type="return" />
