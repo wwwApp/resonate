@@ -21,13 +21,12 @@ class PlaylistPlayButton extends Component {
    * Handle the play/pause button press event.
    */
   play() {
-    /**
-     * If you name your variables the same name as your state
-     * properties, you can simplify your setState call.
-     */
+    // Toggle state and icon
     const isPlaying = !this.state.isPlaying;
     const toggleIcon = isPlaying? "ios-pause" : "ios-play";
     this.setState({ isPlaying, toggleIcon });
+
+    // Code for play the song
   }
 
   render() {

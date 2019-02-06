@@ -27,9 +27,9 @@ class PlayControl extends Component {
   /**
    * Handle the play/pause button press event.
    */
-  play() {
-    this.togglePlay();
-    this.progressSeeker();
+  async play() {
+    await this.togglePlay()
+    await this.progressSeeker()
   }
 
   /**
@@ -38,14 +38,15 @@ class PlayControl extends Component {
   togglePlay() {
     const isPlaying = !this.state.isPlaying;
     const toggleIcon = isPlaying ? "ios-pause" : "ios-play";
-    this.setState({ isPlaying, toggleIcon });
+    this.setState({ isPlaying, toggleIcon })
   }
 
   /**
    * Handle the progress animation on seeker
    */
   progressSeeker() {
-    if (this.state.isPlaying === false) {
+    console.log(this.state.isPlaying)
+    if (this.state.isPlaying === true) {
       this.state.timer = setInterval(() => {
         let updatedCounter = this.state.counter + 1;
         let progress = (updatedCounter / this.state.trackDuration) * 100;
@@ -59,7 +60,7 @@ class PlayControl extends Component {
         }
       }, 1000);
     } else {
-      clearInterval(this.state.timer);
+      clearInterval(this.state.timer)
     }
   }
 
@@ -67,18 +68,22 @@ class PlayControl extends Component {
    * Handle forward event
    */
   forward() {
-    this.setState({ counter: 0, percentage: 0 });
+    this.setState({ counter: 0, percentage: 0 })
     clearInterval(this.state.timer);
-    this.togglePlay();
+    this.progressSeeker()
+
+    // Code for go forward
   }
 
   /**
    * Handle backward event
    */
   backward() {
-    this.setState({ counter: 0, percentage: 0 });
+    this.setState({ counter: 0, percentage: 0 })
     clearInterval(this.state.timer);
-    this.togglePlay();
+    this.progressSeeker()
+    
+    // Code for go backward
   }
 
   render() {
