@@ -6,14 +6,14 @@ import { Tag } from "./../components/Tag";
 import { PlayButton } from "./../components/PlayButton";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
+import {getPlaylist} from "../redux/reducers/playlist.reducer";
+import {connect} from "react-redux";
 
 class Playlist extends Component {
-  /**
-   *
-   * @param {required} props
-   * Use the class constructor to set the initial state
-   * for your component.
-   */
+   componentDidMount() {
+    this.props.getPlaylist('5c50765a4f58cc4b8f5ecc12');
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -48,36 +48,37 @@ class Playlist extends Component {
       // Container View
       // Change the color values based on mood calculated from server for bg color
       <LinearGradient
-        style={styles.container}
-        colors={[Colors.tintTopGradient, Colors.tintBottomGradient]}
+      style={styles.container}
+      colors={[Colors.tintTopGradient, Colors.tintBottomGradient]}
       >
-        <View style={styles.playButton}>
-          <PlayButton />
-        </View>
-        <View style={styles.topIconGroup}>
-          <Button type="return" />
-          <View style={styles.rightIcon}>
-            <Button type="heart" />
-            <Button type="more" />
-          </View>
-        </View>
-
-        <View>
-          <Text style={[styles.playlistItem, styles.title, styles.txtBold]}>
-            {this.state.title}
-          </Text>
-          <Text style={[styles.playlistItem, styles.location, styles.txtLight]}>
-            {this.state.location}
-          </Text>
-          <View style={[styles.playlistItem, styles.tag]}>
-            <Tag tagData={this.state.tag} />
-          </View>
-          <Text style={styles.playlistItem}>{this.state.description}</Text>
-          <Text style={[styles.playlistItem, styles.user, styles.txtLight]}>
-            {this.state.user}
-          </Text>
-        </View>
-        <TrackList trackData={this.state.tracks} />
+          { !this.props.isLoading && [
+          <View style={styles.playButton}>
+            <PlayButton />
+          </View>,
+          <View style={styles.topIconGroup}>
+            <Button type="return" />
+            <View style={styles.rightIcon}>
+              <Button type="heart" />
+              <Button type="more" />
+            </View>
+          </View>,
+          <View>
+            <Text style={[styles.playlistItem, styles.title, styles.txtBold]}>
+              {this.props.playlist.title}
+            </Text>
+            <Text style={[styles.playlistItem, styles.location, styles.txtLight]}>
+              {this.props.playlist.location_name || "location"}
+            </Text>
+            <View style={[styles.playlistItem, styles.tag]}>
+              <Tag tagData={this.props.playlist.tags} />
+            </View>
+            <Text style={styles.playlistItem}>{this.props.playlist.description}</Text>
+            <Text style={[styles.playlistItem, styles.user, styles.txtLight]}>
+              @{this.props.playlist.user.display_name}
+            </Text>
+          </View>,
+          <TrackList trackData={this.props.playlist.tracks} />
+        ]}
       </LinearGradient>
     );
   }
@@ -132,4 +133,15 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Playlist;
+
+
+const mapStateToProps = state => ({
+  playlist: state.playlist.playlist,
+  isLoading: state.playlist.loading
+});
+
+const mapDispatchToProps = {
+  getPlaylist
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

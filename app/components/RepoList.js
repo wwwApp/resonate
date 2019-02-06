@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  let storedRepositories = state.repos.map(repo => ({ key: repo.id, ...repo }));
+  let storedRepositories = state.test.repos.map(repo => ({ key: repo.id, ...repo }));
   return {
     repos: storedRepositories
   };

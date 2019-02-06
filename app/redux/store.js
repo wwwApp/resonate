@@ -8,7 +8,7 @@ import rootReducer from './reducers/root.reducer';
 
 
 const client = axios.create({
-	baseURL: 'https://api.github.com',
+	baseURL: 'http://resonate.openode.io/api/',
 	responseType: 'json'
   });
 

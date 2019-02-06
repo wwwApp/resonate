@@ -12,21 +12,18 @@ class TrackList extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      trackData: props.trackData
-    };
   }
 
   render() {
     return (
       // Scrollview of available track item
       <ScrollView style={styles.trackListStyle}>
-        {this.state.trackData.map((item, index) => (
+        {this.props.trackData.map((item, index) => (
           <View key={index} style={styles.trackContainer}>
             <View style={styles.trackInfoStyle}>
-              <Text style={styles.trackItem}>{item.trackInfo}</Text>
+              <Text style={styles.trackItem}>{item.title}</Text>
               <Text style={[styles.trackItem, styles.arist, styles.txtLight]}>
-                {item.artistInfo}
+                {item.artists.join(", ")}
               </Text>
             </View>
             <View style={styles.trackIconStyle}>
