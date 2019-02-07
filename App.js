@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
 
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -12,19 +5,18 @@ import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import Playlist from "./app/views/Playlist";
 import Player from "./app/views/Player";
 import { Colors } from "./app/styles/Colors";
+import RepoList from "./app/components/RepoList"
 
 /**
  * Some random pages for tab navigation demo
  */
 class Home extends Component {
+
   render() {
     return (
-      <View>
-        <Text style={{ fontSize: 50, marginTop: 300, textAlign: "center" }}>
-          {" "}
-          HOME PAGE{" "}
-        </Text>
-      </View>
+        <View>
+          {/* <RepoList /> */}
+        </View>
     );
   }
 }
@@ -66,5 +58,6 @@ const BottomNav = createBottomTabNavigator(
 
 const App = createAppContainer(BottomNav);
 export default App;
+
 
 const styles = StyleSheet.create({});
