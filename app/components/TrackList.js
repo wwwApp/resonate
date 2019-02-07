@@ -16,7 +16,9 @@ class TrackList extends Component {
 
   render() {
     return (
-      // Scrollview of available track item
+      /** 
+       * Scrollview of available track item
+      */
       <ScrollView style={styles.trackListStyle}>
         {this.props.trackData.map((item, index) => (
           <View key={index} style={styles.trackContainer}>

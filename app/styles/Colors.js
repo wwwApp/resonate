@@ -5,7 +5,9 @@ const Colors = {
     tabNav : '#383837',
     tabIconInactive: '#E2E2E2',
     defaultIcon: '#E2E2E2',
-    defaultFont: 'white'
+    defaultFont: 'white',
+    seekerInactive: '#AFAFAF',
+    seekerActive: 'white'
 }
 
 export { Colors };
