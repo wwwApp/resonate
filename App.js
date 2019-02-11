@@ -6,6 +6,7 @@ import Playlist from "./app/views/Playlist";
 import Player from "./app/views/Player";
 import { Colors } from "./app/styles/Colors";
 import RepoList from "./app/components/RepoList"
+import TrackStack from "./app/components/TrackStack"
 
 /**
  * Some random pages for tab navigation demo
@@ -15,7 +16,7 @@ class Home extends Component {
   render() {
     return (
         <View>
-          {/* <RepoList /> */}
+          <TrackStack />
         </View>
     );
   }
@@ -26,8 +27,7 @@ class First extends Component {
     return (
       <View>
         <Text style={{ fontSize: 50, marginTop: 300, textAlign: "center" }}>
-          {" "}
-          FIRST PAGE{" "}
+          HELLO WORLD
         </Text>
       </View>
     );
