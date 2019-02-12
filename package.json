@@ -10,6 +10,7 @@
         "axios": "^0.18.0",
         "react": "16.6.3",
         "react-native": "^0.57.8",
+        "react-native-color-wheel": "^0.1.6",
         "react-native-linear-gradient": "react-native-community/react-native-linear-gradient",
         "react-native-paper": "^2.6.3",
         "react-native-progress": "^3.5.0",
