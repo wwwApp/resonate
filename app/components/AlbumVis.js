@@ -11,7 +11,8 @@ class AlbumVis extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        imageURI: props.albumSource
+        imageURI: props.albumSource,
+        imageSize: props.size
     };
   }
 
@@ -19,7 +20,7 @@ class AlbumVis extends Component {
     return (
       <View>
           <Image source={{uri:this.state.imageURI}}
-              style={{width: 200, height: 200, borderRadius: 200/2}} />
+              style={{width: this.state.imageSize, height: this.state.imageSize, borderRadius: this.state.imageSize/2}} />
       </View>
     );
   }
