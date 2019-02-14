@@ -43,6 +43,22 @@ class Playlist extends Component {
     };
   }
 
+  onPress = () => {
+    if (this.state.isOpen) {
+      Animated.spring(this.state.topPadding, {
+        to: 0,
+        friction: 5
+      })
+    } else {
+      Animated.spring(this.state.topPadding, {
+        to: 300,
+        friction: 5
+      })
+    }
+
+    this.setState({isOpen: !this.state.isOpen})
+  }
+
   render() {
     return (
       // Container View
@@ -59,6 +75,7 @@ class Playlist extends Component {
             <Button type="return" />
             <View style={styles.rightIcon}>
               <Button type="heart" />
+              
               <Button type="more" />
             </View>
           </View>,

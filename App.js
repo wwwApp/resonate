@@ -5,8 +5,7 @@ import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import Playlist from "./app/views/Playlist";
 import Player from "./app/views/Player";
 import { Colors } from "./app/styles/Colors";
-import RepoList from "./app/components/RepoList"
-import TrackStack from "./app/components/TrackStack"
+import {TrackStack} from "./app/components/TrackStack";
 
 /**
  * Some random pages for tab navigation demo
@@ -15,7 +14,7 @@ class Home extends Component {
 
   render() {
     return (
-        <View>
+        <View style={{paddingTop:200}}>
           <TrackStack />
         </View>
     );
