@@ -5,13 +5,13 @@ import { PlayControl, PCBackward, PCForward, PCPlay } from "./PlayControl";
 import { Seeker } from "./Seeker";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "../styles/Colors";
-import GestureRecognizer from "react-native-swipe-gestures";
+/* import GestureRecognizer from "react-native-swipe-gestures"; */
 
 /**
  * All screens/views should be styled with flexbox in order for player modal to work
  */
 
-class PlayerModal extends PlayControl {
+class PlayerBar extends PlayControl {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,28 +28,26 @@ class PlayerModal extends PlayControl {
       timer: null,
       counter: 0,
       percentage: 0,
-      isModalVisible: props.isVisible
+      isVisible: props.isVisible
     };
   }
 
   /**
    * Handle swipe-up event on player modal to open player compo/view
    */
-  onSwipeUp() {
+ /*  onSwipeUp() {
     this.setState({ isModalVisible: false})
     console.log("swiped up - open the player");
-    console.log(this.state.isModalVisible)
-
-  }
+  } */
 
   render() {
-    if (this.state.isModalVisible === true) {
+    if (this.state.isVisible === true) {
       return (
         <LinearGradient
           style={styles.modalContainer}
           colors={[Colors.minPlayerTopGradient, Colors.minPlayerBottomGradient]}
         >
-          <GestureRecognizer onSwipeUp={() => this.onSwipeUp()}>
+          {/* <GestureRecognizer onSwipeUp={() => this.onSwipeUp()}> */}
             <View style={styles.firstRow}>
               <TouchableOpacity onPress={this.backward.bind(this)}>
                 <PCBackward size={35} />
@@ -76,7 +74,7 @@ class PlayerModal extends PlayControl {
             <View style={styles.secondRow}>
               <Seeker percentage={this.state.percentage} />
             </View>
-          </GestureRecognizer>
+          {/* </GestureRecognizer> */}
         </LinearGradient>
       );
     } else {
@@ -87,11 +85,6 @@ class PlayerModal extends PlayControl {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    height: "auto",
-    width: "100%",
-    position: "absolute",
-    alignSelf: "flex-end",
-    bottom: 0
   },
   firstRow: {
     flexDirection: "row",
@@ -111,4 +104,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { PlayerModal };
+export { PlayerBar };
