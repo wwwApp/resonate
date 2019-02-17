@@ -206,7 +206,7 @@ class TrackStack extends Component {
     this.setState({dragData})
   }
 
-  onStopDrag = (item,index, isBottom) => {
+  onStopDrag = (item, index, isBottom) => {
     if (item === null) {
       Animated.spring(this.state.dragData.marginLeft, {
         toValue: 0,
@@ -225,17 +225,18 @@ class TrackStack extends Component {
         let tempB = isBottom ? this.state.listA : this.state.listB;
         tempA.splice(index, 1);
         tempB.splice(index, 0, item);
+        console.log(index, isBottom, item);
         this.setState({
           dragData: {
             index: 0,
             marginLeft: new Animated.Value(0),
             marginAdjacent: new Animated.Value(0)
           },
-          dragging: false,
-          listA: tempA,
-          listB: tempB
+          listA: isBottom ? tempB : tempA,
+          listB: isBottom ? tempA : tempB
         })
         this.state.dragData.marginAdjacent.setValue(0)
+        this.state.dragData.marginLeft.setValue(0)
       });
       this.setState({ dragging: false })
     }
@@ -251,14 +252,14 @@ class TrackStack extends Component {
   render() {
     return (
       <View>
-        <ScrollView snapToInterval={styles.trackView.width + styles.trackView.marginRight} horizontal={true} style={styles.stack} scrollEnabled={!this.state.dragging} onScroll={this.handleScroll}>
+        <ScrollView scrollEventThrottle={32} snapToInterval={styles.trackView.width + styles.trackView.marginRight} horizontal={true} style={styles.stack} scrollEnabled={!this.state.dragging} onScroll={this.handleScroll}>
           {this.state.listA.map((item, index) => (
-            <TrackView track={item} isBottom={false} dragFrom={this.state.dragFromTop}key={item.id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index) => {this.onStopDrag(item, index)}} />
+            <TrackView track={item} isBottom={false} dragFrom={this.state.dragFromTop}key={item.id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index) => {this.onStopDrag(item, index, false)}} />
           ))}
         </ScrollView>
-        <ScrollView snapToInterval={styles.trackView.width + styles.trackView.marginRight} horizontal={true} style={styles.stack} scrollEnabled={!this.state.dragging} onScroll={this.handleScroll}>
+        <ScrollView scrollEventThrottle={32} snapToInterval={styles.trackView.width + styles.trackView.marginRight} horizontal={true} style={styles.stack} scrollEnabled={!this.state.dragging} onScroll={this.handleScroll}>
           {this.state.listB.map((item, index) => (
-            <TrackView track={item} isBottom={true} dragFrom={!this.state.dragFromTop} key={item.id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item) => {this.onStopDrag(item)}} />
+            <TrackView track={item} isBottom={true} dragFrom={!this.state.dragFromTop} key={item.id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index) => {this.onStopDrag(item,index, true)}} />
           ))}
         </ScrollView>
       </View>
