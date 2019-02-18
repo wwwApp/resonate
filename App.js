@@ -6,7 +6,7 @@ import Player from "./app/components/Player";
 import { PlayerBar } from "./app/components/PlayerBar";
 import { Colors } from "./app/styles/Colors";
 import RepoList from "./app/components/RepoList";
-/* import Swiper from "react-native-swiper"; */
+import Home from "./app/views/Home"
 
 /**
  * Some random pages for tab navigation demo
@@ -57,17 +57,6 @@ class Test1 extends Component {
   }
 }
 
-class Test2 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render(){
-    return(
-      <Text>Map</Text>
-    );
-  }
-}
 
 /**
  * Tab Navigation Config.
@@ -77,7 +66,7 @@ const BottomNav = createBottomTabNavigator(
   {
     /* Home: { screen: Home }, */
     Test1: { screen: Test1 },
-    Test2: { screen: Test2 },
+    Home: { screen: Home },
     Playlist: { screen: Playlist }
   },
   {
