@@ -7,7 +7,7 @@ var defaultState = {
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case TOGGLE_PLAYER_VIEW:
-      return { ...state, isFull: !isFull };
+      return { ...state, isFull: !state.isFull };
     default:
       return state;
   }

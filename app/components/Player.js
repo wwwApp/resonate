@@ -7,7 +7,7 @@ import { Colors } from "../styles/Colors";
 import { PlayerBar } from "./PlayerBar";
 import GestureRecognizer from "react-native-swipe-gestures";
 import { connect } from "react-redux";
-import togglePlayerView from "./../redux/reducers/player.reducer";
+import {togglePlayerView} from "./../redux/reducers/player.reducer";
 
 class Player extends Component {
   /**
@@ -151,11 +151,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export { Player };
-
-// This function provides a means of sending actions so that data in the Redux store
-// can be modified. In this example, calling this.props.addToCounter() will now dispatch
-// (send) an action so that the reducer can update the Redux state.
 function mapDispatchToProps(dispatch) {
   return {
     toggle: () => dispatch(togglePlayerView())

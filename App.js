@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Modal } from "react-native";
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import Playlist from "./app/views/Playlist";
-import { Player } from "./app/components/Player";
+import Player from "./app/components/Player";
 import { PlayerBar } from "./app/components/PlayerBar";
 import { Colors } from "./app/styles/Colors";
 import RepoList from "./app/components/RepoList";
