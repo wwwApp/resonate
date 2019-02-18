@@ -129,10 +129,11 @@ class TrackView extends Component {
     });
 
     this.state.pan.setValue({ x: 0, y: 0 });
-    if (!this.props.dragFrom && (this.props.dragData.index == this.props.i ) && (this.props.transitioning)) {
+    let fromOffset = (this.props.isBottom) ? this.props.offsets.listB : this.props.offsets.listA;
+    let toOffset = (this.props.isBottom) ? this.props.offsets.listA : this.props.offsets.listB;
+    if (!this.props.dragFrom && (this.props.dragData.index + fromOffset == this.props.i + toOffset ) && (this.props.transitioning)) {
       let multiplier = (this.props.isBottom) ? 1 : -1;
       let distance =( multiplier ) * this.props.dragData.dragDistance - (multiplier * (styles.trackView.height + styles.stack.marginTop));
-      console.log(distance);
       this.animateIn(distance);
     }
   }
@@ -179,17 +180,19 @@ class TrackView extends Component {
       insertStyle = {
         marginLeft: this.props.dragData.marginLeft,
         zIndex: 0,
-        backgroundColor: '#FAA'
+        backgroundColor: '#55F',
       }
-    } if (this.props.dragFrom && (this.props.dragData.index == this.props.i - 1)) {
+    } if (this.props.dragFrom && (this.props.dragData.index - increment == this.props.i - 1)) {
       insertStyle = {
         marginLeft: this.props.dragData.marginAdjacent,
-        zIndex: 0
+        zIndex: 0,
+        backgroundColor: '#5F5',
       }
-    } if (!this.props.dragFrom && (this.props.dragData.index == this.props.i ) && (this.props.transitioning)) {
+    } if (!this.props.dragFrom && (this.props.dragData.index + fromOffset == this.props.i + toOffset ) && (this.props.transitioning)) {
       insertStyle = {
         marginRight: -1 * (styles.trackView.width),
-        backgroundColor: '#F55'
+        backgroundColor: '#F55',
+        zIndex: 2
       }
     }
 
@@ -246,33 +249,31 @@ class TrackStack extends Component {
         friction: 12
       }).start();
     } else {
+      this.state.dragData.marginAdjacent.setValue(styles.trackView.width + styles.trackView.marginRight);
       Animated.spring(this.state.dragData.marginAdjacent, {
-        toValue: -(styles.trackView.width + styles.trackView.marginRight),
+        toValue: 0,
         friction: 12
       }).start();
       Animated.spring(this.state.dragData.marginLeft, {
         toValue: (styles.trackView.width + styles.trackView.marginRight),
         friction: 12
       }).start(() => {
-        this.state.dragData.marginAdjacent.setValue(0);
         this.state.dragData.marginLeft.setValue(0);
         this.setState({insertTransitioning: false});
       })
       let tempA = isBottom ? this.state.listB : this.state.listA;
       let tempB = isBottom ? this.state.listA : this.state.listB;
-      // let tempAOffset = isBottom ? this.state.offsets.listB : this.state.offsets.listA;
-      // let tempBOffset = isBottom ? this.state.offsets.listA : this.state.offsets.listB;
-      // let offset = index + tempAOffset - tempBOffset;
-      // console.log(index + tempAOffset - tempBOffset);
+      let tempAOffset = isBottom ? this.state.offsets.listB : this.state.offsets.listA;
+      let tempBOffset = isBottom ? this.state.offsets.listA : this.state.offsets.listB;
+      let offset = index - tempAOffset + tempBOffset;
       tempA.splice(index, 1);
-      tempB.splice(index, 0, item);
+      tempB.splice(offset, 0, item);
       this.setState({
         insertTransitioning: true,
         listA: isBottom ? tempB : tempA,
         listB: isBottom ? tempA : tempB,
         dragging: false
       })
-      // this.setState({ dragging: false })
     }
     
 
