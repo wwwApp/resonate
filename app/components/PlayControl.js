@@ -163,8 +163,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30
   },
   seekerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  /*   flexDirection: "row",
+    justifyContent: "space-between", */
     backgroundColor: Colors.seekerInactive,
     marginVertical: 30
   },

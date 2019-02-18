@@ -7,7 +7,8 @@ import { Colors } from "../styles/Colors";
 import { PlayerBar } from "./PlayerBar";
 import GestureRecognizer from "react-native-swipe-gestures";
 import { connect } from "react-redux";
-import togglePlayerView from "./../redux/reducers/player.reducer";
+import { togglePlayerView } from "./../redux/reducers/player.reducer";
+/* import Modal from "react-native-modal"; */
 
 class Player extends Component {
   /**
@@ -24,8 +25,7 @@ class Player extends Component {
         artist: "Artist Name",
         album:
           "https://images-na.ssl-images-amazon.com/images/I/A1QsthUoerL._SY355_.jpg"
-      },
-      isFull: false
+      }
     };
   }
 
@@ -33,23 +33,23 @@ class Player extends Component {
    * Handle minimization of player view
    */
   minimize() {
-    this.setState({ isModalVisible: true });
     console.log("click - close the player");
-    console.log(this.state.isModalVisible);
+    console.log(this.props.isFull);
+    this.props.toggle();
   }
 
   onSwipeDown() {
-    this.setState({ isModalVisible: true });
     console.log("swipe down - close the player");
-    console.log(this.state.isModalVisible);
+    console.log(this.props.isFull);
+    this.props.toggle();
   }
 
   /**
    * Handle swipe-up event on player bar to open player compo/view
    */
   onSwipeUp() {
-    /* this.setState({ isModalVisible: false}) */
     console.log("swiped up - open the player");
+    console.log(this.props.isFull);
     this.props.toggle();
   }
 
@@ -58,16 +58,12 @@ class Player extends Component {
       // Container View
       <View>
         <GestureRecognizer onSwipeUp={() => this.onSwipeUp()}>
-          <PlayerBar isVisible={true} />
+          <PlayerBar isVisible={!this.props.isFull} />
         </GestureRecognizer>
 
-        <Modal visible={false}>
-          <GestureRecognizer
-            onSwipeDown={() => {
-              this.onSwipeDown();
-            }}
-            style={styles.container}
-          >
+        <GestureRecognizer onSwipeDown={() => this.onSwipeDown()}>
+        <Modal visible={this.props.isFull} animationType={"slide"}>
+        <View style={styles.container}>
             <TouchableOpacity
               style={{ alignSelf: "flex-end" }}
               onPress={this.minimize.bind(this)}
@@ -92,25 +88,18 @@ class Player extends Component {
             </View>
 
             <View style={styles.row}>
-              <TouchableOpacity
-                onPress={() => {
-                  console.log("star");
-                }}
-              >
+              <TouchableOpacity>
                 <Button type="pl-star" />
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  console.log("shuffle");
-                }}
-              >
+              <TouchableOpacity>
                 <Button type="pl-shuffle" />
               </TouchableOpacity>
             </View>
 
             <PlayControl />
-          </GestureRecognizer>
+          </View>
         </Modal>
+        </GestureRecognizer>
       </View>
     );
   }
@@ -151,8 +140,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export { Player };
-
 // This function provides a means of sending actions so that data in the Redux store
 // can be modified. In this example, calling this.props.addToCounter() will now dispatch
 // (send) an action so that the reducer can update the Redux state.
@@ -167,7 +154,7 @@ function mapDispatchToProps(dispatch) {
 // As the count value in the Redux state
 function mapStateToProps(state) {
   return {
-    isFull: state.isFull
+    isFull: state.player.isFull
   };
 }
 
