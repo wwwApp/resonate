@@ -1,94 +1,66 @@
 import React, { Component } from 'react';
 import {
   View, StyleSheet, Text, ScrollView, PanResponder,
-  Animated
+  Animated, ImageBackground
 } from "react-native";
 import { Colors } from "../styles/Colors";
+import LinearGradient from "react-native-linear-gradient";
+
 
 var fakeData = {
   trackListA: [
     {
-      title: "track 1",
-      artists: [
-        "artist 1"
+      "artists": [
+        "Stevie Wonder"
       ],
-      album: "album 1",
-      id:"dhkfla"
+      "_id": "5c6ac32fe21c4e00360b5596",
+      "title": "Sir Duke",
+      "album": "Songs In The Key Of Life (Reissue)",
+      "image_url": "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
+      "spotify_id": "2udw7RDkldLFIPG9WYdVtT"
     },
     {
-      title: "track 2",
-      artists: [
-        "artist 2"
+      "artists": [
+        "Marvin Gaye"
       ],
-      album: "album 2",
-      id:"uhfadshl"
+      "_id": "5c6ac32fe21c4e00360b5595",
+      "title": "What's Going On",
+      "album": "What's Going On",
+      "image_url": "https://i.scdn.co/image/79cc9cb5325ea22f480989045cf62e962822803a",
+      "spotify_id": "34b3a3Pz9Jlz0092LMyNAB"
     },
     {
-      title: "track 3",
-      artists: [
-        "artist 3"
+      "artists": [
+        "Janelle Monáe"
       ],
-      album: "album 3",
-      id:"alskjhfd"
-    },
-    {
-      title: "track 7",
-      artists: [
-        "artist 7"
-      ],
-      album: "album 7",
-      id:"uhfadasdshl"
-    },
-    {
-      title: "track 8",
-      artists: [
-        "artist 8"
-      ],
-      album: "album 8",
-      id:"pagkdf"
-    },
-    {
-      title: "track 10",
-      artists: [
-        "artist 10"
-      ],
-      album: "album 10",
-      id:"fdsfdsaf"
-    },
-    {
-      title: "track 9",
-      artists: [
-        "artist 9"
-      ],
-      album: "album 9",
-      id:"pagfdsakdf"
-    },
+      "_id": "5c6ac32fe21c4e00360b5594",
+      "title": "Make Me Feel",
+      "album": "Make Me Feel",
+      "image_url": "https://i.scdn.co/image/29979c0664b46f3e54b2a3f66f448c9df11f929f",
+      "spotify_id": "79GsUxLyzxgnN4I1E11dtO"
+    }
   ],
   trackListB: [
     {
-      title: "track 4",
-      artists: [
-        "artist 4"
+      "artists": [
+        "Marvin Gaye"
       ],
-      album: "album 4",
-      id:"fdajh;fd"
+      "_id": "5c6ac32fe21c4e00360b5595",
+      "title": "What's Going On",
+      "album": "What's Going On",
+      "image_url": "https://i.scdn.co/image/79cc9cb5325ea22f480989045cf62e962822803a",
+      "spotify_id": "34b3a3Pz9Jlz0092LMyNAB"
     },
     {
-      title: "track 5",
-      artists: [
-        "artist 5"
+      "artists": [
+        "Janelle Monáe"
       ],
-      album: "album 5",
-      id:"aghldksaf"
-    },
-    {
-      title: "track 6",
-      artists: [
-        "artist 6"
-      ],
-      album: "album 6",
-      id:"fdhlsakfd"
-    },
+      "_id": "5c6ac32fe21c4e00360b5594",
+      "title": "Make Me Feel",
+      "album": "Make Me Feel",
+      "image_url": "https://i.scdn.co/image/29979c0664b46f3e54b2a3f66f448c9df11f929f",
+      "spotify_id": "79GsUxLyzxgnN4I1E11dtO"
+    }
   ]
 }
 
@@ -179,28 +151,28 @@ class TrackView extends Component {
     if (!this.props.dragFrom && (this.props.dragData.index + fromOffset == this.props.i + toOffset - increment)) {
       insertStyle = {
         marginLeft: this.props.dragData.marginLeft,
-        zIndex: 0,
-        backgroundColor: '#55F',
+        zIndex: 0
       }
     } if (this.props.dragFrom && (this.props.dragData.index - increment == this.props.i - 1)) {
       insertStyle = {
         marginLeft: this.props.dragData.marginAdjacent,
-        zIndex: 0,
-        backgroundColor: '#5F5',
+        zIndex: 0
       }
     } if (!this.props.dragFrom && (this.props.dragData.index + fromOffset == this.props.i + toOffset ) && (this.props.transitioning)) {
       insertStyle = {
         marginRight: -1 * (styles.trackView.width),
-        backgroundColor: '#F55',
         zIndex: 2
       }
     }
 
     return (
       <Animated.View {...this.panResponder.panHandlers} style={[panStyle,styles.trackView, insertStyle]}>
-        <Text>{this.props.track.title}</Text>
-        <Text>{this.props.track.artists[0]}</Text>
-        <Text>{this.props.track.album}</Text>
+        <ImageBackground source={{uri: this.props.track.image_url}} style={{width: '100%', height: '100%'}}>
+          <LinearGradient colors={['#0000', '#000B']} style={{width: '100%', height: '100%', flexDirection: "column-reverse", padding: 10}}>
+            <Text style={styles.artist}>{this.props.track.artists[0]}</Text>
+            <Text style={styles.title}>{this.props.track.title}</Text>
+          </LinearGradient>
+        </ImageBackground>
       </Animated.View>
     )
   }
@@ -309,12 +281,12 @@ class TrackStack extends Component {
       <View>
         <ScrollView snapToAlignment='right' snapToInterval={styles.trackView.width + styles.trackView.marginRight} horizontal={true} style={styles.stack} scrollEnabled={!this.state.dragging} onScroll={this.handleScrollTop} scrollEventThrottle={64}>
           {this.state.listA.map((item, index) => (
-            <TrackView transitioning={this.state.insertTransitioning} track={item} offsets={this.state.offsets} isBottom={false} dragFrom={this.state.dragFromTop} key={item.id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index, distance) => {this.onStopDrag(item, index, false, distance)}} />
+            <TrackView transitioning={this.state.insertTransitioning} track={item} offsets={this.state.offsets} isBottom={false} dragFrom={this.state.dragFromTop} key={item.spotify_id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index, distance) => {this.onStopDrag(item, index, false, distance)}} />
           ))}
         </ScrollView>
         <ScrollView snapToAlignment='right' snapToInterval={styles.trackView.width + styles.trackView.marginRight} horizontal={true} style={styles.stack} scrollEnabled={!this.state.dragging} onScroll={this.handleScrollBottom} scrollEventThrottle={64}>
           {this.state.listB.map((item, index) => (
-            <TrackView transitioning={this.state.insertTransitioning} track={item} offsets={this.state.offsets} isBottom={true} dragFrom={!this.state.dragFromTop} key={item.id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index, distance) => {this.onStopDrag(item,index, true, distance)}} />
+            <TrackView transitioning={this.state.insertTransitioning} track={item} offsets={this.state.offsets} isBottom={true} dragFrom={!this.state.dragFromTop} key={item.spotify_id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index, distance) => {this.onStopDrag(item,index, true, distance)}} />
           ))}
         </ScrollView>
       </View>
@@ -326,12 +298,24 @@ const styles = StyleSheet.create({
   trackView: {
     backgroundColor: Colors.tintBottomGradient,
     marginRight: 5,
-    width: 100,
-    height: 100
+    width: 150,
+    height: 150
   },
   stack: {
     overflow: "visible",
     marginTop: 10
+  },
+  title: {
+    fontFamily: "Avenir",
+    color: "#FFF",
+    fontWeight: "700",
+    fontSize: 16
+  },
+  artist: {
+    fontFamily: "Avenir",
+    color: "#FFF",
+    fontWeight: "400",
+    fontSize: 14
   }
 });
 
