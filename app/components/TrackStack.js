@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   View, StyleSheet, Text, ScrollView, PanResponder,
-  Animated, ImageBackground
+  Animated, ImageBackground, TextInput
 } from "react-native";
 import { Colors } from "../styles/Colors";
 import LinearGradient from "react-native-linear-gradient";
@@ -105,7 +105,7 @@ class TrackView extends Component {
     let toOffset = (this.props.isBottom) ? this.props.offsets.listA : this.props.offsets.listB;
     if (!this.props.dragFrom && (this.props.dragData.index + fromOffset == this.props.i + toOffset ) && (this.props.transitioning)) {
       let multiplier = (this.props.isBottom) ? 1 : -1;
-      let distance =( multiplier ) * this.props.dragData.dragDistance - (multiplier * (styles.trackView.height + styles.stack.marginTop));
+      let distance =( multiplier ) * this.props.dragData.dragDistance - (multiplier * (styles.trackView.height + styles.stack.marginTop + 60));
       this.animateIn(distance);
     }
   }
@@ -168,7 +168,7 @@ class TrackView extends Component {
     return (
       <Animated.View {...this.panResponder.panHandlers} style={[panStyle,styles.trackView, insertStyle]}>
         <ImageBackground source={{uri: this.props.track.image_url}} style={{width: '100%', height: '100%'}}>
-          <LinearGradient colors={['#0000', '#000B']} style={{width: '100%', height: '100%', flexDirection: "column-reverse", padding: 10}}>
+          <LinearGradient colors={['#0000', '#000E']} style={{width: '100%', height: '100%', flexDirection: "column-reverse", padding: 10}}>
             <Text style={styles.artist}>{this.props.track.artists[0]}</Text>
             <Text style={styles.title}>{this.props.track.title}</Text>
           </LinearGradient>
@@ -185,7 +185,7 @@ class TrackStack extends Component {
       listA: fakeData.trackListA,
       listB: fakeData.trackListB,
       dragging: false,
-      totalDragDistance: (styles.trackView.height + styles.stack.marginTop),
+      totalDragDistance: (styles.trackView.height + styles.stack.marginTop + 60),
       dragData: {
         index: 0,
         marginLeft: new Animated.Value(0),
@@ -278,15 +278,64 @@ class TrackStack extends Component {
 
   render() {
     return (
-      <View>
-        <ScrollView snapToAlignment='right' snapToInterval={styles.trackView.width + styles.trackView.marginRight} horizontal={true} style={styles.stack} scrollEnabled={!this.state.dragging} onScroll={this.handleScrollTop} scrollEventThrottle={64}>
+      <View style={{padding: 16}}>
+        <View style={this.props.styles.textInputWrapper} >
+          <TextInput 
+            style={this.props.styles.textInput} 
+            placeholder="search for artist, album ..."
+            placeholderTextColor={Colors.defaultFont}
+          />
+          <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={[Colors.tintTopGradient, Colors.tintBottomGradient]} style={{width: '100%', height: 4}} />
+        </View>
+        <ScrollView 
+          snapToAlignment='right' 
+          snapToInterval={styles.trackView.width + styles.trackView.marginRight} 
+          horizontal={true} 
+          style={styles.stack} 
+          scrollEnabled={!this.state.dragging} 
+          onScroll={this.handleScrollTop} 
+          scrollEventThrottle={64}
+        >
           {this.state.listA.map((item, index) => (
-            <TrackView transitioning={this.state.insertTransitioning} track={item} offsets={this.state.offsets} isBottom={false} dragFrom={this.state.dragFromTop} key={item.spotify_id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index, distance) => {this.onStopDrag(item, index, false, distance)}} />
+            <TrackView 
+              transitioning={this.state.insertTransitioning} 
+              track={item} 
+              offsets={this.state.offsets} 
+              isBottom={false} 
+              dragFrom={this.state.dragFromTop} 
+              key={item.spotify_id} i={index} 
+              dragData={this.state.dragData} 
+              onDrag={this.onDrag} 
+              onStopDrag={(item, index, distance) => {this.onStopDrag(item, index, false, distance)}} 
+            />
           ))}
         </ScrollView>
-        <ScrollView snapToAlignment='right' snapToInterval={styles.trackView.width + styles.trackView.marginRight} horizontal={true} style={styles.stack} scrollEnabled={!this.state.dragging} onScroll={this.handleScrollBottom} scrollEventThrottle={64}>
+        <View style={styles.text}>
+          <Text style={this.props.styles.h3}>songs currently saved in</Text>
+          <Text style={this.props.styles.h2}>{this.props.title}</Text>
+        </View>
+        <ScrollView 
+          snapToAlignment='right' 
+          snapToInterval={styles.trackView.width + styles.trackView.marginRight} 
+          horizontal={true} 
+          style={styles.stack} 
+          scrollEnabled={!this.state.dragging} 
+          onScroll={this.handleScrollBottom} 
+          scrollEventThrottle={64}
+        >
           {this.state.listB.map((item, index) => (
-            <TrackView transitioning={this.state.insertTransitioning} track={item} offsets={this.state.offsets} isBottom={true} dragFrom={!this.state.dragFromTop} key={item.spotify_id} i={index} dragData={this.state.dragData} onDrag={this.onDrag} onStopDrag={(item, index, distance) => {this.onStopDrag(item,index, true, distance)}} />
+            <TrackView 
+              transitioning={this.state.insertTransitioning} 
+              track={item} 
+              offsets={this.state.offsets} 
+              isBottom={true} 
+              dragFrom={!this.state.dragFromTop} 
+              key={item.spotify_id} 
+              i={index} 
+              dragData={this.state.dragData} 
+              onDrag={this.onDrag} 
+              onStopDrag={(item, index, distance) => {this.onStopDrag(item,index, true, distance)}} 
+            />
           ))}
         </ScrollView>
       </View>
@@ -299,11 +348,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tintBottomGradient,
     marginRight: 5,
     width: 150,
-    height: 150
+    height: 150,
+    shadowOffset:{  width: 3,  height: 3,  },
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
   },
   stack: {
     overflow: "visible",
-    marginTop: 10
+    marginTop: 5,
+    marginBottom: 15,
+    zIndex: 10
   },
   title: {
     fontFamily: "Avenir",
@@ -313,9 +367,12 @@ const styles = StyleSheet.create({
   },
   artist: {
     fontFamily: "Avenir",
-    color: "#FFF",
+    color: "#FFFC",
     fontWeight: "400",
     fontSize: 14
+  },
+  text: {
+    zIndex: 0
   }
 });
 
