@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from "react-native";
 import { Colors } from "./../styles/Colors";
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import {Button as ButtonIcon} from "../components/Button" ;
 import {TrackStack} from "../components/TrackStack";
 import LinearGradient from "react-native-linear-gradient";
+import ImagePicker from 'react-native-image-picker';
+import Icon from "react-native-vector-icons/Ionicons";
 
 class Create_Details extends Component {
   // componentDidMount() {
@@ -19,15 +21,52 @@ class Create_Details extends Component {
     )
   });
 
+  state = {
+    photo: null,
+  }
+
+  handleChoosePhoto = () => {
+    const options = {
+      noData: true,
+    }
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.uri) {
+        console.log(response)
+        this.setState({ photo: response })
+      }
+    })
+  }
+
+
   render() {
     const {navigate} = this.props.navigation;
+    const { photo } = this.state;
     return (
       // Container View
       // Change the color values based on mood calculated from server for bg color
       <View style={[styles.bg, {paddingTop:16}]}>
         <View style={[styles.margin, styles.horizontal]}>
           <Text style={[styles.h2,{flex:1}]}>Create a Playlist</Text>
-          <Text style={styles.imagePlaceholder}>*image placeholder*</Text>
+          <TouchableOpacity style={styles.image} onPress={this.handleChoosePhoto}>
+          
+            {photo && (
+              <Image
+                source={{ uri: photo.uri }}
+                style={{ width: 160, height: 160, }}
+              />
+            ) || (
+              <View style={{flex: 1}}>
+                <Text style={styles.imageText}>Upload Playlist Cover Image</Text>
+                <View style={{justiftyContent:"center", alignItems:"center", marginTop: 16}}>
+                  <Icon
+                    style={{color: Colors.defaultFont}}
+                    name="ios-cloud-upload"
+                    size={30}
+                  />
+                </View>
+              </View>
+            )}  
+          </TouchableOpacity>
         </View>
         <View style={[styles.textInputWrapper, styles.margin, {marginTop: 16}]} >
           <TextInput 
@@ -208,11 +247,23 @@ const styles = StyleSheet.create({
     bottom:16,
     textAlign:'center'
   },
-  imagePlaceholder: {
+  image: {
     width: 160,
     height: 160,
     backgroundColor: "grey",
-    marginLeft:16
+    marginLeft:16,
+    overflow: "hidden",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageText: {
+    marginTop: 18,
+    color: Colors.defaultFont,
+    fontFamily: "Avenir",
+    fontSize: 16,
+    textAlign: "center",
+    fontWeight: "600",
+    width: 120
   },
   textBoxWrapper: {
     flex:1,
