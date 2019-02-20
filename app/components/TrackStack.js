@@ -80,14 +80,13 @@ class TrackView extends Component {
     this.state.pan.addListener((value) => this._val = value);
     // Initialize PanResponder with move handling
     this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: (e, gesture) => true,
-      onPanResponderGrant: (e, gesture) => {
-        // this.setState({ dragging: true });
+      onMoveShouldSetPanResponder: (evt, gestureState) => {
+        return Math.abs(gestureState.dy) > Math.abs(gestureState.dx * 3);
       },
       onPanResponderMove: (e, gesture) => {
         if (!this.props.isBottom && gesture.dy > 5)
           this.props.onDrag(this.props.i, gesture.dy, this.props.isBottom);
-        else if (this.props.isBottom && gesture.dy < 5)
+        else if (this.props.isBottom && gesture.dy < -5)
           this.props.onDrag(this.props.i, gesture.dy, this.props.isBottom);
         Animated.event([null, { dy: this.state.pan.y }])(e, gesture)
       },
@@ -184,7 +183,6 @@ class TrackStack extends Component {
     this.state = {
       listA: fakeData.trackListA,
       listB: fakeData.trackListB,
-      dragging: false,
       totalDragDistance: (styles.trackView.height + styles.stack.marginTop + 60),
       dragData: {
         index: 0,
@@ -203,9 +201,6 @@ class TrackStack extends Component {
 
   onDrag = (index, dy, isBottom) => {
     this.setState({dragFromTop: !isBottom})
-    // if (!this.state.dragging) {
-    //   this.setState({ dragging: true })
-    // }
     var dragData = {...this.state.dragData}
     dragData.index = index;
     dragDistance = isBottom ? -dy : dy;
@@ -292,7 +287,7 @@ class TrackStack extends Component {
           snapToInterval={styles.trackView.width + styles.trackView.marginRight} 
           horizontal={true} 
           style={styles.stack} 
-          scrollEnabled={!this.state.dragging} 
+          scrollEnabled={true} 
           onScroll={this.handleScrollTop} 
           scrollEventThrottle={64}
         >
@@ -319,7 +314,7 @@ class TrackStack extends Component {
           snapToInterval={styles.trackView.width + styles.trackView.marginRight} 
           horizontal={true} 
           style={styles.stack} 
-          scrollEnabled={!this.state.dragging} 
+          scrollEnabled={true} 
           onScroll={this.handleScrollBottom} 
           scrollEventThrottle={64}
         >
