@@ -30,7 +30,7 @@ class Button extends Component {
         );
       case "return":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon
               style={styles.iconStyle}
               name="ios-arrow-back"
@@ -93,10 +93,10 @@ class Button extends Component {
             <Icon style={[styles.iconStyle]} name="ios-play" size={50} />
           </TouchableOpacity>
         );
-      case "pb-pause":
+      case "close":
         return (
-          <TouchableOpacity>
-            <Icon style={[styles.iconStyle]} name="ios-more" size={50} />
+          <TouchableOpacity onPress={this.props.onPress}>
+            <Icon style={[styles.iconStyle]} name="ios-close" size={50} />
           </TouchableOpacity>
         );
       default:

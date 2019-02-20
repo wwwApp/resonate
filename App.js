@@ -4,25 +4,10 @@ import { StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import Playlist from "./app/views/Playlist";
 import Player from "./app/views/Player";
+import Library from "./app/views/Library";
 import { Colors } from "./app/styles/Colors";
-import RepoList from "./app/components/RepoList"
-import TrackStack from "./app/components/TrackStack"
 
-/**
- * Some random pages for tab navigation demo
- */
 class Home extends Component {
-
-  render() {
-    return (
-        <View>
-          <TrackStack />
-        </View>
-    );
-  }
-}
-
-class First extends Component {
   render() {
     return (
       <View>
@@ -41,7 +26,7 @@ class First extends Component {
 const BottomNav = createBottomTabNavigator(
   {
     Home: { screen: Home },
-    First: { screen: First },
+    Library: { screen: Library },
     Playlist: { screen: Playlist },
     Player: { screen: Player }
   },
