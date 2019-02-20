@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "./../styles/Colors";
@@ -12,7 +12,7 @@ class Button extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = { "type": props.type };
+    this.state = { type: props.type };
   }
 
   render() {
@@ -21,11 +21,7 @@ class Button extends Component {
       case "heart":
         return (
           <TouchableOpacity>
-            <Icon
-              style={styles.iconStyle}
-              name="md-heart-empty"
-              size={35}
-            />
+            <Icon style={styles.iconStyle} name="md-heart-empty" size={35} />
           </TouchableOpacity>
         );
       case "return":
@@ -52,14 +48,11 @@ class Button extends Component {
             />
           </TouchableOpacity>
         );
-        case "minimize":
+      case "minimize":
         return (
           <TouchableOpacity>
             <Icon
-              style={[
-                styles.iconStyle,
-                styles.verticalIcon
-              ]}
+              style={[styles.iconStyle, styles.verticalIcon]}
               name="ios-arrow-back"
               size={35}
             />
@@ -69,11 +62,7 @@ class Button extends Component {
       case "track-star":
         return (
           <TouchableOpacity>
-            <Icon
-              style={styles.iconStyle}
-              name="ios-star-outline"
-              size={25}
-            />
+            <Icon style={styles.iconStyle} name="ios-star-outline" size={25} />
           </TouchableOpacity>
         );
       case "track-more":
@@ -97,6 +86,19 @@ class Button extends Component {
         return (
           <TouchableOpacity onPress={this.props.onPress}>
             <Icon style={[styles.iconStyle]} name="ios-close" size={50} />
+          </TouchableOpacity>
+        );
+      // Icons from playbutton
+      case "pl-star":
+        return (
+          <TouchableOpacity>
+            <Icon style={styles.iconStyle} name="ios-star-outline" size={35} />
+          </TouchableOpacity>
+        );
+      case "pl-shuffle":
+        return (
+          <TouchableOpacity>
+            <Icon style={styles.iconStyle} name="ios-repeat" size={35} />
           </TouchableOpacity>
         );
       default:

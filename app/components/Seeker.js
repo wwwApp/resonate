@@ -11,7 +11,7 @@ const Seeker = props => {
 };
 
 const Filler = props => {
-  return <View style={[styles.filler, { width: `${props.percentage}%` }]} />;
+  return <View style={[styles.filler, { width: `${props.percentage}%` }]}></View>;
 };
 
 const styles = StyleSheet.create({

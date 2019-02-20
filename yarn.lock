@@ -4820,6 +4820,11 @@ react-native-linear-gradient@react-native-community/react-native-linear-gradient
   version "2.5.3"
   resolved "https://codeload.github.com/react-native-community/react-native-linear-gradient/tar.gz/f136e8ed820f12e68540d82641f8b7d97af3dead"
 
+react-native-maps@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.23.0.tgz#edbfdcad0e42190627eb1c8067eaba5965c8f81e"
+  integrity sha512-qxOIQGsDtQXQlSJdXMW1wg8pvLaVYdbiIolB7tZTTgTGgIA/hDxXwZbQZ08c4KDD6/VTk8krfd1APaHkqvh6og==
+
 react-native-paper@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-2.6.3.tgz#9ed37d127a4a5d30b940a9123ea9224c4d64034a"
@@ -4830,13 +4835,6 @@ react-native-paper@^2.6.3:
     create-react-context "^0.2.3"
     hoist-non-react-statics "^3.1.0"
     react-lifecycles-compat "^3.0.4"
-
-react-native-progress@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.5.0.tgz#d1ccc7f96dc17c609aedb43b2e6695d67deae0ec"
-  integrity sha512-Tgc002D0BGes1fTlObu/qNItlsTPYKFrF9XRQaJLme77TNxNX9I04sgIz3kaq8O4R+z/jlai64dk1HDEDQhzMA==
-  dependencies:
-    prop-types "^15.5.8"
 
 react-native-safe-area-view@^0.11.0:
   version "0.11.0"

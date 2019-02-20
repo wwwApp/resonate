@@ -1,0 +1,5 @@
+# platform :ios, '9.0'
+target 'resonate' do
+    # Pods for resonate
+    pod 'GoogleMaps'
+    end

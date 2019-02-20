@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-/* import ProgressBar from "react-native-progress/Bar"; */
 import { Seeker } from "./../components/Seeker";
 import { Colors } from "./../styles/Colors";
 
@@ -28,8 +27,8 @@ class PlayControl extends Component {
    * Handle the play/pause button press event.
    */
   async play() {
-    await this.togglePlay()
-    await this.progressSeeker()
+    await this.togglePlay();
+    await this.progressSeeker();
   }
 
   /**
@@ -38,14 +37,14 @@ class PlayControl extends Component {
   togglePlay() {
     const isPlaying = !this.state.isPlaying;
     const toggleIcon = isPlaying ? "ios-pause" : "ios-play";
-    this.setState({ isPlaying, toggleIcon })
+    this.setState({ isPlaying, toggleIcon });
   }
 
   /**
    * Handle the progress animation on seeker
    */
   progressSeeker() {
-    console.log(this.state.isPlaying)
+    console.log(this.state.isPlaying);
     if (this.state.isPlaying === true) {
       this.state.timer = setInterval(() => {
         let updatedCounter = this.state.counter + 1;
@@ -60,7 +59,7 @@ class PlayControl extends Component {
         }
       }, 1000);
     } else {
-      clearInterval(this.state.timer)
+      clearInterval(this.state.timer);
     }
   }
 
@@ -68,9 +67,9 @@ class PlayControl extends Component {
    * Handle forward event
    */
   forward() {
-    this.setState({ counter: 0, percentage: 0 })
+    this.setState({ counter: 0, percentage: 0 });
     clearInterval(this.state.timer);
-    this.progressSeeker()
+    this.progressSeeker();
 
     // Code for go forward
   }
@@ -79,52 +78,55 @@ class PlayControl extends Component {
    * Handle backward event
    */
   backward() {
-    this.setState({ counter: 0, percentage: 0 })
+    this.setState({ counter: 0, percentage: 0 });
     clearInterval(this.state.timer);
-    this.progressSeeker()
-    
+    this.progressSeeker();
+
     // Code for go backward
+  }
+
+  /**
+   * Handle formatting of track duration
+   */
+
+  formatDuration(durationInSec) {
+    let minutes = Math.floor((durationInSec % 3600) / 60);
+    let seconds = Math.floor(durationInSec % 60);
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    return minutes + ":" + seconds;
   }
 
   render() {
     return (
-      <View style={{ width: "100%" }}>
-        <View style={styles.firstRow}>
-          <TouchableOpacity>
-            <Icon style={styles.iconStyle} name="ios-star-outline" size={35} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Icon style={styles.iconStyle} name="ios-repeat" size={35} />
-          </TouchableOpacity>
+      <View style={{ width: "100%", height: "auto" }}>
+        <View>
+          {/* <Text style={styles.timeText}>
+            {this.formatDuration(this.state.counter)}
+          </Text> */}
+          <View style={styles.seekerContainer}>
+            <Seeker percentage={this.state.percentage} />
+          </View>
+          {/* <Text style={styles.timeText}>
+            {this.formatDuration(this.state.trackDuration)}
+          </Text> */}
         </View>
 
-        <View style={styles.seekerContainer}>
-          <Seeker percentage={this.state.percentage} />
-        </View>
-
-        <View style={styles.secondRow}>
-          <TouchableOpacity>
-            <Icon
-              style={styles.iconStyle}
-              name="ios-skip-backward"
-              size={40}
-              onPress={this.forward.bind(this)}
-            />
+        <View style={styles.controlGroup}>
+          <TouchableOpacity onPress={this.backward.bind(this)}>
+            <PCBackward size={40} />
           </TouchableOpacity>
           <TouchableOpacity onPress={this.play.bind(this)}>
-            <Icon
-              style={styles.iconStyle}
-              name={this.state.toggleIcon}
-              size={70}
-            />
+            <PCPlay iconName={this.state.toggleIcon} size={70} />
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Icon
-              style={styles.iconStyle}
-              name="ios-skip-forward"
-              size={40}
-              onPress={this.backward.bind(this)}
-            />
+
+          <TouchableOpacity onPress={this.forward.bind(this)}>
+            <PCForward size={40} />
           </TouchableOpacity>
         </View>
       </View>
@@ -132,28 +134,43 @@ class PlayControl extends Component {
   }
 }
 
+const PCForward = props => {
+  return (
+    <Icon style={styles.iconStyle} name="ios-skip-forward" size={props.size} />
+  );
+};
+
+const PCBackward = props => {
+  return (
+    <Icon style={styles.iconStyle} name="ios-skip-backward" size={props.size} />
+  );
+};
+
+const PCPlay = props => {
+  return (
+    <Icon style={styles.iconStyle} name={props.iconName} size={props.size} />
+  );
+};
+
 const styles = StyleSheet.create({
   iconStyle: {
     color: Colors.defaultIcon
   },
-  firstRow: {
-    flexDirection: "row",
-    marginTop: 15,
-    justifyContent: "space-around",
-    paddingHorizontal: 80
-  },
-  secondRow: {
+  controlGroup: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 30
   },
   seekerContainer: {
-    height: 5,
-    marginVertical: 30,
-    marginHorizontal: -40,
-    backgroundColor: Colors.seekerInactive
+  /*   flexDirection: "row",
+    justifyContent: "space-between", */
+    backgroundColor: Colors.seekerInactive,
+    marginVertical: 30
+  },
+  timeText: {
+    color: Colors.defaultFont
   }
 });
 
-export { PlayControl };
+export { PlayControl, PCBackward, PCForward, PCPlay };

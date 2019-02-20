@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, ScrollView } from "react-native";
 import { Button } from "./Button";
-import { Colors } from "../styles/Colors";
+import { Colors } from "./../styles/Colors";
 
 class TrackList extends Component {
   /**

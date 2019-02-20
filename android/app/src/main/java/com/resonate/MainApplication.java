@@ -5,6 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.imagepicker.ImagePickerPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new ImagePickerPackage(),
             new RNGestureHandlerPackage(),
+            new MapsPackage(),
             new LinearGradientPackage(),
             new VectorIconsPackage()
       );

@@ -6,8 +6,8 @@ import { Tag } from "./../components/Tag";
 import { PlaylistPlayButton } from "./../components/PlaylistPlayButton";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
-import {getPlaylist} from "../redux/reducers/playlist.reducer";
-import {connect} from "react-redux";
+import { getPlaylist } from "../redux/reducers/playlist.reducer";
+import { connect } from "react-redux";
 
 class Playlist extends Component {
    componentDidMount() {
@@ -19,10 +19,10 @@ class Playlist extends Component {
       // Container View
       // Change the color values based on mood calculated from server for bg color
       <LinearGradient
-      style={styles.container}
-      colors={[Colors.tintTopGradient, Colors.tintBottomGradient]}
+        style={styles.container}
+        colors={[Colors.tintTopGradient, Colors.tintBottomGradient]}
       >
-          { !this.props.isLoading && [
+        {!this.props.isLoading && [
           <View style={styles.playButton}>
             <PlaylistPlayButton />
           </View>,
@@ -38,13 +38,17 @@ class Playlist extends Component {
             <Text style={[styles.playlistItem, styles.title, styles.txtBold]}>
               {this.props.playlist.title}
             </Text>
-            <Text style={[styles.playlistItem, styles.location, styles.txtLight]}>
+            <Text
+              style={[styles.playlistItem, styles.location, styles.txtLight]}
+            >
               {this.props.playlist.location_name || "location"}
             </Text>
             <View style={[styles.playlistItem, styles.tag]}>
               <Tag tagData={this.props.playlist.tags} />
             </View>
-            <Text style={styles.playlistItem}>{this.props.playlist.description}</Text>
+            <Text style={styles.playlistItem}>
+              {this.props.playlist.description}
+            </Text>
             <Text style={[styles.playlistItem, styles.user, styles.txtLight]}>
               @{this.props.playlist.user.display_name}
             </Text>
@@ -105,8 +109,6 @@ const styles = StyleSheet.create({
   }
 });
 
-
-
 const mapStateToProps = state => ({
   playlist: state.playlist.playlist,
   isLoading: state.playlist.loading
@@ -116,4 +118,7 @@ const mapDispatchToProps = {
   getPlaylist
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Playlist);

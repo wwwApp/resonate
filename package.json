@@ -13,6 +13,7 @@
         "react-native-gesture-handler": "^1.0.15",
         "react-native-image-picker": "^0.28.0",
         "react-native-linear-gradient": "react-native-community/react-native-linear-gradient",
+        "react-native-maps": "^0.23.0",
         "react-native-paper": "^2.6.3",
         "react-native-progress": "^3.5.0",
         "react-native-swipe-gestures": "^1.0.3",
