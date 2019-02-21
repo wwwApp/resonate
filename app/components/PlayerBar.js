@@ -1,79 +1,50 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { AlbumVis } from "./AlbumVis";
-import { PlayControl, PCBackward, PCForward, PCPlay } from "./PlayControl";
 import { Seeker } from "./Seeker";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "../styles/Colors";
-/* import GestureRecognizer from "react-native-swipe-gestures"; */
+import { Button } from "./Button";
 
-/**
- * All screens/views should be styled with flexbox in order for player modal to work
- */
-
-class PlayerBar extends PlayControl {
+class PlayerBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentTrack: {
-        title: "Track Name",
-        artist: "Artist Name",
-        album:
-          "https://images-na.ssl-images-amazon.com/images/I/A1QsthUoerL._SY355_.jpg"
-      },
-      isMinimized: false,
-      trackDuration: 180,
-      isPlaying: false,
-      toggleIcon: "ios-play",
-      timer: null,
-      counter: 0,
-      percentage: 0,
-      isVisible: props.isVisible
-    };
+    this.state = {};
   }
 
-  /**
-   * Handle swipe-up event on player modal to open player compo/view
-   */
- /*  onSwipeUp() {
-    this.setState({ isModalVisible: false})
-    console.log("swiped up - open the player");
-  } */
-
   render() {
-    if (this.state.isVisible === true) {
+    if (this.props.isVisible === true) {
       return (
         <LinearGradient
           style={styles.modalContainer}
           colors={[Colors.minPlayerTopGradient, Colors.minPlayerBottomGradient]}
         >
           {/* <GestureRecognizer onSwipeUp={() => this.onSwipeUp()}> */}
-            <View style={styles.firstRow}>
-              <TouchableOpacity onPress={this.backward.bind(this)}>
-                <PCBackward size={35} />
-              </TouchableOpacity>
+          <View style={styles.firstRow}>
+            <Button
+              type="pc-backward"
+              size={35}
+              onPress={this.props.backward}
+            />
 
-              <View style={styles.playContainer}>
-                <AlbumVis
-                  albumSource={this.state.currentTrack.album}
-                  size={70}
+            <View style={styles.playContainer}>
+              <AlbumVis albumSource={this.props.currentTrack.album} size={70} />
+              <View style={styles.playButton}>
+                <Button
+                  type="pc-play"
+                  size={50}
+                  toggleIcon={this.props.toggleIcon}
+                  onPress={this.props.play}
                 />
-                <TouchableOpacity
-                  onPress={this.play.bind(this)}
-                  style={styles.playButton}
-                >
-                  <PCPlay iconName={this.state.toggleIcon} size={50} />
-                </TouchableOpacity>
               </View>
-
-              <TouchableOpacity onPress={this.forward.bind(this)}>
-                <PCForward size={35} />
-              </TouchableOpacity>
             </View>
 
-            <View style={styles.secondRow}>
-              <Seeker percentage={this.state.percentage} />
-            </View>
+            <Button type="pc-forward" size={35} onPress={this.props.forward} />
+          </View>
+
+          <View style={styles.secondRow}>
+            <Seeker percentage={this.props.percentage} />
+          </View>
           {/* </GestureRecognizer> */}
         </LinearGradient>
       );
@@ -84,8 +55,7 @@ class PlayerBar extends PlayControl {
 }
 
 const styles = StyleSheet.create({
-  modalContainer: {
-  },
+  modalContainer: {},
   firstRow: {
     flexDirection: "row",
     alignItems: "center",
