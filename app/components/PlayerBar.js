@@ -4,7 +4,7 @@ import { AlbumVis } from "./AlbumVis";
 import { Seeker } from "./Seeker";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "../styles/Colors";
-import { Button } from "./Button";
+import { ButtonIcon } from "./ButtonIcon";
 
 class PlayerBar extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class PlayerBar extends Component {
         >
           {/* <GestureRecognizer onSwipeUp={() => this.onSwipeUp()}> */}
           <View style={styles.firstRow}>
-            <Button
+            <ButtonIcon
               type="pc-backward"
               size={35}
               onPress={this.props.backward}
@@ -30,7 +30,7 @@ class PlayerBar extends Component {
             <View style={styles.playContainer}>
               <AlbumVis albumSource={this.props.currentTrack.album} size={70} />
               <View style={styles.playButton}>
-                <Button
+                <ButtonIcon
                   type="pc-play"
                   size={50}
                   toggleIcon={this.props.toggleIcon}
@@ -39,7 +39,7 @@ class PlayerBar extends Component {
               </View>
             </View>
 
-            <Button type="pc-forward" size={35} onPress={this.props.forward} />
+            <ButtonIcon type="pc-forward" size={35} onPress={this.props.forward} />
           </View>
 
           <View style={styles.secondRow}>

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { View, StyleSheet, Animated } from "react-native";
+import React from "react";
+import { View, StyleSheet} from "react-native";
 import { Colors } from "./../styles/Colors";
 
 const Seeker = props => {

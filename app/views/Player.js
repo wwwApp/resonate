@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Modal } from "react-native";
-import { Button } from "../components/Button";
+import { ButtonIcon } from "../components/ButtonIcon";
 import { AlbumVis } from "../components/AlbumVis";
 /* import PlayControl from "./PlayControl"; */
 import Icon from "react-native-vector-icons/Ionicons";
@@ -123,7 +123,7 @@ class Player extends Component {
           <Modal visible={this.props.isFull} animationType={"slide"}>
             <View style={styles.container}>
               <View style={{ alignSelf: "flex-end" }}>
-                <Button type="minimize" onPress={this.toggleView.bind(this)} />
+                <ButtonIcon type="minimize" onPress={this.toggleView.bind(this)} />
               </View>
 
               <View style={styles.trackImage}>
@@ -144,10 +144,10 @@ class Player extends Component {
 
               <View style={styles.row}>
                 <TouchableOpacity>
-                  <Button type="pl-star" />
+                  <ButtonIcon type="pl-star" />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Button type="pl-shuffle" />
+                  <ButtonIcon type="pl-shuffle" />
                 </TouchableOpacity>
               </View>
 
@@ -165,20 +165,20 @@ class Player extends Component {
                 </View>
 
                 <View style={styles.controlGroup}>
-                  <Button
+                  <ButtonIcon
                     type="pc-backward"
                     size={40}
                     onPress={this.backward.bind(this)}
                   />
 
-                  <Button
+                  <ButtonIcon
                     type="pc-play"
                     size={70}
                     toggleIcon={this.state.toggleIcon}
                     onPress={this.play.bind(this)}
                   />
 
-                  <Button
+                  <ButtonIcon
                     type="pc-forward"
                     size={40}
                     onPress={this.forward.bind(this)}

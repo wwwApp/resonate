@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from "react-native";
 import { Colors } from "./../styles/Colors";
 import {createStackNavigator, createAppContainer} from 'react-navigation';
-import {Button as ButtonIcon} from "../components/Button" ;
+import {ButtonIcon} from "../components/ButtonIcon" ;
 import {TrackStack} from "../components/TrackStack";
 import LinearGradient from "react-native-linear-gradient";
 import ImagePicker from 'react-native-image-picker';

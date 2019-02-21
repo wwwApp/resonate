@@ -1,17 +1,28 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TrackList } from "./../components/TrackList";
-import { Button } from "./../components/Button";
+import { ButtonIcon } from "../components/ButtonIcon";
 import { Tag } from "./../components/Tag";
-import { PlaylistPlayButton } from "./../components/PlaylistPlayButton";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
 import { getPlaylist } from "../redux/reducers/playlist.reducer";
 import { connect } from "react-redux";
 
 class Playlist extends Component {
-   componentDidMount() {
-    this.props.getPlaylist('5c6ac32fe21c4e00360b5592');
+  componentDidMount() {
+    this.props.getPlaylist("5c6ac32fe21c4e00360b5592");
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = { isPlaying: false, toggleIcon: "ios-play" };
+  }
+
+  togglePlay() {
+    // Toggle state and icon
+    const isPlaying = !this.state.isPlaying;
+    const toggleIcon = isPlaying ? "ios-pause" : "ios-play";
+    this.setState({ isPlaying, toggleIcon });
   }
 
   render() {
@@ -23,15 +34,24 @@ class Playlist extends Component {
         colors={[Colors.tintTopGradient, Colors.tintBottomGradient]}
       >
         {!this.props.isLoading && [
-          <View style={styles.playButton}>
-            <PlaylistPlayButton />
+          <View style={[styles.playButtonContainer, styles.playButtonIcon]}>
+            <ButtonIcon
+              style={{color: 'black'}}
+              type="pl-play"
+              toggleIcon={this.state.toggleIcon}
+              size={50}
+              onPress={this.togglePlay.bind(this)}
+            />
           </View>,
           <View style={styles.topIconGroup}>
-            <Button type="return" />
+            <ButtonIcon type="return" />
             <View style={styles.rightIcon}>
-              <Button type="heart" onPress={() => this.props.getPlaylist("fdsafdsgjhakfgkjads")}/>
-              
-              <Button type="more" />
+              <ButtonIcon
+                type="heart"
+                onPress={() => this.props.getPlaylist("fdsafdsgjhakfgkjads")}
+              />
+
+              <ButtonIcon type="more" />
             </View>
           </View>,
           <View>
@@ -101,11 +121,20 @@ const styles = StyleSheet.create({
   txtLight: {
     fontWeight: "100"
   },
-  playButton: {
+  playButtonContainer: {
     position: "absolute",
     top: 130,
     right: 35,
     zIndex: 9999
+  },
+  playButtonIcon: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 90,
+    height: 90,
+    backgroundColor: "#E7E7E7",
+    borderRadius: 90
   }
 });
 

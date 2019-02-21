@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, ScrollView } from "react-native";
-import { Button } from "./Button";
+import { ButtonIcon } from "./ButtonIcon";
 import { Colors } from "./../styles/Colors";
 
 class TrackList extends Component {
@@ -29,8 +29,8 @@ class TrackList extends Component {
               </Text>
             </View>
             <View style={styles.trackIconStyle}>
-              <Button style={styles.trackItem} type="track-star" />
-              <Button style={styles.trackItem} type="track-more" />
+              <ButtonIcon style={styles.trackItem} type="track-star" />
+              <ButtonIcon style={styles.trackItem} type="track-more" />
             </View>
           </View>
         ))}

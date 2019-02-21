@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 
 class AlbumVis extends Component {
   /**
