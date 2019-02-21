@@ -7,6 +7,7 @@ var defaultState = {
   playlist: {}
 }
 
+
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case GET_PLAYLIST:
