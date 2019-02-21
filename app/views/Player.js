@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Modal } from "react-native";
-import { Button } from "./Button";
-import { AlbumVis } from "./AlbumVis";
+import { Button } from "../components/Button";
+import { AlbumVis } from "../components/AlbumVis";
 /* import PlayControl from "./PlayControl"; */
 import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "../styles/Colors";
-import { PlayerBar } from "./PlayerBar";
-import { Seeker } from "./Seeker";
+import { PlayerBar } from "../components/PlayerBar";
+import { Seeker } from "../components/Seeker";
 import GestureRecognizer from "react-native-swipe-gestures";
 import { connect } from "react-redux";
 import {
@@ -14,7 +14,7 @@ import {
   incrementSeeker,
   resetSeeker,
   togglePlay
-} from "./../redux/reducers/player.reducer";
+} from "../redux/reducers/player.reducer";
 /* import Modal from "react-native-modal"; */
 
 class Player extends Component {

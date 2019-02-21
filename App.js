@@ -3,17 +3,16 @@ import { StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import Playlist from "./app/views/Playlist";
 import Library from "./app/views/Library";
-import Player from "./app/components/Player";
+import Player from "./app/views/Player";
 import { PlayerBar } from "./app/components/PlayerBar";
 import { Colors } from "./app/styles/Colors";
 import RepoList from "./app/components/RepoList";
-import Home from "./app/views/Home"
+import Home from "./app/views/Home";
 
 /**
  * Some random pages for tab navigation demo
  */
 class Test1 extends Component {
-
   constructor(props) {
     super(props);
     this.state = {};
@@ -27,37 +26,17 @@ class Test1 extends Component {
       <View style={{ height: "100%" }}>
         <View>
           <Text style={{ fontSize: 50, marginTop: 300, textAlign: "center" }}>
-            {" "}
-            HOME PAGE{" "}
+            PLAYER TEST
           </Text>
-          {/* <RepoList /> */}
-          {/* <PlayerModal isVisible={this.state.isModalVisible} /> */}
-          {/* <Swiper
-          horizontal={false}
-          loop={false}
-          showsPagination={false}
-          index={0}
-        >
-          <PlayerModal isVisible={this.state.isModalVisible} />
-          <Swiper
-            horizontal={false}
-            loop={false}
-            showsPagination={false}
-            index={1}
-          >
-            <Player />
-          </Swiper>
-        </Swiper> */}
         </View>
 
         <View style={{ position: "absolute", bottom: 0, width: "100%" }}>
-        <Player />
+          <Player />
         </View>
       </View>
     );
   }
 }
-
 
 /**
  * Tab Navigation Config.
@@ -66,10 +45,9 @@ class Test1 extends Component {
 const BottomNav = createBottomTabNavigator(
   {
     /* Home: { screen: Home }, */
-    Test1: { screen: Test1 },
+    Player: { screen: Test1 },
     Library: { screen: Library },
-    Playlist: { screen: Playlist },
-    Player: { screen: Player }
+    Playlist: { screen: Playlist }
   },
   {
     tabBarOptions: {
