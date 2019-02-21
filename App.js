@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import Playlist from "./app/views/Playlist";
+import Library from "./app/views/Library";
 import Player from "./app/components/Player";
 import { PlayerBar } from "./app/components/PlayerBar";
 import { Colors } from "./app/styles/Colors";
@@ -66,8 +67,9 @@ const BottomNav = createBottomTabNavigator(
   {
     /* Home: { screen: Home }, */
     Test1: { screen: Test1 },
-    Home: { screen: Home },
-    Playlist: { screen: Playlist }
+    Library: { screen: Library },
+    Playlist: { screen: Playlist },
+    Player: { screen: Player }
   },
   {
     tabBarOptions: {

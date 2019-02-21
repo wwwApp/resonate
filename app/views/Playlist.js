@@ -10,37 +10,8 @@ import { getPlaylist } from "../redux/reducers/playlist.reducer";
 import { connect } from "react-redux";
 
 class Playlist extends Component {
-  componentDidMount() {
-    this.props.getPlaylist("5c6ac32fe21c4e00360b5592");
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "Playlist Title",
-      user: "@User",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      albumImg:
-        "https://images-na.ssl-images-amazon.com/images/I/A1QsthUoerL._SY355_.jpg",
-      tag: ["Tag1", "Tag2", "Tag3"],
-      location: "Location",
-      mood: "Mood",
-      tracks: [
-        { trackInfo: "Track 1", artistInfo: "Artist1", duration: "03:00" },
-        { trackInfo: "Track 2", artistInfo: "Artist2", duration: "03:00" },
-        { trackInfo: "Track 3", artistInfo: "Artist3", duration: "03:00" },
-        { trackInfo: "Track 4", artistInfo: "Artist4", duration: "03:00" },
-        { trackInfo: "Track 5", artistInfo: "Artist5", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" }
-      ]
-    };
+   componentDidMount() {
+    this.props.getPlaylist('5c6ac32fe21c4e00360b5592');
   }
 
   render() {
@@ -58,7 +29,8 @@ class Playlist extends Component {
           <View style={styles.topIconGroup}>
             <Button type="return" />
             <View style={styles.rightIcon}>
-              <Button type="heart" />
+              <Button type="heart" onPress={() => this.props.getPlaylist("fdsafdsgjhakfgkjads")}/>
+              
               <Button type="more" />
             </View>
           </View>,
