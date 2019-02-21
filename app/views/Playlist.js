@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 
 class Playlist extends Component {
   componentDidMount() {
-    this.props.getPlaylist("5c50765a4f58cc4b8f5ecc12");
+    this.props.getPlaylist("5c6ac32fe21c4e00360b5592");
   }
 
   constructor(props) {

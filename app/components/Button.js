@@ -46,7 +46,7 @@ class Button extends Component {
         );
       case "minimize":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon
               style={[styles.iconStyle, styles.verticalIcon]}
               name="ios-arrow-back"

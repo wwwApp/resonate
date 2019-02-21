@@ -64,12 +64,9 @@ class Player extends Component {
         <GestureRecognizer onSwipeDown={() => this.onSwipeDown()}>
         <Modal visible={this.props.isFull} animationType={"slide"}>
         <View style={styles.container}>
-            <TouchableOpacity
-              style={{ alignSelf: "flex-end" }}
-              onPress={this.minimize.bind(this)}
-            >
-              <Button type="minimize" />
-            </TouchableOpacity>
+            <View style={{ alignSelf: "flex-end" }}>
+              <Button type="minimize" onPress={this.minimize.bind(this)} />
+            </View>
 
             <View style={styles.trackImage}>
               <AlbumVis
