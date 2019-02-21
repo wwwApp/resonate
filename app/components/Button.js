@@ -20,19 +20,19 @@ class Button extends Component {
       // Icons from top-bar
       case "heart":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon style={styles.iconStyle} name="md-heart-empty" size={35} />
           </TouchableOpacity>
         );
       case "return":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon style={styles.iconStyle} name="ios-arrow-back" size={35} />
           </TouchableOpacity>
         );
       case "more":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon
               style={[
                 styles.iconStyle,
@@ -57,13 +57,13 @@ class Button extends Component {
       // Icons from track item
       case "track-star":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon style={styles.iconStyle} name="ios-star-outline" size={25} />
           </TouchableOpacity>
         );
       case "track-more":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon
               style={[styles.iconStyle, styles.verticalIcon]}
               name="ios-more"
@@ -74,27 +74,57 @@ class Button extends Component {
       // Icons from playbutton
       case "pb-play":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon style={[styles.iconStyle]} name="ios-play" size={50} />
           </TouchableOpacity>
         );
       case "pb-pause":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon style={[styles.iconStyle]} name="ios-more" size={50} />
           </TouchableOpacity>
         );
       // Icons from playbutton
       case "pl-star":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon style={styles.iconStyle} name="ios-star-outline" size={35} />
           </TouchableOpacity>
         );
       case "pl-shuffle":
         return (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onPress}>
             <Icon style={styles.iconStyle} name="ios-repeat" size={35} />
+          </TouchableOpacity>
+        );
+      case "pc-play":
+        return (
+          <TouchableOpacity onPress={this.props.onPress}>
+            <Icon
+              style={styles.iconStyle}
+              name={this.props.toggleIcon}
+              size={this.props.size}
+            />
+          </TouchableOpacity>
+        );
+      case "pc-backward":
+        return (
+          <TouchableOpacity onPress={this.props.onPress}>
+            <Icon
+              style={styles.iconStyle}
+              name="ios-skip-backward"
+              size={this.props.size}
+            />
+          </TouchableOpacity>
+        );
+      case "pc-forward":
+        return (
+          <TouchableOpacity onPress={this.props.onPress}>
+            <Icon
+              style={styles.iconStyle}
+              name="ios-skip-forward"
+              size={this.props.size}
+            />
           </TouchableOpacity>
         );
       default:
