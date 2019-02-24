@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import Playlist from "./app/views/Playlist";
 import Library from "./app/views/Library";
 import Player from "./app/views/Player";
-import { PlayerBar } from "./app/components/PlayerBar";
 import { Colors } from "./app/styles/Colors";
 import RepoList from "./app/components/RepoList";
 import Home from "./app/views/Home";
@@ -44,17 +44,35 @@ class Test1 extends Component {
 
 const BottomNav = createBottomTabNavigator(
   {
-    /* Home: { screen: Home }, */
-    Player: { screen: Test1 },
     Library: { screen: Library },
+    Player: { screen: Test1 },
+    Home: { screen: Home },
     Playlist: { screen: Playlist }
   },
   {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === "Home") {
+          // iconName = `ios-information-circle${focused ? "" : "-outline"}`;
+          iconName = "ios-home";
+        } else if (routeName === "Library") {
+          iconName = "ios-albums";
+        } else if (routeName === "Settings") {
+          iconName = "ios-settings";
+        }
+
+        // You can return any component that you like here!
+        return <Icon name={iconName} size={23} color={tintColor} />;
+      }
+    }),
     tabBarOptions: {
       activeTintColor: "#F8F8F8",
       inactiveTintColor: Colors.tabIconInactive,
       style: {
-        backgroundColor: Colors.tabNav
+        backgroundColor: Colors.tabNav,
+        paddingTop: 10
       }
     }
   }
@@ -62,5 +80,3 @@ const BottomNav = createBottomTabNavigator(
 
 const app = createAppContainer(BottomNav);
 export default app;
-
-const styles = StyleSheet.create({});
