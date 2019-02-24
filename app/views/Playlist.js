@@ -1,46 +1,28 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TrackList } from "./../components/TrackList";
-import { Button } from "./../components/Button";
+import { ButtonIcon } from "../components/ButtonIcon";
 import { Tag } from "./../components/Tag";
-import { PlaylistPlayButton } from "./../components/PlaylistPlayButton";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
-import {getPlaylist} from "../redux/reducers/playlist.reducer";
-import {connect} from "react-redux";
+import { getPlaylist } from "../redux/reducers/playlist.reducer";
+import { connect } from "react-redux";
 
 class Playlist extends Component {
-   componentDidMount() {
-    this.props.getPlaylist('5c50765a4f58cc4b8f5ecc12');
+  componentDidMount() {
+    this.props.getPlaylist("5c6ac32fe21c4e00360b5592");
   }
 
   constructor(props) {
     super(props);
-    this.state = {
-      title: "Playlist Title",
-      user: "@User",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      albumImg:
-        "https://images-na.ssl-images-amazon.com/images/I/A1QsthUoerL._SY355_.jpg",
-      tag: ["Tag1", "Tag2", "Tag3"],
-      location: "Location",
-      mood: "Mood",
-      tracks: [
-        { trackInfo: "Track 1", artistInfo: "Artist1", duration: "03:00" },
-        { trackInfo: "Track 2", artistInfo: "Artist2", duration: "03:00" },
-        { trackInfo: "Track 3", artistInfo: "Artist3", duration: "03:00" },
-        { trackInfo: "Track 4", artistInfo: "Artist4", duration: "03:00" },
-        { trackInfo: "Track 5", artistInfo: "Artist5", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" },
-        { trackInfo: "Track 6", artistInfo: "Artist6", duration: "03:00" }
-      ]
-    };
+    this.state = { isPlaying: false, toggleIcon: "ios-play" };
+  }
+
+  togglePlay() {
+    // Toggle state and icon
+    const isPlaying = !this.state.isPlaying;
+    const toggleIcon = isPlaying ? "ios-pause" : "ios-play";
+    this.setState({ isPlaying, toggleIcon });
   }
 
   render() {
@@ -48,31 +30,45 @@ class Playlist extends Component {
       // Container View
       // Change the color values based on mood calculated from server for bg color
       <LinearGradient
-      style={styles.container}
-      colors={[Colors.tintTopGradient, Colors.tintBottomGradient]}
+        style={styles.container}
+        colors={[Colors.tintTopGradient, Colors.tintBottomGradient]}
       >
-          { !this.props.isLoading && [
-          <View style={styles.playButton}>
-            <PlaylistPlayButton />
+        {!this.props.isLoading && [
+          <View style={[styles.playButtonContainer, styles.playButtonIcon]}>
+            <ButtonIcon
+              style={{color: 'black'}}
+              type="pl-play"
+              toggleIcon={this.state.toggleIcon}
+              size={50}
+              onPress={this.togglePlay.bind(this)}
+            />
           </View>,
           <View style={styles.topIconGroup}>
-            <Button type="return" />
+            <ButtonIcon type="return" />
             <View style={styles.rightIcon}>
-              <Button type="heart" />
-              <Button type="more" />
+              <ButtonIcon
+                type="heart"
+                onPress={() => this.props.getPlaylist("fdsafdsgjhakfgkjads")}
+              />
+
+              <ButtonIcon type="more" />
             </View>
           </View>,
           <View>
             <Text style={[styles.playlistItem, styles.title, styles.txtBold]}>
               {this.props.playlist.title}
             </Text>
-            <Text style={[styles.playlistItem, styles.location, styles.txtLight]}>
+            <Text
+              style={[styles.playlistItem, styles.location, styles.txtLight]}
+            >
               {this.props.playlist.location_name || "location"}
             </Text>
             <View style={[styles.playlistItem, styles.tag]}>
               <Tag tagData={this.props.playlist.tags} />
             </View>
-            <Text style={styles.playlistItem}>{this.props.playlist.description}</Text>
+            <Text style={styles.playlistItem}>
+              {this.props.playlist.description}
+            </Text>
             <Text style={[styles.playlistItem, styles.user, styles.txtLight]}>
               @{this.props.playlist.user.display_name}
             </Text>
@@ -125,15 +121,22 @@ const styles = StyleSheet.create({
   txtLight: {
     fontWeight: "100"
   },
-  playButton: {
+  playButtonContainer: {
     position: "absolute",
     top: 130,
     right: 35,
     zIndex: 9999
+  },
+  playButtonIcon: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 90,
+    height: 90,
+    backgroundColor: "#E7E7E7",
+    borderRadius: 90
   }
 });
-
-
 
 const mapStateToProps = state => ({
   playlist: state.playlist.playlist,
@@ -144,4 +147,7 @@ const mapDispatchToProps = {
   getPlaylist
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Playlist);

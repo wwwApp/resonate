@@ -1,34 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight, Modal,  Dimensions } from 'react-native';
-import { ColorWheel } from '../react-native-color-wheel';
-
+import { ColorWheel } from 'react-native-color-wheel';
+import { Tag } from './Tag';
 
 class MoodPicker extends React.Component {
 
 
-  state = {
-    modalVisible: false,
-  };
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
 
   render(){
-      <Modal
-        animationType="slide"
-        transparent={true}    
-        visible={this.state.modalVisible}  >
+    return(
+      
 
       <View style={styles.moodPicker}> 
         <View style={{width: "100%", height: 100, flex: .3, alignItems: "flex-end", }}>
         
               <TouchableHighlight
-                onPress={() => {this.setModalVisible(!this.state.modalVisible);}}
+                onPress={() => {this.props.closeMp()}}
                 style={{padding: 10,}}>
                 
                         <Image
-                          source={require('./assets/close-button.png')}
+                          source={require('../assets/close-button.png')}
                           style={{
                           marginRight: 20,
                           marginTop: 65,
@@ -53,8 +44,11 @@ class MoodPicker extends React.Component {
                   />
 
             </View>   
+
+            <Tag tagData={["Party", "Beach", "Warm Weather"]} />
       </View>
-    </Modal>
+  
+    )
   }
 
 
