@@ -44,7 +44,7 @@ class Test1 extends Component {
 
 const BottomNav = createBottomTabNavigator(
   {
-    /* Home: { screen: Home }, */
+    Home: { screen: Home }, 
     Player: { screen: Test1 },
     Library: { screen: Library },
     Playlist: { screen: Playlist }
