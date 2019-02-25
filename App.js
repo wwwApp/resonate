@@ -6,7 +6,6 @@ import Library from "./app/views/Library";
 import Player from "./app/views/Player";
 import { PlayerBar } from "./app/components/PlayerBar";
 import { Colors } from "./app/styles/Colors";
-import RepoList from "./app/components/RepoList";
 import Home from "./app/views/Home";
 
 /**

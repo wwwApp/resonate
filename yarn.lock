@@ -1529,6 +1529,11 @@ color@^2.0.1:
     color-convert "^1.9.1"
     color-string "^1.5.2"
 
+colorsys@^1.0.17:
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/colorsys/-/colorsys-1.0.22.tgz#e08459b297de7d4da4a53c26c3555f5a9609ad88"
+  integrity sha512-KCqF23oqkOD0IUCTLCl0obwGIMyeGFlNWuJ4oRRVKmawvKQeb3x5UvajVeH9AShZWU9hNaIhjXeTGw3iPNtl/Q==
+
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.7.tgz#2d1d24317afb8abe95d6d2c0b07b57813539d828"
@@ -4801,6 +4806,13 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-native-color-wheel@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-color-wheel/-/react-native-color-wheel-0.1.6.tgz#57215e7ac2326f4bdc297aa51a03023aa1504f00"
+  integrity sha512-TIZwDskkK8xI0QV312gpZBk6h0lyaOtDNwH5xSUlLkhxJkr8YPXNFFNtIqy+t+R0d7JA1clFQZUbww8vWqU00g==
+  dependencies:
+    colorsys "^1.0.17"
 
 react-native-gesture-handler@^1.0.0, react-native-gesture-handler@^1.0.15:
   version "1.0.15"
