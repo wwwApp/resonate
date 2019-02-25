@@ -15,20 +15,21 @@ var defaultState = {
     latitudeDelta: 0.09,
     longitudeDelta: 0.09
   },
-  locality: ""
+  locality: "",
+  searchText:""
 }
 
 
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case GET_MAP_ADDR:
-      return { ...state, loading: true };
+      return { ...state, loading: true, searchText: action.search };
     case GET_MAP_POS:
       return { ...state, loading: true };
     case RECEIVE_POS:
       return { ...state, loading: false, region: action.pos };
     case RECEIVE_LOCALITY:
-      return { ...state, loading: false, locality: action.locality  };
+      return { ...state, loading: false, locality: action.locality, searchText: action.locality  };
     case GET_MAP_FAIL:
       return { ...state, loading: false, error: action.error  };
     default:
@@ -41,11 +42,14 @@ function requestPos(pos) {
     type: GET_MAP_POS
   }
 }
-function requestAddr(pos) {
+export function requestAddr(text) {
   return {
-    type: GET_MAP_ADDR
+    type: GET_MAP_ADDR,
+    search: text
   }
 }
+
+
 
 export function receivePos(pos) {
   return {
@@ -70,7 +74,6 @@ function mapError(error) {
 
 
 export const getMapAddr = (addr) => (dispatch) => {
-  dispatch(requestAddr(addr))
   Geocoder.geocodeAddress(addr).then(res => {
     let pos = {
       latitude: res[0].position.lat,
@@ -78,7 +81,8 @@ export const getMapAddr = (addr) => (dispatch) => {
       latitudeDelta: 0.09,
       longitudeDelta: 0.09
     }
-    dispatch(receivePos(pos))
+    dispatch(receivePos(pos));
+    dispatch(receiveLocality(res[0].locality));
   })
   .catch(err => console.log(err));
 }

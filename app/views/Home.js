@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ScrollView, ImageBackground, Image, TouchableOpacity, Modal, Dimensions, Animated } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TextInput, Image, TouchableOpacity, Modal, Dimensions, Animated } from "react-native";
 import { MoodPicker } from "../components/MoodPicker.js";
 import Map from "../components/Map";
 import { PlaylistCard } from "../components/PlaylistCard";
 import {Colors} from "../styles/Colors";
+import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
+import { connect } from "react-redux";
 
 class Home extends Component {
 	constructor(props) {
@@ -11,7 +13,8 @@ class Home extends Component {
 		this.state = {
 			isOpen: false,
 			topY: new Animated.Value(60),
-			modalVisible: false
+			modalVisible: false,
+			text: this.props.locality
 		};
 	}
 
@@ -33,6 +36,15 @@ class Home extends Component {
 		}
 		this.setState({ isOpen: !this.state.isOpen });
 	};
+
+	onChangeText = (text) => {
+		this.props.requestAddr(text);
+	}
+
+	onSubmit = (text) => {
+		this.props.getMapAddr(this.props.locality);
+	}
+
 	render() {
 		const paddingStyle = {
 			paddingTop: this.state.topY
@@ -44,7 +56,13 @@ class Home extends Component {
 				<View style={styles.map}>
 					<Map />
 					<View style={{ flex: 1, flexDirection: "row", justifyContent: "center", marginTop: 65, position: "absolute" }}>
-						<Text style={{ color: "white", marginLeft: 10, fontSize: 28, fontWeight: "bold", paddingRight: 120 }}>Philadelphia</Text>
+						<TextInput 
+							style={{ flex:1, color: "white", marginLeft: 10, fontSize: 28, fontWeight: "bold", paddingRight: 120 }}
+							onChangeText={this.onChangeText}
+							onSubmitEditing={this.onSubmit}
+							value={this.props.locality}
+							returnKeyType="search"
+						/>
 
 						<TouchableOpacity
 							onPress={() => {
@@ -142,4 +160,17 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Home;
+const mapStateToProps = state => ({
+	locality: state.map.searchText
+});
+
+const mapDispatchToProps = {
+	getMapAddr,
+	requestAddr
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Home);
+

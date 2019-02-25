@@ -55,7 +55,6 @@ class Map extends Component {
 				style={{ flex: 1 }}
 				initialRegion={this.props.region}
         customMapStyle={MapStyle}
-        onPress={() => {this.props.getMapAddr("New York")}}
 			></MapView>
 		);
 	}
