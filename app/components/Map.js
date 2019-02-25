@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, ScrollView } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import MapStyle from "../styles/MapStyle.json";
+import Geocoder from 'react-native-geocoder';
 
 class Map extends Component {
   constructor(props) {
@@ -21,13 +22,16 @@ class Map extends Component {
   // }
 
   render() {
-    return (<MapView
+    return (
+    <View>
+    <MapView
       provider={PROVIDER_GOOGLE}
       onRegionChange={this.onRegionChange}
       style={{ flex: 1 }}
       region={this.state.region}
       customMapStyle={MapStyle}
     />
+    </View>
     );
   }
 }
