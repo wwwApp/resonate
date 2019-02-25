@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, ScrollView, ImageBackground, Image, TouchableOpacity, Modal, Dimensions, Animated } from "react-native";
 import { MoodPicker } from "../components/MoodPicker.js";
-import { Map } from "../components/Map";
+import Map from "../components/Map";
 import { PlaylistCard } from "../components/PlaylistCard";
+import {Colors} from "../styles/Colors";
 
 class Home extends Component {
 	constructor(props) {
@@ -19,7 +20,6 @@ class Home extends Component {
 	}
 
 	onPress = () => {
-		console.log(this.state.topY);
 		if (this.state.isOpen) {
 			Animated.spring(this.state.topY, {
 				toValue: 60,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		// marginTop: 50,
 		zIndex: 100,
-		backgroundColor: "#312F2F"
+		backgroundColor: Colors.defaultBg
 	},
 	playlistRow: {
 		flex: 1,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column"
 	},
 	moodPicker: {
-		backgroundColor: "#312F2F",
+		backgroundColor: Colors.defaultBg,
 		height: 1000,
 		opacity: 0.95,
 		flex: 1,
