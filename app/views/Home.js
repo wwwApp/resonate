@@ -54,7 +54,7 @@ class Home extends Component {
 			<Animated.View style={[styles.container, paddingStyle]}>
 				{/*********************************** MAP *********************************************/}
 				<View style={styles.map}>
-					<Map />
+					<Map paddingBottom={45}/>
 					<View style={{ flex: 1, flexDirection: "row", justifyContent: "center", marginTop: 65, position: "absolute" }}>
 						<TextInput 
 							style={{ flex:1, color: "white", marginLeft: 10, fontSize: 28, fontWeight: "bold", paddingRight: 120 }}

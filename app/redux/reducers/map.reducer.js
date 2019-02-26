@@ -5,11 +5,18 @@ export const GET_MAP_ADDR = 'map/LOAD_ADDR';
 export const GET_MAP_POS = 'map/LOAD_POS';
 export const RECEIVE_LOCALITY = 'map/RECEIVE_LOCALITY';
 export const RECEIVE_POS = 'map/RECEIVE_POS';
+export const SET_RECENT_REGION = 'map/SET_RECENT_REGION';
 export const GET_MAP_FAIL = 'map/LOAD_FAIL';
 
 var defaultState = {
   loading: true,
   region: {
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.09,
+    longitudeDelta: 0.09
+  },
+  recentRegion: {
     latitude: 37.78825,
     longitude: -122.4324,
     latitudeDelta: 0.09,
@@ -25,9 +32,11 @@ export default function reducer(state = defaultState, action) {
     case GET_MAP_ADDR:
       return { ...state, loading: true, searchText: action.search };
     case GET_MAP_POS:
-      return { ...state, loading: true };
+      return { ...state, loading: true, region: action.region };
     case RECEIVE_POS:
-      return { ...state, loading: false, region: action.pos };
+      return { ...state, loading: false, region: action.pos, recentRegion: action.pos };
+    case SET_RECENT_REGION:
+      return { ...state, recentRegion: action.pos };
     case RECEIVE_LOCALITY:
       return { ...state, loading: false, locality: action.locality, searchText: action.locality  };
     case GET_MAP_FAIL:
@@ -37,9 +46,10 @@ export default function reducer(state = defaultState, action) {
   }
 }
 
-function requestPos(pos) {
+function requestPos(region) {
   return {
-    type: GET_MAP_POS
+    type: GET_MAP_POS,
+    region
   }
 }
 export function requestAddr(text) {
@@ -54,6 +64,13 @@ export function requestAddr(text) {
 export function receivePos(pos) {
   return {
     type: RECEIVE_POS,
+    pos
+  }
+}
+
+export function setRecentRegion(pos) {
+  return {
+    type: SET_RECENT_REGION,
     pos
   }
 }
@@ -82,13 +99,18 @@ export const getMapAddr = (addr) => (dispatch) => {
       longitudeDelta: 0.09
     }
     dispatch(receivePos(pos));
+    dispatch(setRecentRegion(pos));
     dispatch(receiveLocality(res[0].locality));
   })
   .catch(err => console.log(err));
 }
 
-export const getMapPos = (pos) => (dispatch) => {
-  dispatch(requestPos(pos))
+export const getMapPos = (region) => (dispatch) => {
+  pos = {
+    lat: region.latitude,
+    lng: region.longitude,
+  }
+  dispatch(requestPos(region))
   Geocoder.geocodePosition(pos).then(res => {
     dispatch(receiveLocality(res[0].locality))
   })
@@ -110,7 +132,6 @@ export const initializeMap = () => (dispatch) => {
         latitudeDelta: 0.09,
         longitudeDelta: 0.09,
       }
-      console.log("region", region)
       dispatch(receivePos(region));
       getMapPos({lat:region.latitude, lng: region.longitude});
     }

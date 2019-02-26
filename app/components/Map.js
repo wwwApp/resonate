@@ -9,39 +9,32 @@ import { connect } from "react-redux";
 class Map extends Component {
 	constructor(props) {
 		super(props);
+		let temp = this.props.recentRegion;
 		this.state = {
-			prevPos: null,
-			curPos: { latitude: 37.420814, longitude: -122.081949 },
-			curAng: 45,
-			latitudeDelta: 0.0922,
-			longitudeDelta: 0.0421
+			recent : temp
 		};
 	}
 
 	animate(region) {
-		// this.changePosition(0.0001, 0)
-		this.map.animateToRegion(region, 1000);
+		if (region) {
+			this.map.animateToRegion(region, 1000);
+		}
 	}
 
 	componentDidUpdate() {
-    console.log("update: ", this.props.region != this.state.region)
-		if (this.props.region != this.state.region) {
-			this.setState({ region: this.props.region });
-			this.animate(this.props.region);
+		if (this.props.recentRegion != this.state.recent ) {
+			this.setState({ recent: this.props.recentRegion });
+				this.animate(this.props.recentRegion);
 		}
 	}
 
 	componentDidMount() {
 		this.props.initializeMap();
-  }
+	}
   
   onRegionChangeComplete = (region) => {
-    pos = {
-      lat: region.latitude,
-      lng: region.longitude,
-    }
-    this.props.getMapPos(pos);
-  }
+		this.props.getMapPos(region);
+	}
 
 	render() {
 		return (
@@ -51,10 +44,11 @@ class Map extends Component {
 				onRegionChangeComplete={this.onRegionChangeComplete}
 				showsUserLocation={true}
 				showsMyLocationButton={true}
-				mapPadding={{ bottom: 45 }}
-				style={{ flex: 1 }}
+				mapPadding={{ bottom: this.props.paddingBottom ? this.props.paddingBottom : 0}}
+				style={[{ flex: 1 }, this.props.style]}
 				initialRegion={this.props.region}
-        customMapStyle={MapStyle}
+				customMapStyle={MapStyle}
+				onMapReady={this.onMapReady}
 			></MapView>
 		);
 	}
@@ -62,7 +56,8 @@ class Map extends Component {
 
 const mapStateToProps = state => ({
 	locality: state.map.locality,
-	region: state.map.region
+	region: state.map.region,
+	recentRegion: state.map.recentRegion,
 });
 
 const mapDispatchToProps = {

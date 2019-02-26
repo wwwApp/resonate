@@ -7,6 +7,9 @@ import {TrackStack} from "../components/TrackStack";
 import LinearGradient from "react-native-linear-gradient";
 import ImagePicker from 'react-native-image-picker';
 import Icon from "react-native-vector-icons/Ionicons";
+import Map from "../components/Map";
+import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
+import { connect } from "react-redux";
 
 class Create_Details extends Component {
   // componentDidMount() {
@@ -108,6 +111,14 @@ class Create_Map extends Component {
       </View>
     )
   });
+
+  onChangeText = (text) => {
+		this.props.requestAddr(text);
+	}
+
+	onSubmit = (text) => {
+		this.props.getMapAddr(this.props.locality);
+	}
   
   render() {
     const {navigate} = this.props.navigation;
@@ -120,10 +131,14 @@ class Create_Map extends Component {
             style={styles.textInput} 
             placeholder="search for location"
             placeholderTextColor={Colors.defaultFont}
+            onChangeText={this.onChangeText}
+            onSubmitEditing={this.onSubmit}
+            value={this.props.locality}
+            returnKeyType="search"
           />
           <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={[Colors.tintTopGradient, Colors.tintBottomGradient]} style={{width: '100%', height: 4}} />
         </View>
-        <Text style={styles.mapPlaceholder}>*Map will go here*</Text>
+        <Map style={{marginTop:5, marginBottom:15}}/>
         <TouchableOpacity
           onPress={() => navigate('Mood')}
         >
@@ -133,6 +148,21 @@ class Create_Map extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+	locality: state.map.searchText
+});
+
+const mapDispatchToProps = {
+	getMapAddr,
+	requestAddr
+};
+
+Connected_Map = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Create_Map);
+
 class Create_Tracks extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerRight: (
@@ -295,7 +325,7 @@ const MainNavigator = createStackNavigator(
   {
     Details: {screen: Create_Details},
     Tracks: {screen: Create_Tracks},
-    Location: {screen: Create_Map},
+    Location: {screen: Connected_Map},
     Mood: {screen: Create_Mood}
   }, {
     defaultNavigationOptions: {
