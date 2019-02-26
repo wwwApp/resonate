@@ -166,8 +166,7 @@ class Create_Tracks extends Component {
 			// Container View
 			// Change the color values based on mood calculated from server for bg color
 			<View style={[styles.bg, styles.padTop]}>
-				<Text style={[styles.h3, styles.margin]}>find songs for</Text>
-				<Text style={[styles.h2, styles.margin]}>Playlist title</Text>
+				<Text style={[styles.h2, styles.margin, {marginBottom:10}]}>Add Tracks</Text>
 				<TrackStack title="Playlist title" styles={styles} />
 				<TouchableOpacity onPress={() => navigate("Location")} style={styles.continueWrapper}>
 					<Text style={styles.continueButton}>Continue</Text>
