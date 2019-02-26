@@ -99,7 +99,7 @@ class Home extends Component {
         </View>
         
 
-        <ScrollView style={styles.playlistRow} horizontal={true}>
+        <ScrollView style={styles.playlistRow} horizontal={true} showsHorizontalScrollIndicator={false}>
         
           <View style={styles.card} >
             <View style={styles.cardWrapper}>
@@ -255,7 +255,7 @@ class Home extends Component {
         </View>
         
 
-        <ScrollView style={styles.playlistRow} horizontal={true}>
+        <ScrollView style={styles.playlistRow} horizontal={true} showsHorizontalScrollIndicator={false}>
         
           <View style={styles.card} >
             <View style={styles.cardWrapper}>
