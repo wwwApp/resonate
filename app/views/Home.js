@@ -115,6 +115,7 @@ class Home extends Component {
 			</Animated.View>
 		);
 	}
+
 }
 
 const styles = StyleSheet.create({
