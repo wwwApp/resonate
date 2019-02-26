@@ -49,7 +49,8 @@ class Map extends Component {
 				initialRegion={this.props.region}
 				customMapStyle={MapStyle}
 				onMapReady={this.onMapReady}
-			></MapView>
+			>
+			</MapView>
 		);
 	}
 }

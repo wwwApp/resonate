@@ -5,7 +5,8 @@ import {
 } from "react-native";
 import { Colors } from "../styles/Colors";
 import LinearGradient from "react-native-linear-gradient";
-
+import {initSpotify, searchTrack} from "../redux/reducers/spotify.reducer";
+import { connect } from "react-redux";
 
 var fakeData = {
   trackListA: [
@@ -270,6 +271,9 @@ class TrackStack extends Component {
     this.handleScrollTop(event, true);
   }
 
+  componentDidMount() {
+    this.props.initSpotify();
+  }
 
   render() {
     return (
@@ -279,6 +283,8 @@ class TrackStack extends Component {
             style={this.props.styles.textInput} 
             placeholder="search for artist, album ..."
             placeholderTextColor={Colors.defaultFont}
+            onChangeText={this.props.searchTrack}
+            value={this.props.term}
           />
           <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={[Colors.tintTopGradient, Colors.tintBottomGradient]} style={{width: '100%', height: 4}} />
         </View>
@@ -291,14 +297,15 @@ class TrackStack extends Component {
           onScroll={this.handleScrollTop} 
           scrollEventThrottle={64}
         >
-          {this.state.listA.map((item, index) => (
+          {this.props.searchResults.map((item, index) => (
             <TrackView 
               transitioning={this.state.insertTransitioning} 
               track={item} 
               offsets={this.state.offsets} 
               isBottom={false} 
               dragFrom={this.state.dragFromTop} 
-              key={item.spotify_id} i={index} 
+              key={item.spotify_id} 
+              i={index} 
               dragData={this.state.dragData} 
               onDrag={this.onDrag} 
               onStopDrag={(item, index, distance) => {this.onStopDrag(item, index, false, distance)}} 
@@ -352,7 +359,8 @@ const styles = StyleSheet.create({
     overflow: "visible",
     marginTop: 5,
     marginBottom: 15,
-    zIndex: 10
+    zIndex: 10,
+    height: 150,
   },
   title: {
     fontFamily: "Avenir",
@@ -371,4 +379,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export { TrackStack };
+const mapStateToProps = state => ({
+  term: state.spotify.term,
+  searchResults: state.spotify.searchResults
+});
+
+const mapDispatchToProps = {
+	initSpotify,
+	searchTrack
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(TrackStack);
