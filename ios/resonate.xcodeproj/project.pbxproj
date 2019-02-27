@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -39,7 +40,12 @@
 		2DCD954D1E0B4F2C00145EB5 /* resonateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* resonateTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		4504D84F6B624E7CB788B62F /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D0F8D5F8074BCBA4B05733 /* MaterialCommunityIcons.ttf */; };
+		4787DE9B2224680700E831BC /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4787DE9A222467E700E831BC /* libRNGeocoder.a */; };
+		47AA744622259C0400B7E06F /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AA744322259C0400B7E06F /* SpotifyAudioPlayback.framework */; };
+		47AA744722259C0400B7E06F /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AA744422259C0400B7E06F /* SpotifyMetadata.framework */; };
+		47AA744822259C0400B7E06F /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AA744522259C0400B7E06F /* SpotifyAuthentication.framework */; };
 		503E150A9AB9459F9F03F08F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF289D557A7A4EEAAF178AEC /* Zocial.ttf */; };
+		67DCDEFB727A4A89B60C54A4 /* libRNSpotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CDCF91B0BAC4EEC97CF7D08 /* libRNSpotify.a */; };
 		6EB9D38A76CA474DB65AFE83 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2967A0E0DD6A4791A0F2E3F7 /* EvilIcons.ttf */; };
 		71D91D9807DD426982D84D26 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5464AB1AEDB4B3F90C51718 /* Ionicons.ttf */; };
 		81934F4E1CDD44BBA3820FDB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70CD8ADE2AFF45D2B6DC7D07 /* Octicons.ttf */; };
@@ -47,6 +53,7 @@
 		8C38313D2BC14FD192B1B0DE /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5CFB21894AA46E99E6E40F2 /* FontAwesome5_Brands.ttf */; };
 		9270C49D1CCB4CF690D444EA /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F3DBE276C1F447197D359F7 /* Foundation.ttf */; };
 		96D90B21C0204C62A5B12937 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB4075ED7C974469AA41B009 /* FontAwesome5_Regular.ttf */; };
+		9AC67C04E4B14498B41D90A5 /* libRNEventEmitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4564CBCF5BE4F40835E7F40 /* libRNEventEmitter.a */; };
 		9D118E4B221A7373006F2E1F /* AIRDummyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D118E21221A7373006F2E1F /* AIRDummyView.m */; };
 		9D118E4C221A7373006F2E1F /* AIRGoogleMapUrlTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D118E23221A7373006F2E1F /* AIRGoogleMapUrlTile.m */; };
 		9D118E4D221A7373006F2E1F /* AIRGoogleMapPolygonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D118E26221A7373006F2E1F /* AIRGoogleMapPolygonManager.m */; };
@@ -74,12 +81,12 @@
 		9D118E73221A7639006F2E1F /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 473B63972202AA6500A46440 /* libBVLinearGradient.a */; };
 		A944BFC6C83A4F6590C8ACBB /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA6AE13BBAE045E78593B870 /* FontAwesome.ttf */; };
 		BCCA96BBB4834C6385BD7D4D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C31E26CBC4E42A08C58BFE2 /* SimpleLineIcons.ttf */; };
+		D0EBAF1AAC274ED5A712D5D9 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4164A263071F4426B06675D5 /* libRNImagePicker.a */; };
 		D3F23A0FF0894BC098634430 /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA517DDEC2404233ACEFB444 /* libRNVectorIcons-tvOS.a */; };
 		E1735D7195924DC6BB1AC27E /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5963EAAC70A542318BF5A6E0 /* libAirMaps.a */; };
 		F21C5B219FC848F09F94EFA1 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99B60D807328471497A5B763 /* Feather.ttf */; };
 		F50D649A2B404F2CADD690C1 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7CCE5B9D24642A19863771B /* AntDesign.ttf */; };
 		F94D4C2324DA4B888088F765 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3335363B6384FE193C0D195 /* libRNGestureHandler.a */; };
-		D0EBAF1AAC274ED5A712D5D9 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4164A263071F4426B06675D5 /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -356,6 +363,34 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNGestureHandler;
 		};
+		4787DE932224677600E831BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1E6A5FCE2C2403CA492EE77 /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
+		4787DE99222467E700E831BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4787DE95222467E700E831BC /* RNGeocoder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BF8FCF941BFFB184000FCD37;
+			remoteInfo = RNGeocoder;
+		};
+		47AA743C22259B8300B7E06F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14495E8F062D4547A33EE7F9 /* RNSpotify.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSpotify;
+		};
+		47AA744122259B8300B7E06F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C60F56215C741FBA47271BD /* RNEventEmitter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNEventEmitter;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -422,11 +457,17 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = resonate/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = resonate/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = resonate/main.m; sourceTree = "<group>"; };
+		14495E8F062D4547A33EE7F9 /* RNSpotify.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpotify.xcodeproj; path = "../node_modules/rn-spotify-sdk/ios/RNSpotify.xcodeproj"; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2967A0E0DD6A4791A0F2E3F7 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* resonate-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "resonate-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* resonate-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "resonate-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4164A263071F4426B06675D5 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
+		4787DE95222467E700E831BC /* RNGeocoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGeocoder.xcodeproj; path = "../node_modules/react-native-geocoder/ios/RNGeocoder.xcodeproj"; sourceTree = "<group>"; };
+		47AA744322259C0400B7E06F /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAudioPlayback.framework; path = "../node_modules/rn-spotify-sdk/ios/external/SpotifySDK/SpotifyAudioPlayback.framework"; sourceTree = "<group>"; };
+		47AA744422259C0400B7E06F /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyMetadata.framework; path = "../node_modules/rn-spotify-sdk/ios/external/SpotifySDK/SpotifyMetadata.framework"; sourceTree = "<group>"; };
+		47AA744522259C0400B7E06F /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAuthentication.framework; path = "../node_modules/rn-spotify-sdk/ios/external/SpotifySDK/SpotifyAuthentication.framework"; sourceTree = "<group>"; };
 		4E28BC1F47034CF39B320073 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		5963EAAC70A542318BF5A6E0 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -441,6 +482,8 @@
 		8F3DBE276C1F447197D359F7 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		95ACD17279A646B89A1B28B4 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		99B60D807328471497A5B763 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		9C60F56215C741FBA47271BD /* RNEventEmitter.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNEventEmitter.xcodeproj; path = "../node_modules/react-native-events/ios/RNEventEmitter.xcodeproj"; sourceTree = "<group>"; };
+		9CDCF91B0BAC4EEC97CF7D08 /* libRNSpotify.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpotify.a; sourceTree = "<group>"; };
 		9D118E21221A7373006F2E1F /* AIRDummyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRDummyView.m; sourceTree = "<group>"; };
 		9D118E22221A7373006F2E1F /* AIRGoogleMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapPolyline.h; sourceTree = "<group>"; };
 		9D118E23221A7373006F2E1F /* AIRGoogleMapUrlTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapUrlTile.m; sourceTree = "<group>"; };
@@ -483,6 +526,7 @@
 		9D118E48221A7373006F2E1F /* AIRGoogleMapCircleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapCircleManager.h; sourceTree = "<group>"; };
 		9D118E49221A7373006F2E1F /* AIRGoogleMapPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapPolygon.m; sourceTree = "<group>"; };
 		9D118E4A221A7373006F2E1F /* AIRGMSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGMSMarker.m; sourceTree = "<group>"; };
+		A1E6A5FCE2C2403CA492EE77 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B5CFB21894AA46E99E6E40F2 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		BA517DDEC2404233ACEFB444 /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
@@ -492,11 +536,10 @@
 		D7CCE5B9D24642A19863771B /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		DC3A971EEA3B400AA22DD88E /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		DF289D557A7A4EEAAF178AEC /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		E4564CBCF5BE4F40835E7F40 /* libRNEventEmitter.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNEventEmitter.a; sourceTree = "<group>"; };
 		EB4075ED7C974469AA41B009 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		F3335363B6384FE193C0D195 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		F76A08A8F0B14EE890F87E09 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		A1E6A5FCE2C2403CA492EE77 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		4164A263071F4426B06675D5 /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		F8046232E591081AE0D0B493 /* libPods-resonate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-resonate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -513,6 +556,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47AA744622259C0400B7E06F /* SpotifyAudioPlayback.framework in Frameworks */,
+				47AA744722259C0400B7E06F /* SpotifyMetadata.framework in Frameworks */,
+				47AA744822259C0400B7E06F /* SpotifyAuthentication.framework in Frameworks */,
+				4787DE9B2224680700E831BC /* libRNGeocoder.a in Frameworks */,
 				9D118E73221A7639006F2E1F /* libBVLinearGradient.a in Frameworks */,
 				9D118E72221A762D006F2E1F /* libRNVectorIcons.a in Frameworks */,
 				9D118E71221A7606006F2E1F /* libRCTAnimation.a in Frameworks */,
@@ -527,12 +574,12 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				0296ECBD9EF748D19560516B /* libRNVectorIcons.a in Frameworks */,
-				C91107427A214DC188C426CE /* libBVLinearGradient.a in Frameworks */,
 				F94D4C2324DA4B888088F765 /* libRNGestureHandler.a in Frameworks */,
 				D0EBAF1AAC274ED5A712D5D9 /* libRNImagePicker.a in Frameworks */,
 				E1735D7195924DC6BB1AC27E /* libAirMaps.a in Frameworks */,
 				1DF0354E2D0D1901449704D0 /* libPods-resonate.a in Frameworks */,
+				9AC67C04E4B14498B41D90A5 /* libRNEventEmitter.a in Frameworks */,
+				67DCDEFB727A4A89B60C54A4 /* libRNSpotify.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +729,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				47AA744322259C0400B7E06F /* SpotifyAudioPlayback.framework */,
+				47AA744522259C0400B7E06F /* SpotifyAuthentication.framework */,
+				47AA744422259C0400B7E06F /* SpotifyMetadata.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				F8046232E591081AE0D0B493 /* libPods-resonate.a */,
 			);
@@ -696,6 +746,9 @@
 				BA517DDEC2404233ACEFB444 /* libRNVectorIcons-tvOS.a */,
 				F3335363B6384FE193C0D195 /* libRNGestureHandler.a */,
 				5963EAAC70A542318BF5A6E0 /* libAirMaps.a */,
+				4164A263071F4426B06675D5 /* libRNImagePicker.a */,
+				E4564CBCF5BE4F40835E7F40 /* libRNEventEmitter.a */,
+				9CDCF91B0BAC4EEC97CF7D08 /* libRNSpotify.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -722,6 +775,38 @@
 			isa = PBXGroup;
 			children = (
 				47443A31221DC1000090038E /* libRNGestureHandler.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4787DE902224677600E831BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4787DE942224677600E831BC /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4787DE96222467E700E831BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4787DE9A222467E700E831BC /* libRNGeocoder.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		47AA743922259B8200B7E06F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47AA743D22259B8300B7E06F /* libRNSpotify.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		47AA743E22259B8300B7E06F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47AA744222259B8300B7E06F /* libRNEventEmitter.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -769,6 +854,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				4787DE95222467E700E831BC /* RNGeocoder.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -786,6 +872,8 @@
 				7E6B99EB7D3A45298920BBD1 /* RNGestureHandler.xcodeproj */,
 				A1E6A5FCE2C2403CA492EE77 /* RNImagePicker.xcodeproj */,
 				95ACD17279A646B89A1B28B4 /* AirMaps.xcodeproj */,
+				9C60F56215C741FBA47271BD /* RNEventEmitter.xcodeproj */,
+				14495E8F062D4547A33EE7F9 /* RNSpotify.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1078,8 +1166,24 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 47AA743E22259B8300B7E06F /* Products */;
+					ProjectRef = 9C60F56215C741FBA47271BD /* RNEventEmitter.xcodeproj */;
+				},
+				{
+					ProductGroup = 4787DE96222467E700E831BC /* Products */;
+					ProjectRef = 4787DE95222467E700E831BC /* RNGeocoder.xcodeproj */;
+				},
+				{
 					ProductGroup = 47443A2D221DC1000090038E /* Products */;
 					ProjectRef = 7E6B99EB7D3A45298920BBD1 /* RNGestureHandler.xcodeproj */;
+				},
+				{
+					ProductGroup = 4787DE902224677600E831BC /* Products */;
+					ProjectRef = A1E6A5FCE2C2403CA492EE77 /* RNImagePicker.xcodeproj */;
+				},
+				{
+					ProductGroup = 47AA743922259B8200B7E06F /* Products */;
+					ProjectRef = 14495E8F062D4547A33EE7F9 /* RNSpotify.xcodeproj */;
 				},
 				{
 					ProductGroup = 473B63922202AA6400A46440 /* Products */;
@@ -1356,6 +1460,34 @@
 			remoteRef = 47443A30221DC1000090038E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4787DE942224677600E831BC /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = 4787DE932224677600E831BC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4787DE9A222467E700E831BC /* libRNGeocoder.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGeocoder.a;
+			remoteRef = 4787DE99222467E700E831BC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		47AA743D22259B8300B7E06F /* libRNSpotify.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSpotify.a;
+			remoteRef = 47AA743C22259B8300B7E06F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		47AA744222259B8300B7E06F /* libRNEventEmitter.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNEventEmitter.a;
+			remoteRef = 47AA744122259B8300B7E06F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1624,12 +1756,16 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-events/ios",
+					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = resonateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1659,12 +1795,16 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-events/ios",
+					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = resonateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1689,7 +1829,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5C38MHWK43;
-				DEVELOPMENT_TEAM = DE2XDV5S83;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/GoogleMaps/Base/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleMaps/Maps/Frameworks\"",
+					"../node_modules/rn-spotify-sdk/ios/external/SpotifySDK",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -1703,6 +1848,8 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps/**",
+					"$(SRCROOT)/../node_modules/react-native-events/ios",
+					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = resonate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1724,7 +1871,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5C38MHWK43;
-				DEVELOPMENT_TEAM = DE2XDV5S83;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/GoogleMaps/Base/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleMaps/Maps/Frameworks\"",
+					"../node_modules/rn-spotify-sdk/ios/external/SpotifySDK",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -1738,6 +1890,8 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps/**",
+					"$(SRCROOT)/../node_modules/react-native-events/ios",
+					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = resonate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1771,11 +1925,15 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-events/ios",
+					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = "resonate-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1812,11 +1970,15 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-events/ios",
+					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = "resonate-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1852,11 +2014,15 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-events/ios",
+					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = "resonate-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1893,11 +2059,15 @@
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-events/ios",
+					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = "resonate-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
