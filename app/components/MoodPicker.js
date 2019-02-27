@@ -5,7 +5,8 @@ import { Tag } from './Tag';
 
 class MoodPicker extends React.Component {
   static defaultProps = {
-    onColorChange: () => {}
+    onColorChange: () => {},
+    initialColor: "#ffffff"
   }
 
 
@@ -18,7 +19,7 @@ class MoodPicker extends React.Component {
           <View style={{flex: 2, height: 300, }}>
             
           <ColorWheel
-              initialColor="#ffffff"
+              initialColor={this.props.initialColor}
               onColorChange={(color, coordinates) => this.props.onColorChange(color,coordinates)}
               style={{
               width: Dimensions.get('window').width,

@@ -92,7 +92,6 @@ export function initSpotify() {
 }
 
 export function dragItem (searchRes, queue, index, offset, fromSearch) {
-  console.log(offset);
   if (fromSearch) {
     item = searchRes.splice(index, 1);
     queue.splice(offset, 0, item[0]);

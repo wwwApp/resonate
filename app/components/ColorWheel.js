@@ -24,7 +24,7 @@ export class ColorWheel extends Component {
     this.state = {
       offset: {x: 0, y: 0},
       currentColor: props.initialColor,
-      pan: new Animated.ValueXY(),
+      pan: new Animated.ValueXY()
     }
   }
 
@@ -99,7 +99,7 @@ export class ColorWheel extends Component {
         top: y % window.height,
         left: absX,
       })
-      this.forceUpdate(this.state.currentColor, {x:0,y:0})
+      this.forceUpdate(this.state.currentColor)
     })
   }
 
@@ -164,7 +164,7 @@ export class ColorWheel extends Component {
       x: left - this.props.thumbSize / 2,
       y: top - this.props.thumbSize / 2,
     })
-    this.props.onColorChange(color, {x: offset.x, y: offset.y});
+    this.props.onColorChange(color, {x: left - this.state.offset.x, y: top - this.state.offset.y + this.props.thumbSize*2});
   }
 
   render () {

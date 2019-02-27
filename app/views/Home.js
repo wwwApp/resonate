@@ -5,8 +5,10 @@ import Map from "../components/Map";
 import { PlaylistCard } from "../components/PlaylistCard";
 import { Colors } from "../styles/Colors";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
+import { setMood } from "../redux/reducers/home.reducer";
 import { connect } from "react-redux";
 import { ButtonIcon } from "../components/ButtonIcon";
+import LinearGradient from "react-native-linear-gradient";
 
 class Home extends Component {
 	constructor(props) {
@@ -51,14 +53,18 @@ class Home extends Component {
 			paddingTop: this.state.topY
 		};
 
+		const moodOffset = {
+			transform: [{ translateX: this.props.coordinates.x / 10 }, { translateY: this.props.coordinates.y / 10 }]
+		};
+
 		return (
 			<Animated.View style={[styles.container, paddingStyle]}>
 				{/*********************************** MAP *********************************************/}
 				<View style={styles.map}>
 					<Map paddingBottom={45} />
-					<View style={{ flex: 1, flexDirection: "row", justifyContent: "center", marginTop: 65, position: "absolute" }}>
+					<View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-start", marginTop: 65, position: "absolute", paddingLeft: 16, paddingRight: 16 }}>
 						<TextInput
-							style={{ flex: 1, color: "white", marginLeft: 10, fontSize: 28, fontWeight: "bold", paddingRight: 20 }}
+							style={{ flex: 1, color: "white", fontSize: 28, fontWeight: "bold", paddingRight: 20, lineHeight: 42 }}
 							onChangeText={this.onChangeText}
 							onSubmitEditing={this.onSubmit}
 							value={this.props.locality}
@@ -69,42 +75,63 @@ class Home extends Component {
 							onPress={() => {
 								this.setModalVisible(true);
 							}}>
-							<Image source={require("../assets/moodPicker.png")} style={{}} />
+							<View style={styles.moodIconOuter}>
+								<View style={[styles.moodIconInner, moodOffset]} />
+							</View>
 						</TouchableOpacity>
 					</View>
 				</View>
 
 				{/*********************************** DOWN ARROW *********************************************/}
-				<View style={{ width: "100%", height: 60, backgroundColor: "#312F2F", marginTop: 60, borderTopLeftRadius: 14, borderTopRightRadius: 14, alignItems: "center" }}>
-					<TouchableOpacity onPress={this.onPress}>
-						<Image style={{ marginTop: 15 }} source={require("../assets/down-arrow.png")} />
-					</TouchableOpacity>
+				<View style={{ marginTop: 60, borderTopLeftRadius: 14, borderTopRightRadius: 14, backgroundColor: "#312F2F", flex: 1, position: "relative", overflow: "hidden" }}>
+					<LinearGradient
+						style={{
+							width: "100%",
+							height: 70,
+							borderTopLeftRadius: 14,
+							borderTopRightRadius: 14,
+							alignItems: "center",
+							position: "absolute",
+							backgroundColor: "#0006",
+							zIndex: 20,
+							top: 0,
+							right: 0,
+							blur: 10,
+							paddingTop:5
+						}}
+						colors={[Colors.defaultBg, Colors.defaultBg + "00"]}
+						start={{ x: 0, y: .2 }} end={{ x: 0, y: 1 }}
+						>
+						<ButtonIcon type={this.state.isOpen? "maximize" : "minimize"} onPress={() => {this.onPress()}}/>
+					</LinearGradient>
+
+					{/*********************************** SCROLLVIEW 1 *********************************************/}
+					<ScrollView style={styles.mainWrapper}>
+						<View>
+							<Text style={[{ color: "white", fontSize: 20 }, styles.sidePadding]}>Top Charts</Text>
+						</View>
+
+						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
+							<PlaylistCard />
+							<PlaylistCard />
+							<PlaylistCard />
+						</ScrollView>
+
+						{/*********************************** SCROLLVIEW 2 *********************************************/}
+
+						<View>
+							<Text style={[{ color: "white", fontSize: 20 }, styles.sidePadding]}>Recommended</Text>
+						</View>
+
+						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
+							<PlaylistCard />
+							<PlaylistCard />
+							<PlaylistCard />
+						</ScrollView>
+					</ScrollView>
 				</View>
 
-				{/*********************************** SCROLLVIEW 1 *********************************************/}
-				<ScrollView style={styles.mainWrapper}>
-					<View contentContainerstyle={styles.titleWrapper}>
-						<Text style={{ color: "white", marginLeft: 30, fontSize: 20 }}>Top Charts</Text>
-					</View>
-
-					<ScrollView style={styles.playlistRow} horizontal={true}>
-						<PlaylistCard />
-						<PlaylistCard />
-						<PlaylistCard />
-					</ScrollView>
-
-					{/*********************************** SCROLLVIEW 2 *********************************************/}
-
-					<View contentContainerstyle={styles.titleWrapper}>
-						<Text style={{ color: "white", marginLeft: 30, fontSize: 20 }}>Recommended</Text>
-					</View>
-
-					<ScrollView style={styles.playlistRow} horizontal={true}>
-						<PlaylistCard />
-						<PlaylistCard />
-						<PlaylistCard />
-					</ScrollView>
-				</ScrollView>
+				{/*********************************** Mood Modal *********************************************/}
 
 				<Modal animationType="slide" transparent={true} visible={this.state.modalVisible}>
 					<View style={{ paddingTop: 40, flex: 1, alignItems: "flex-end", backgroundColor: Colors.defaultBg + "EE" }}>
@@ -114,7 +141,7 @@ class Home extends Component {
 								this.setModalVisible(false);
 							}}
 						/>
-						<MoodPicker />
+						<MoodPicker onColorChange={(color, coordinates) => this.props.setMood(color, coordinates)} initialColor={this.props.color} />
 					</View>
 				</Modal>
 			</Animated.View>
@@ -141,15 +168,14 @@ const styles = StyleSheet.create({
 	mainWrapper: {
 		flex: 1,
 		// marginTop: 50,
-		zIndex: 100,
-		backgroundColor: Colors.defaultBg
+		zIndex: 10,
+		paddingTop: 55
 	},
 	playlistRow: {
 		flex: 1,
 		flexDirection: "row",
 		height: 400,
-		paddingTop: 20,
-		paddingLeft: 30
+		paddingTop: 20
 	},
 	cardWrapper: {
 		flex: 1,
@@ -162,16 +188,39 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: "column",
 		alignItems: "flex-start"
+	},
+	moodIconOuter: {
+		width: 40,
+		height: 40,
+		borderWidth: 3,
+		borderColor: Colors.defaultIcon,
+		borderRadius: 100,
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	moodIconInner: {
+		width: 12,
+		height: 12,
+		borderWidth: 3,
+		borderColor: Colors.defaultIcon,
+		borderRadius: 100
+	},
+	sidePadding: {
+		paddingRight: 16,
+		paddingLeft: 16
 	}
 });
 
 const mapStateToProps = state => ({
-	locality: state.map.searchText
+	locality: state.map.searchText,
+	coordinates: state.home.moodCoordinates,
+	color: state.home.moodColor
 });
 
 const mapDispatchToProps = {
 	getMapAddr,
-	requestAddr
+	requestAddr,
+	setMood
 };
 
 export default connect(
