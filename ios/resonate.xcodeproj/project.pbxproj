@@ -22,7 +22,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		1DF0354E2D0D1901449704D0 /* libPods-resonate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8046232E591081AE0D0B493 /* libPods-resonate.a */; };
 		21EA1B0286D842CE82A590E6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE612F341C4F489F8496BB61 /* Entypo.ttf */; };
 		26611E17535C42B9AA2D969D /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F76A08A8F0B14EE890F87E09 /* FontAwesome5_Solid.ttf */; };
 		2BC1824EB0674644B251F777 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E28BC1F47034CF39B320073 /* MaterialIcons.ttf */; };
@@ -83,6 +82,7 @@
 		BCCA96BBB4834C6385BD7D4D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C31E26CBC4E42A08C58BFE2 /* SimpleLineIcons.ttf */; };
 		D0EBAF1AAC274ED5A712D5D9 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4164A263071F4426B06675D5 /* libRNImagePicker.a */; };
 		D3F23A0FF0894BC098634430 /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA517DDEC2404233ACEFB444 /* libRNVectorIcons-tvOS.a */; };
+		DBE6A75A41A492D50571929A /* libPods-resonate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A79DD63EFAEE76D0DF0C741 /* libPods-resonate.a */; };
 		E1735D7195924DC6BB1AC27E /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5963EAAC70A542318BF5A6E0 /* libAirMaps.a */; };
 		F21C5B219FC848F09F94EFA1 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99B60D807328471497A5B763 /* Feather.ttf */; };
 		F50D649A2B404F2CADD690C1 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7CCE5B9D24642A19863771B /* AntDesign.ttf */; };
@@ -447,7 +447,6 @@
 		00E356F21AD99517003FC87E /* resonateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = resonateTests.m; sourceTree = "<group>"; };
 		04919C3365244641BABD99D0 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		0A8022D7601D431591F67485 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
-		0AEE1A5CD1546F66AC039432 /* Pods-resonate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-resonate.debug.xcconfig"; path = "Target Support Files/Pods-resonate/Pods-resonate.debug.xcconfig"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* resonate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = resonate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -459,6 +458,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = resonate/main.m; sourceTree = "<group>"; };
 		14495E8F062D4547A33EE7F9 /* RNSpotify.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpotify.xcodeproj; path = "../node_modules/rn-spotify-sdk/ios/RNSpotify.xcodeproj"; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1E2958ED06A40875AB49E65C /* Pods-resonate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-resonate.release.xcconfig"; path = "Target Support Files/Pods-resonate/Pods-resonate.release.xcconfig"; sourceTree = "<group>"; };
 		2967A0E0DD6A4791A0F2E3F7 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* resonate-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "resonate-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* resonate-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "resonate-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -471,10 +471,11 @@
 		4E28BC1F47034CF39B320073 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		5963EAAC70A542318BF5A6E0 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		6A79DD63EFAEE76D0DF0C741 /* libPods-resonate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-resonate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B575E067C64A4463EAE916D /* Pods-resonate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-resonate.debug.xcconfig"; path = "Target Support Files/Pods-resonate/Pods-resonate.debug.xcconfig"; sourceTree = "<group>"; };
 		6C31E26CBC4E42A08C58BFE2 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		70CD8ADE2AFF45D2B6DC7D07 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		73B11DA63A8046DFAEB7BD3D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
-		75B78694C41CCAFFC6C70559 /* Pods-resonate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-resonate.release.xcconfig"; path = "Target Support Files/Pods-resonate/Pods-resonate.release.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		79D0F8D5F8074BCBA4B05733 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		7E6B99EB7D3A45298920BBD1 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
@@ -540,7 +541,6 @@
 		EB4075ED7C974469AA41B009 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		F3335363B6384FE193C0D195 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		F76A08A8F0B14EE890F87E09 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		F8046232E591081AE0D0B493 /* libPods-resonate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-resonate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -577,9 +577,9 @@
 				F94D4C2324DA4B888088F765 /* libRNGestureHandler.a in Frameworks */,
 				D0EBAF1AAC274ED5A712D5D9 /* libRNImagePicker.a in Frameworks */,
 				E1735D7195924DC6BB1AC27E /* libAirMaps.a in Frameworks */,
-				1DF0354E2D0D1901449704D0 /* libPods-resonate.a in Frameworks */,
 				9AC67C04E4B14498B41D90A5 /* libRNEventEmitter.a in Frameworks */,
 				67DCDEFB727A4A89B60C54A4 /* libRNSpotify.a in Frameworks */,
+				DBE6A75A41A492D50571929A /* libPods-resonate.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,7 +733,7 @@
 				47AA744522259C0400B7E06F /* SpotifyAuthentication.framework */,
 				47AA744422259C0400B7E06F /* SpotifyMetadata.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				F8046232E591081AE0D0B493 /* libPods-resonate.a */,
+				6A79DD63EFAEE76D0DF0C741 /* libPods-resonate.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -919,8 +919,8 @@
 		8B6E6A38B82101376A86EDEF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0AEE1A5CD1546F66AC039432 /* Pods-resonate.debug.xcconfig */,
-				75B78694C41CCAFFC6C70559 /* Pods-resonate.release.xcconfig */,
+				6B575E067C64A4463EAE916D /* Pods-resonate.debug.xcconfig */,
+				1E2958ED06A40875AB49E65C /* Pods-resonate.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1017,12 +1017,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "resonate" */;
 			buildPhases = (
-				2798DF8098B2A65430986AD0 /* [CP] Check Pods Manifest.lock */,
+				1CD84C7EE5355083901A8095 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				707EFCFFA0E3DEA35F463077 /* [CP] Copy Pods Resources */,
+				A32F14D2E409446AFC780645 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1596,7 +1596,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		2798DF8098B2A65430986AD0 /* [CP] Check Pods Manifest.lock */ = {
+		1CD84C7EE5355083901A8095 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1632,7 +1632,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		707EFCFFA0E3DEA35F463077 /* [CP] Copy Pods Resources */ = {
+		A32F14D2E409446AFC780645 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1640,7 +1640,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-resonate/Pods-resonate-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-resonate/Pods-resonate-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1651,7 +1651,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-resonate/Pods-resonate-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-resonate/Pods-resonate-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1823,7 +1823,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0AEE1A5CD1546F66AC039432 /* Pods-resonate.debug.xcconfig */;
+			baseConfigurationReference = 6B575E067C64A4463EAE916D /* Pods-resonate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1852,6 +1852,7 @@
 					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = resonate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1866,7 +1867,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75B78694C41CCAFFC6C70559 /* Pods-resonate.release.xcconfig */;
+			baseConfigurationReference = 1E2958ED06A40875AB49E65C /* Pods-resonate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1894,6 +1895,7 @@
 					"$(SRCROOT)/../node_modules/rn-spotify-sdk/ios/**",
 				);
 				INFOPLIST_FILE = resonate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

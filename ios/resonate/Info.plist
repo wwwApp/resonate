@@ -37,8 +37,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>For taking a photo.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>For saving a photo.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>For choosing a photo.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -66,16 +72,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>For choosing a photo.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>For taking a photo.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>For saving a photo.</string>
 </dict>
 </plist>
