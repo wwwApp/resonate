@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight, Modal,  Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Modal,  Dimensions, ScrollView } from 'react-native';
 import { ColorWheel } from 'react-native-color-wheel';
 import { Tag } from './Tag';
 
@@ -12,21 +12,23 @@ class MoodPicker extends React.Component {
       
 
       <View style={styles.moodPicker}> 
-        <View style={{width: "100%", height: 100, flex: .3, alignItems: "flex-end", }}>
+        <View style={{width: "100%", height: 100, alignItems: "flex-end", }}>
         
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => {this.props.closeMp()}}
-                style={{padding: 10,}}>
+                style={{}}>
                 
                         <Image
                           source={require('../assets/close-button.png')}
                           style={{
-                          marginRight: 20,
-                          marginTop: 65,
+                            
+                            marginRight: 30,
+                            marginTop: 55,
+                            padding: 20
                           }} />
                             
                           
-                  </TouchableHighlight>
+                  </TouchableOpacity>
 
         </View>
 
@@ -36,16 +38,22 @@ class MoodPicker extends React.Component {
               initialColor="#ffffff"
               onColorChange={color => console.log({color})}
               onColorChangeComplete={color => onChange(color)}
-              style={{
+              style={{marginTop: 20,
               width: Dimensions.get('window').width,
               maxHeight: 400
                         }}
               thumbStyle={{ height: 30, width: 30, borderRadius: 30}}
                   />
 
+
+
+
             </View>   
 
-            <Tag tagData={["Party", "Beach", "Warm Weather"]} />
+            <ScrollView style={styles.tags} horizontal={true} showsHorizontalScrollIndicator={false}> 
+<Tag tagData={["Holiday", "Vacation", "Late Night", "Early Morning", "Celebration", "Classical", "Driving", "Home", "2000's", "1960's", "1980's", "International", "Religious"]} />
+</ScrollView>
+            
       </View>
   
     )
@@ -57,6 +65,7 @@ class MoodPicker extends React.Component {
 const styles = StyleSheet.create({
     
     moodPicker: {
+      
       backgroundColor: "#312F2F",
       height: 1000,
       opacity: .95,
@@ -65,6 +74,11 @@ const styles = StyleSheet.create({
       alignItems: "flex-start"
       
   
+    },
+    tags: {
+    marginLeft: 30,
+    marginTop: 30
+    
     }
     
   });

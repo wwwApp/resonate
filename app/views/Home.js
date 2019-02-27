@@ -445,14 +445,17 @@ const styles = StyleSheet.create({
     flex: 1,
     // marginTop: 50,
     zIndex: 100,
-    backgroundColor: "#312F2F"
+    backgroundColor: "#312F2F",
+    
   },
   playlistRow: {
     flex: 1,
     flexDirection: "row",
     height: 400,
     paddingTop: 20,
-    paddingLeft: 30
+    paddingLeft: 30,
+    paddingRight: 30
+   
 
   },
   card: {
@@ -464,6 +467,7 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 1.0,
     shadowRadius: 10,
+    
 
     
   },

@@ -31,7 +31,8 @@ class Tag extends Component {
 
 const styles = StyleSheet.create({
   tagContainer: {
-    flexDirection: "row"
+    flexDirection: "row",
+    maxHeight: 25
   },
   tagName: {
     color: Colors.defaultFont,
