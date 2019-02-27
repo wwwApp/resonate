@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ScrollView, TextInput, Image, TouchableOpacity, Modal, Dimensions, Animated } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TextInput, Image, TouchableOpacity, Modal, Animated } from "react-native";
 import { MoodPicker } from "../components/MoodPicker.js";
 import Map from "../components/Map";
 import { PlaylistCard } from "../components/PlaylistCard";
-import {Colors} from "../styles/Colors";
+import { Colors } from "../styles/Colors";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
 import { connect } from "react-redux";
+import { ButtonIcon } from "../components/ButtonIcon";
 
 class Home extends Component {
 	constructor(props) {
@@ -37,13 +38,13 @@ class Home extends Component {
 		this.setState({ isOpen: !this.state.isOpen });
 	};
 
-	onChangeText = (text) => {
+	onChangeText = text => {
 		this.props.requestAddr(text);
-	}
+	};
 
-	onSubmit = (text) => {
+	onSubmit = text => {
 		this.props.getMapAddr(this.props.locality);
-	}
+	};
 
 	render() {
 		const paddingStyle = {
@@ -54,10 +55,10 @@ class Home extends Component {
 			<Animated.View style={[styles.container, paddingStyle]}>
 				{/*********************************** MAP *********************************************/}
 				<View style={styles.map}>
-					<Map paddingBottom={45}/>
+					<Map paddingBottom={45} />
 					<View style={{ flex: 1, flexDirection: "row", justifyContent: "center", marginTop: 65, position: "absolute" }}>
-						<TextInput 
-							style={{ flex:1, color: "white", marginLeft: 10, fontSize: 28, fontWeight: "bold", paddingRight: 120 }}
+						<TextInput
+							style={{ flex: 1, color: "white", marginLeft: 10, fontSize: 28, fontWeight: "bold", paddingRight: 20 }}
 							onChangeText={this.onChangeText}
 							onSubmitEditing={this.onSubmit}
 							value={this.props.locality}
@@ -106,16 +107,19 @@ class Home extends Component {
 				</ScrollView>
 
 				<Modal animationType="slide" transparent={true} visible={this.state.modalVisible}>
-					<MoodPicker
-						closeMp={() => {
-							this.setModalVisible(false);
-						}}
-					/>
+					<View style={{ paddingTop: 40, flex: 1, alignItems: "flex-end", backgroundColor: Colors.defaultBg + "EE" }}>
+						<ButtonIcon
+							type={"close"}
+							onPress={() => {
+								this.setModalVisible(false);
+							}}
+						/>
+						<MoodPicker />
+					</View>
 				</Modal>
 			</Animated.View>
 		);
 	}
-
 }
 
 const styles = StyleSheet.create({
@@ -174,4 +178,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Home);
-

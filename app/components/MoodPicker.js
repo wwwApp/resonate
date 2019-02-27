@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight, Modal,  Dimensions } from 'react-native';
-import { ColorWheel } from 'react-native-color-wheel';
+import { ColorWheel } from './ColorWheel';
 import { Tag } from './Tag';
 
 class MoodPicker extends React.Component {
-
+  static defaultProps = {
+    onColorChange: () => {}
+  }
 
 
   render(){
@@ -12,30 +14,12 @@ class MoodPicker extends React.Component {
       
 
       <View style={styles.moodPicker}> 
-        <View style={{width: "100%", height: 100, flex: .3, alignItems: "flex-end", }}>
-        
-              <TouchableHighlight
-                onPress={() => {this.props.closeMp()}}
-                style={{padding: 10,}}>
-                
-                        <Image
-                          source={require('../assets/close-button.png')}
-                          style={{
-                          marginRight: 20,
-                          marginTop: 65,
-                          }} />
-                            
-                          
-                  </TouchableHighlight>
-
-        </View>
 
           <View style={{flex: 2, height: 300, }}>
             
           <ColorWheel
               initialColor="#ffffff"
-              onColorChange={color => console.log({color})}
-              onColorChangeComplete={color => onChange(color)}
+              onColorChange={(color, coordinates) => this.props.onColorChange(color,coordinates)}
               style={{
               width: Dimensions.get('window').width,
               maxHeight: 400
@@ -57,14 +41,10 @@ class MoodPicker extends React.Component {
 const styles = StyleSheet.create({
     
     moodPicker: {
-      backgroundColor: "#312F2F",
       height: 1000,
-      opacity: .95,
       flex: 1,
       flexDirection: "column",
       alignItems: "flex-start"
-      
-  
     }
     
   });

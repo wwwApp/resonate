@@ -8,7 +8,9 @@ import LinearGradient from "react-native-linear-gradient";
 import ImagePicker from "react-native-image-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import Map from "../components/Map";
+import { MoodPicker } from "../components/MoodPicker";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
+import { setMood } from "../redux/reducers/create.reducer";
 import { connect } from "react-redux";
 
 class Create_Details extends Component {
@@ -198,7 +200,7 @@ class Create_Mood extends Component {
 			// Container View
 			// Change the color values based on mood calculated from server for bg color
 			<View style={[styles.bg, { paddingBottom: 16 }]}>
-				<Text style={styles.mapPlaceholder}>*Moodpicker/tag placeholder*</Text>
+				<MoodPicker onColorChange={(color, coordinates) => {this.props.setMood(color, coordinates)}}/>
 				<TouchableOpacity onPress={() => navigate("Library")}>
 					<Text style={styles.continueButton}>Done</Text>
 				</TouchableOpacity>
@@ -206,6 +208,18 @@ class Create_Mood extends Component {
 		);
 	}
 }
+
+const mapStateToPropsMood = state => ({
+});
+
+const mapDispatchToPropsMood = {
+	setMood
+};
+ 
+const Connnected_Mood = connect(
+	mapStateToPropsMood,
+	mapDispatchToPropsMood
+)(Create_Mood);
 
 const styles = StyleSheet.create({
 	bg: {
@@ -305,7 +319,7 @@ const MainNavigator = createStackNavigator(
 		Details: { screen: Create_Details },
 		Tracks: { screen: Create_Tracks },
 		Location: { screen: Connected_Map },
-		Mood: { screen: Create_Mood }
+		Mood: { screen: Connnected_Mood }
 	},
 	{
 		defaultNavigationOptions: {

@@ -5,65 +5,8 @@ import {
 } from "react-native";
 import { Colors } from "../styles/Colors";
 import LinearGradient from "react-native-linear-gradient";
-import {initSpotify, searchTrack, dragItem} from "../redux/reducers/spotify.reducer";
+import {initSpotify, searchTrack, dragItem} from "../redux/reducers/create.reducer";
 import { connect } from "react-redux";
-
-var fakeData = {
-  trackListA: [
-    {
-      "artists": [
-        "Stevie Wonder"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5596",
-      "title": "Sir Duke",
-      "album": "Songs In The Key Of Life (Reissue)",
-      "image_url": "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
-      "spotify_id": "2udw7RDkldLFIPG9WYdVtT"
-    },
-    {
-      "artists": [
-        "Marvin Gaye"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5595",
-      "title": "What's Going On",
-      "album": "What's Going On",
-      "image_url": "https://i.scdn.co/image/79cc9cb5325ea22f480989045cf62e962822803a",
-      "spotify_id": "34b3a3Pz9Jlz0092LMyNAB"
-    },
-    {
-      "artists": [
-        "Janelle Monáe"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5594",
-      "title": "Make Me Feel",
-      "album": "Make Me Feel",
-      "image_url": "https://i.scdn.co/image/29979c0664b46f3e54b2a3f66f448c9df11f929f",
-      "spotify_id": "79GsUxLyzxgnN4I1E11dtO"
-    }
-  ],
-  trackListB: [
-    {
-      "artists": [
-        "Marvin Gaye"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5595",
-      "title": "What's Going On",
-      "album": "What's Going On",
-      "image_url": "https://i.scdn.co/image/79cc9cb5325ea22f480989045cf62e962822803a",
-      "spotify_id": "34b3a3Pz9Jlz0092LMyNAB"
-    },
-    {
-      "artists": [
-        "Janelle Monáe"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5594",
-      "title": "Make Me Feel",
-      "album": "Make Me Feel",
-      "image_url": "https://i.scdn.co/image/29979c0664b46f3e54b2a3f66f448c9df11f929f",
-      "spotify_id": "79GsUxLyzxgnN4I1E11dtO"
-    }
-  ]
-}
 
 class TrackView extends Component {
   constructor() {
@@ -178,8 +121,6 @@ class TrackStack extends Component {
   constructor() {
     super();
     this.state = {
-      listA: fakeData.trackListA,
-      listB: fakeData.trackListB,
       totalDragDistance: (styles.trackView.height + styles.stack.marginTop + 110),
       dragData: {
         index: 0,
@@ -381,9 +322,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  term: state.spotify.term,
-  searchResults: state.spotify.searchResults,
-  trackQueue: state.spotify.trackQueue
+  term: state.create.term,
+  searchResults: state.create.searchResults,
+  trackQueue: state.create.trackQueue
 });
 
 const mapDispatchToProps = {

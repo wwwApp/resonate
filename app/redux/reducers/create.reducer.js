@@ -1,42 +1,28 @@
 import Spotify from "rn-spotify-sdk";
 
-export const SEARCH = 'spotify/SEARCH';
-export const SEARCH_SUCCESS = 'spotify/SEARCH_SUCCESS';
-export const SEARCH_FAIL = 'spotify/SEARCH_FAIL';
+export const SEARCH = 'create/SEARCH';
+export const SEARCH_SUCCESS = 'create/SEARCH_SUCCESS';
+export const SEARCH_FAIL = 'create/SEARCH_FAIL';
 
 export const INIT = 'spotify/INIT';
 export const INIT_SUCCESS = 'spotify/INIT_SUCCESS';
 export const INIT_FAIL = 'spotify/INIT_FAIL';
 
-export const SET_LISTS = 'spotify/SET_LISTS';
+export const SET_MOOD = 'create/SET_MOOD';
+
+export const SET_LISTS = 'create/SET_LISTS';
 
 defaultState = {
   loading: false,
   searchResults: [],
-  trackQueue: [
-    {
-      "artists": [
-        "Marvin Gaye"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5595",
-      "title": "What's Going On",
-      "album": "What's Going On",
-      "image_url": "https://i.scdn.co/image/79cc9cb5325ea22f480989045cf62e962822803a",
-      "spotify_id": "34b3a3Pz9Jlz0092LMyNAB"
-    },
-    {
-      "artists": [
-        "Janelle Monáe"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5594",
-      "title": "Make Me Feel",
-      "album": "Make Me Feel",
-      "image_url": "https://i.scdn.co/image/29979c0664b46f3e54b2a3f66f448c9df11f929f",
-      "spotify_id": "79GsUxLyzxgnN4I1E11dtO"
-    }
-  ],
+  trackQueue: [],
   term: "",
-  init: false
+  init: false,
+  moodColor: "#ffffff",
+  moodCoordinates: {
+    x: 0,
+    y: 0
+  }
 }
 
 export default function reducer(state = defaultState, action) {
@@ -58,6 +44,8 @@ export default function reducer(state = defaultState, action) {
         ...state,
         loading: false
       };
+    case SET_MOOD:
+      return {...state, moodColor: action.color, moodCoordinates: action.coordinates}
     default:
       return state;
   }
@@ -75,6 +63,14 @@ export function receiveResults(results, term) {
     type: SEARCH_SUCCESS,
     term: term,
     results: results
+  }
+}
+
+export function setMood(color, coordinates) {
+  return {
+    type: SET_MOOD,
+    color: color,
+    coordinates: coordinates
   }
 }
 
@@ -112,13 +108,24 @@ export function dragItem (searchRes, queue, index, offset, fromSearch) {
   }
 }
 
-export const searchTrack = (term) => (dispatch) => {
+export const searchTrack = (term) => (dispatch, getState) => {
   dispatch(setSearchTerm(term));
   // search for query
+  let trackQueue = getState().create.trackQueue;
   Spotify.search( term,["track"]).then( res => {
     // PARSE DATA
     let data = []
     for (item of res.tracks.items) {
+      var found = trackQueue.some(function (el) {
+        console.log(el.spotify_id);
+        console.log(item.id)
+        return el.spotify_id === item.id;
+      });
+  
+      if (found) {
+        continue;
+      }
+
       let itemData = { artists: []}
       for (artist of item.artists) {
         itemData.artists.push(artist.name);
@@ -128,7 +135,7 @@ export const searchTrack = (term) => (dispatch) => {
       itemData.image_url = item.album.images[0].url;
       itemData.spotify_id = item.id;
       itemData.duration = item.duration_ms;
-
+      
       data.push(itemData);
     }
 
