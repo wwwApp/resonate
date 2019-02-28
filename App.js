@@ -68,7 +68,7 @@ class MapTesting extends Component {
 
 const BottomNav = createBottomTabNavigator(
   {
-    Map: { screen: MapTesting },
+    // Map: { screen: MapTesting },
     Library: { screen: Library },
     Player: { screen: Test1 },
     Home: { screen: Home },

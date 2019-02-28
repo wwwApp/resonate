@@ -5,12 +5,12 @@ import { ButtonIcon } from "../components/ButtonIcon";
 import { Tag } from "./../components/Tag";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
-import { getPlaylist } from "../redux/reducers/playlist.reducer";
+import { getPlaylist, togglePlaylistView } from "../redux/reducers/playlist.reducer";
 import { connect } from "react-redux";
 
 class Playlist extends Component {
   componentDidMount() {
-    this.props.getPlaylist("5c6ac32fe21c4e00360b5592");
+    this.props.getPlaylist(this.props.id);
   }
 
   constructor(props) {
@@ -26,7 +26,6 @@ class Playlist extends Component {
   }
 
   render() {
-    // const { navigate } = this.props.navigation;
     return (
       // Container View
       // Change the color values based on mood calculated from server for bg color
@@ -45,7 +44,10 @@ class Playlist extends Component {
             />
           </View>,
           <View style={styles.topIconGroup}>
-            <ButtonIcon type="return" />
+            <ButtonIcon
+              type="close"
+              onPress={this.props.togglePlaylistView()}
+            />
             <View style={styles.rightIcon}>
               <ButtonIcon
                 type="heart"
@@ -145,7 +147,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getPlaylist
+  getPlaylist,
+  togglePlaylistView
 };
 
 export default connect(
