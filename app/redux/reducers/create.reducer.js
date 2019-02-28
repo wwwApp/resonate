@@ -125,6 +125,8 @@ export function initSpotify() {
 		tokenRefreshURL: "http://resonate.openode.io/api/token/refresh"
 	};
 	const loggedIn = Spotify.initialize(spotifyOptions);
+	// if (!loggedIn) {
+	// }
 	Spotify.login();
 
 	return {
@@ -157,8 +159,6 @@ export const searchTrack = term => (dispatch, getState) => {
 			let data = [];
 			for (item of res.tracks.items) {
 				var found = trackQueue.some(function(el) {
-					console.log(el.spotify_id);
-					console.log(item.id);
 					return el.spotify_id === item.id;
 				});
 
