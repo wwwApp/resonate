@@ -7,9 +7,6 @@ import Library from "./app/views/Library";
 import Player from "./app/views/Player";
 import { Colors } from "./app/styles/Colors";
 import Home from "./app/views/Home";
-////////////////////////////////////////////////////////////////// MAP TESTING
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import MapStyle from "./app/styles/MapStyle.json";
 
 /**
  * Some random pages for tab navigation demo
@@ -40,39 +37,15 @@ class Test1 extends Component {
   }
 }
 
-////////////////////////////////////////////////////////////////// MAP TESTING
-class MapTesting extends Component {
-  render() {
-    return (
-      <MapView
-        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-        style={{ flex: 1 }}
-        customMapStyle={MapStyle}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
-        region={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121
-        }}
-      >
-      </MapView>
-    );
-  }
-}
-
 /**
  * Tab Navigation Config.
  */
 
 const BottomNav = createBottomTabNavigator(
   {
-    // Map: { screen: MapTesting },
     Library: { screen: Library },
     Player: { screen: Test1 },
-    Home: { screen: Home },
-    Playlist: { screen: Playlist }
+    Home: { screen: Home }
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
