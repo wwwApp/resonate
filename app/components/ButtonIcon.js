@@ -48,6 +48,14 @@ const ButtonIcon = props => {
           />
         </TouchableOpacity>
       );
+    case "maximize":
+      return (
+        <TouchableOpacity onPress={props.onPress}>
+          <Icon
+            style={[styles.iconStyle, styles.verticalIcon_reverse]}
+            name="ios-arrow-back"
+            size={35}
+          />
     case "create":
       return (
         <TouchableOpacity onPress={props.onPress}>
@@ -146,6 +154,9 @@ const styles = StyleSheet.create({
   },
   verticalIcon: {
     transform: [{ rotate: "270deg" }]
+  },
+  verticalIcon_reverse: {
+    transform: [{ rotate: "90deg" }]
   }
 });
 

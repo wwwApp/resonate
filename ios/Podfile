@@ -2,4 +2,5 @@
 target 'resonate' do
     # Pods for resonate
     pod 'GoogleMaps'
+
     end
