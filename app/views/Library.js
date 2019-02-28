@@ -25,21 +25,24 @@ var fakeData = {
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 1",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     },
     {
       title: "Playlist Title 2",
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 2",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     },
     {
       title: "Playlist Title 3",
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 3",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     }
   ],
   my: [
@@ -48,21 +51,24 @@ var fakeData = {
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 1",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     },
     {
       title: "Playlist Title 2",
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 2",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     },
     {
       title: "Playlist Title 3",
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 3",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     }
   ]
 };
@@ -121,7 +127,7 @@ class PlaylistItem extends Component {
     if (this.props.hasStarred) {
       starred = (
         <TouchableOpacity
-          onPress={() => this.onPress("5c6ac32fe21c4e00360b5592")}
+          onPress={() => this.onPress("5c77715834dcda001ee60096")}
         >
           <LinearGradient
             colors={["#E23955", "#553484"]}
@@ -160,11 +166,15 @@ class PlaylistItem extends Component {
   render() {
     return (
       <View>
-        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ paddingVertical: 15 }}>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          style={{ paddingVertical: 15 }}
+        >
           {starred}
           {this.props.playlistData.map((item, index) => (
             <TouchableOpacity
-              onPress={() => this.onPress("5c6ac32fe21c4e00360b5592")}
+              onPress={() => this.onPress(item.id)}
               key={index}
             >
               <ImageBackground

@@ -5,7 +5,10 @@ import { ButtonIcon } from "../components/ButtonIcon";
 import { Tag } from "./../components/Tag";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
-import { getPlaylist, togglePlaylistView } from "../redux/reducers/playlist.reducer";
+import {
+  getPlaylist,
+  togglePlaylistView
+} from "../redux/reducers/playlist.reducer";
 import { connect } from "react-redux";
 
 class Playlist extends Component {
@@ -44,20 +47,22 @@ class Playlist extends Component {
             />
           </View>,
           <View style={styles.topIconGroup}>
-            <ButtonIcon
-              type="close"
-              onPress={this.props.togglePlaylistView()}
-            />
-            <View style={styles.rightIcon}>
+            <View style={{ flexDirection: "row" }}>
+              <ButtonIcon type="more" />
+
               <ButtonIcon
                 type="heart"
                 onPress={() => this.props.getPlaylist("fdsafdsgjhakfgkjads")}
               />
-
-              <ButtonIcon type="more" />
             </View>
+            <ButtonIcon
+              type="close"
+              onPress={() => {
+                this.props.togglePlaylistView();
+              }}
+            />
           </View>,
-          <View>
+          <View style={{ width: "100%" }}>
             <Text style={[styles.playlistItem, styles.title, styles.txtBold]}>
               {this.props.playlist.title}
             </Text>
@@ -96,9 +101,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20
-  },
-  rightIcon: {
-    flexDirection: "row"
   },
   playlistItem: {
     fontFamily: "Avenir",
