@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
-import test from './test.reducer';
+import spotify from './spotify.reducer';
 import playlist from './playlist.reducer';
 import player from './player.reducer';
+import map from './map.reducer';
 
 export default combineReducers({
-  test,
+  spotify,
   playlist,
-  player
+  player,
+  map
 });

@@ -7,7 +7,6 @@ import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
 import { getPlaylist } from "../redux/reducers/playlist.reducer";
 import { connect } from "react-redux";
-import { createStackNavigator, createAppContainer } from "react-navigation";
 
 class Playlist extends Component {
   componentDidMount() {
@@ -25,14 +24,6 @@ class Playlist extends Component {
     const toggleIcon = isPlaying ? "ios-pause" : "ios-play";
     this.setState({ isPlaying, toggleIcon });
   }
-
-  // static navigationOptions = ({ navigation }) => ({
-  //   headerleft: (
-  //     <View style={{ marginRight: 16, alignItems: "center" }}>
-  //       <ButtonIcon type="return" onPress={() => navigation.dismiss()} />
-  //     </View>
-  //   )
-  // });
 
   render() {
     // const { navigate } = this.props.navigation;
@@ -147,24 +138,6 @@ const styles = StyleSheet.create({
     borderRadius: 90
   }
 });
-
-// const MainNavigator = createStackNavigator(
-//   {
-//     Playlist: { screen: Playlist_View }
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerTintColor: Colors.defaultFont,
-//       headerStyle: {
-//         backgroundColor: Colors.defaultBg,
-//         borderWidth: 0,
-//         borderBottomColor: "transparent"
-//       }
-//     }
-//   }
-// );
-
-// const Playlist = createAppContainer(MainNavigator);
 
 const mapStateToProps = state => ({
   playlist: state.playlist.playlist,

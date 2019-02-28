@@ -1,6 +1,6 @@
-export const GET_PLAYLIST = 'plalist/LOAD';
-export const GET_PLAYLIST_SUCCESS = 'plalist/LOAD_SUCCESS';
-export const GET_PLAYLIST_FAIL = 'plalist/LOAD_FAIL';
+export const GET_PLAYLIST = 'playlist/LOAD';
+export const GET_PLAYLIST_SUCCESS = 'playlist/LOAD_SUCCESS';
+export const GET_PLAYLIST_FAIL = 'playlist/LOAD_FAIL';
 
 var defaultState = {
   loading: true,
