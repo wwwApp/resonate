@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal
 } from "react-native";
 import { ButtonIcon } from "./../components/ButtonIcon";
 import { Colors } from "./../styles/Colors";
@@ -14,6 +15,8 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import LinearGradient from "react-native-linear-gradient";
 import Create from "./Create";
 import Playlist from "./Playlist";
+import { togglePlaylistView } from "../redux/reducers/playlist.reducer";
+import { connect } from "react-redux";
 
 var fakeData = {
   saved: [
@@ -22,21 +25,24 @@ var fakeData = {
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 1",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     },
     {
       title: "Playlist Title 2",
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 2",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     },
     {
       title: "Playlist Title 3",
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 3",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     }
   ],
   my: [
@@ -45,21 +51,24 @@ var fakeData = {
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 1",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     },
     {
       title: "Playlist Title 2",
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 2",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     },
     {
       title: "Playlist Title 3",
       image_url:
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 3",
-      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
+      id: "5c77715834dcda001ee60096"
     }
   ]
 };
@@ -85,85 +94,129 @@ class Lib extends Component {
         <View style={styles.playlistWrapper}>
           <View>
             <Text style={styles.h2}>Saved Playlist</Text>
-            <PlaylistView
+            <Connected_PlaylistItem
               playlistData={this.state.saved}
-              onPress={() => navigate("Playlist")}
               hasStarred={true}
             />
           </View>
 
           <View>
             <Text style={styles.h2}>My Playlist</Text>
-            <PlaylistView
+            <Connected_PlaylistItem
               playlistData={this.state.my}
-              onPress={() => navigate("Playlist")}
               hasStarred={false}
             />
           </View>
         </View>
       </View>
-      
     );
   }
 }
 
-const PlaylistView = props => {
-  var starred;
-  if (props.hasStarred) {
-    starred = (
-      <TouchableOpacity onPress={props.onPress}>
-        <LinearGradient
-          colors={["#E23955", "#553484"]}
-          style={{
-            width: 150,
-            height: 150,
-            justifyContent: "center",
-            padding: 10,
-            marginRight: 5,
-            shadowOffset: { width: 3, height: 3 },
-            shadowColor: "black",
-            shadowOpacity: 0.4
-          }}
+var playlistView;
+var starred;
+class PlaylistItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onPress = this.onPress.bind(this);
+  }
+
+  componentWillMount() {
+    console.log(this.props.hasStarred);
+    if (this.props.hasStarred) {
+      starred = (
+        <TouchableOpacity
+          onPress={() => this.onPress("5c77715834dcda001ee60096")}
         >
-          <Icon
-            style={{ color: Colors.defaultIcon, textAlign: 'center' }}
-            name="ios-star"
-            size={25}
-          />
-          <Text style={[styles.title, { textAlign: "center" }]}>Starred</Text>
-        </LinearGradient>
-      </TouchableOpacity>
+          <LinearGradient
+            colors={["#E23955", "#553484"]}
+            style={{
+              width: 150,
+              height: 150,
+              justifyContent: "center",
+              padding: 10,
+              marginRight: 5,
+              shadowOffset: { width: 3, height: 3 },
+              shadowColor: "black",
+              shadowOpacity: 0.4
+            }}
+          >
+            <Icon
+              style={{ color: Colors.defaultIcon, textAlign: "center" }}
+              name="ios-star"
+              size={25}
+            />
+            <Text style={[styles.title, { textAlign: "center" }]}>Starred</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      );
+    } else {
+      starred = null;
+    }
+  }
+
+  onPress(playlistID) {
+    console.log(playlistID);
+    playlistView = <Playlist id={playlistID} />;
+    this.props.togglePlaylistView();
+    return playlistView;
+  }
+
+  render() {
+    return (
+      <View>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          style={{ paddingVertical: 15 }}
+        >
+          {starred}
+          {this.props.playlistData.map((item, index) => (
+            <TouchableOpacity
+              onPress={() => this.onPress(item.id)}
+              key={index}
+            >
+              <ImageBackground
+                source={{ uri: item.image_url }}
+                style={[
+                  styles.playlistView,
+                  { maxWidth: "100%", maxHeight: "100%" }
+                ]}
+              >
+                <LinearGradient
+                  colors={[item.mood[0], item.mood[1]]}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    flexDirection: "column-reverse",
+                    padding: 10
+                  }}
+                >
+                  <Text style={styles.title}>{item.title}</Text>
+                </LinearGradient>
+              </ImageBackground>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+        <Modal visible={this.props.isVisible}>{playlistView}</Modal>
+      </View>
     );
   }
-  return (
-    <ScrollView horizontal={true} style={{ paddingVertical: 15 }}>
-      {starred}
-      {props.playlistData.map((item, index) => (
-        <TouchableOpacity onPress={props.onPress} key={index}>
-          <ImageBackground
-            source={{ uri: item.image_url }}
-            style={[
-              styles.playlistView,
-              { maxWidth: "100%", maxHeight: "100%" }
-            ]}
-          >
-            <LinearGradient
-              colors={[item.mood[0], item.mood[1]]}
-              style={{
-                width: "100%",
-                height: "100%",
-                flexDirection: "column-reverse",
-                padding: 10
-              }}
-            >
-              <Text style={styles.title}>{item.title}</Text>
-            </LinearGradient>
-          </ImageBackground>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
-  );
+}
+
+const mapStateToProps = state => ({
+  isVisible: state.playlist.isVisible
+});
+
+const mapDispatchToProps = {
+  togglePlaylistView
 };
+
+const Connected_PlaylistItem = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlaylistItem);
 
 const styles = StyleSheet.create({
   bg: {
