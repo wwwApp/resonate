@@ -10,7 +10,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Map from "../components/Map";
 import { MoodPicker } from "../components/MoodPicker";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
-import { setMood } from "../redux/reducers/create.reducer";
+import { setMood,  setTitle, setDesc, setImg, uploadPhoto, uploadPlaylist } from "../redux/reducers/create.reducer";
 import { connect } from "react-redux";
 
 class Create_Details extends Component {
@@ -36,8 +36,8 @@ class Create_Details extends Component {
 		};
 		ImagePicker.launchImageLibrary(options, response => {
 			if (response.uri) {
-				console.log(response);
 				this.setState({ photo: response });
+				this.props.setImg(response);
 			}
 		});
 	};
@@ -63,15 +63,15 @@ class Create_Details extends Component {
 					</TouchableOpacity>
 				</View>
 				<View style={[styles.textInputWrapper, styles.margin, { marginTop: 16 }]}>
-					<TextInput style={styles.textInput} placeholder="enter your playlist title" placeholderTextColor={Colors.defaultFont} />
+					<TextInput returnKeyType="done" style={styles.textInput} placeholder="enter your playlist title" placeholderTextColor={Colors.defaultFont} onChangeText={(text) => {this.props.setTitle(text)}} />
 					<LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={[Colors.tintTopGradient, Colors.tintBottomGradient]} style={{ width: "100%", height: 4 }} />
 				</View>
 				<View style={[styles.textBoxWrapper, { marginBottom: 50 }]}>
-					<Text style={styles.textInput}>
+					<Text style={styles.textInput} >
 						enter a description <Text style={styles.optional}>(optional)</Text>
 					</Text>
 					<LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={[Colors.tintTopGradient, Colors.tintBottomGradient]} style={{ width: "100%", flex: 1 }}>
-						<TextInput style={styles.textBox} multiline={true} />
+						<TextInput returnKeyType="done" blurOnSubmit={true} onChangeText={(text) => {this.props.setDesc(text)}} style={styles.textBox} multiline={true} />
 					</LinearGradient>
 				</View>
 				<TouchableOpacity onPress={() => navigate("Tracks")} style={styles.continueWrapper}>
@@ -81,6 +81,21 @@ class Create_Details extends Component {
 		);
 	}
 }
+
+const mapStateToPropsDetails = state => ({
+
+});
+
+const mapDispatchToPropsDetails = {
+	setTitle,
+	setDesc,
+	setImg
+};
+ 
+const Connected_Detail = connect(
+	mapStateToPropsDetails,
+	mapDispatchToPropsDetails
+)(Create_Details);
 
 class Create_Map extends Component {
 	static navigationOptions = ({ navigation }) => ({
@@ -194,6 +209,36 @@ class Create_Mood extends Component {
 		)
 	});
 
+	onSubmit() {
+		
+		let createData = this.props.createData;
+		let mapData = this.props.mapData;
+		var playlist = {
+			user: "5c7765a46f802f001eccceca",
+			title: createData.title,
+			description: createData.description,
+			location: {
+				coordinates: [mapData.region.longitude, mapData.region.longitude]
+			},
+			tags: ["workout", "fun"],
+			tracks: createData.trackQueue,
+			location_name: mapData.locality,
+			image_path: "",
+			location: {
+				coordinates: [createData.moodCoordinates.x, createData.moodCoordinates.x]
+			},
+			color: createData.moodColor
+		};
+		this.props.uploadPhoto(createData.local_image_data, "5c7765a46f802f001eccceca").then(res => {
+			playlist.image_path = res.payload.data.image_url
+			this.props.uploadPlaylist(playlist).then((res) => {
+				console.log(res)
+				const { navigate } = this.props.navigation;
+				navigate("Library");
+			})
+		});
+	}
+
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
@@ -201,7 +246,7 @@ class Create_Mood extends Component {
 			// Change the color values based on mood calculated from server for bg color
 			<View style={[styles.bg, { paddingBottom: 16 }]}>
 				<MoodPicker onColorChange={(color, coordinates) => {this.props.setMood(color, coordinates)}}/>
-				<TouchableOpacity onPress={() => navigate("Library")}>
+				<TouchableOpacity onPress={() => {this.onSubmit()}}>
 					<Text style={styles.continueButton}>Done</Text>
 				</TouchableOpacity>
 			</View>
@@ -210,10 +255,14 @@ class Create_Mood extends Component {
 }
 
 const mapStateToPropsMood = state => ({
+	createData: state.create,
+	mapData: state.map
 });
 
 const mapDispatchToPropsMood = {
-	setMood
+	setMood,
+	uploadPhoto,
+	uploadPlaylist
 };
  
 const Connnected_Mood = connect(
@@ -316,7 +365,7 @@ const styles = StyleSheet.create({
 
 const MainNavigator = createStackNavigator(
 	{
-		Details: { screen: Create_Details },
+		Details: { screen: Connected_Detail },
 		Tracks: { screen: Create_Tracks },
 		Location: { screen: Connected_Map },
 		Mood: { screen: Connnected_Mood }
