@@ -18,7 +18,7 @@ class Playlist extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isPlaying: false, toggleIcon: "ios-play" };
+    this.state = { isPlaying: false, toggleIcon: "ios-play", isHearted: false, toggleHeartIcon: "ios-heart-empty" };
   }
 
   togglePlay() {
@@ -26,6 +26,14 @@ class Playlist extends Component {
     const isPlaying = !this.state.isPlaying;
     const toggleIcon = isPlaying ? "ios-pause" : "ios-play";
     this.setState({ isPlaying, toggleIcon });
+  }
+
+  toggleHeart(){
+    const isHearted = !this.state.isHearted;
+    const toggleHeartIcon = isHearted ? "ios-heart" : "ios-heart-empty";
+    this.setState({ isHearted, toggleHeartIcon });
+
+    //this.props.getPlaylist("fdsafdsgjhakfgkjads")
   }
 
   render() {
@@ -52,7 +60,8 @@ class Playlist extends Component {
 
               <ButtonIcon
                 type="heart"
-                onPress={() => this.props.getPlaylist("fdsafdsgjhakfgkjads")}
+                onPress={this.toggleHeart.bind(this)}
+                toggleIcon={this.state.toggleHeartIcon}
               />
             </View>
             <ButtonIcon
@@ -100,7 +109,8 @@ const styles = StyleSheet.create({
     height: "auto",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 20
+    marginBottom: 20,
+    alignItems: 'center'
   },
   playlistItem: {
     fontFamily: "Avenir",

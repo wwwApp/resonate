@@ -35,7 +35,11 @@ const ButtonIcon = props => {
     case "heart":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={styles.iconStyle} name="md-heart-empty" size={35} />
+          <Icon
+            style={styles.iconStyle}
+            size={35}
+            name={props.toggleIcon}
+          />
         </TouchableOpacity>
       );
     case "minimize":
