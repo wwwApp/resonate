@@ -218,14 +218,14 @@ class Create_Mood extends Component {
 			title: createData.title,
 			description: createData.description,
 			location: {
-				coordinates: [mapData.region.longitude, mapData.region.longitude]
+				coordinates: [mapData.region.latitude, mapData.region.longitude]
 			},
 			tags: ["workout", "fun"],
 			tracks: createData.trackQueue,
 			location_name: mapData.locality,
 			image_path: "",
-			location: {
-				coordinates: [createData.moodCoordinates.x, createData.moodCoordinates.x]
+			mood: {
+				coordinates: [createData.moodCoordinates.x, createData.moodCoordinates.y]
 			},
 			color: createData.moodColor
 		};
