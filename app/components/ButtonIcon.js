@@ -61,7 +61,7 @@ const ButtonIcon = props => {
             size={35}
           />
         </TouchableOpacity>
-      );
+          );
     case "create":
       return (
         <TouchableOpacity onPress={props.onPress}>
