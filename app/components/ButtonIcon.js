@@ -56,6 +56,8 @@ const ButtonIcon = props => {
             name="ios-arrow-back"
             size={35}
           />
+        </TouchableOpacity>
+          );
     case "create":
       return (
         <TouchableOpacity onPress={props.onPress}>
