@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { AlbumVis } from "./AlbumVis";
 import { Seeker } from "./Seeker";
 import LinearGradient from "react-native-linear-gradient";
@@ -7,11 +7,6 @@ import { Colors } from "../styles/Colors";
 import { ButtonIcon } from "./ButtonIcon";
 
 class PlayerBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     if (this.props.isVisible === true) {
       return (
@@ -19,7 +14,6 @@ class PlayerBar extends Component {
           style={styles.modalContainer}
           colors={[Colors.minPlayerTopGradient, Colors.minPlayerBottomGradient]}
         >
-          {/* <GestureRecognizer onSwipeUp={() => this.onSwipeUp()}> */}
           <View style={styles.firstRow}>
             <ButtonIcon
               type="pc-backward"
@@ -28,7 +22,11 @@ class PlayerBar extends Component {
             />
 
             <View style={styles.playContainer}>
-              <AlbumVis albumSource={this.props.currentTrack.album} size={70} />
+              <AlbumVis
+                albumSource={this.props.currentTrack.album}
+                size={70}
+                isPlaying={this.props.isPlaying}
+              />
               <View style={styles.playButton}>
                 <ButtonIcon
                   type="pc-play"
@@ -39,13 +37,16 @@ class PlayerBar extends Component {
               </View>
             </View>
 
-            <ButtonIcon type="pc-forward" size={35} onPress={this.props.forward} />
+            <ButtonIcon
+              type="pc-forward"
+              size={35}
+              onPress={this.props.forward}
+            />
           </View>
 
           <View style={styles.secondRow}>
             <Seeker percentage={this.props.percentage} />
           </View>
-          {/* </GestureRecognizer> */}
         </LinearGradient>
       );
     } else {
@@ -59,8 +60,8 @@ const styles = StyleSheet.create({
   firstRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
-    paddingHorizontal: 20
+    justifyContent: "space-between",
+    paddingHorizontal: 60
   },
   secondRow: {},
   playContainer: {

@@ -13,17 +13,18 @@ import {
   togglePlayerView,
   incrementSeeker,
   resetSeeker,
-  togglePlay
+  togglePlay,
+  getCurrentTrack,
+  getNextTrack,
+  getPrevTrack
 } from "../redux/reducers/player.reducer";
 /* import Modal from "react-native-modal"; */
 
 class Player extends Component {
-  /**
-   *
-   * @param {required} props
-   * Use the class constructor to set the initial state
-   * for your component.
-   */
+  componentDidMount(){
+    this.props.getCurrentTrack();
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -71,8 +72,8 @@ class Player extends Component {
 
         // When it reaches the end of the current track
         if (this.props.counter === this.props.duration) {
-          return;
           // Make some call for next track
+          this.props.forward();
         }
       }, 1000);
     } else {
@@ -89,6 +90,7 @@ class Player extends Component {
     this.progressSeeker();
 
     // Code for go forward
+    this.props.forward();
   }
 
   /**
@@ -100,6 +102,7 @@ class Player extends Component {
     this.progressSeeker();
 
     // Code for go backward
+    this.props.backward();
   }
 
   render() {
@@ -109,13 +112,14 @@ class Player extends Component {
         <GestureRecognizer onSwipeUp={() => this.toggleView()}>
           <PlayerBar
             isVisible={!this.props.isFull}
-            albumSource
+            albumSource={this.props.currentTrack.album}
             play={() => this.play()}
             forward={() => this.forward()}
             backward={() => this.backward()}
             percentage={this.props.percentage}
             currentTrack={this.props.currentTrack}
             toggleIcon={this.state.toggleIcon}
+            isPlaying={this.props.isPlaying}
           />
         </GestureRecognizer>
 
@@ -130,6 +134,7 @@ class Player extends Component {
                 <AlbumVis
                   albumSource={this.props.currentTrack.album}
                   size={200}
+                  isPlaying={this.props.isPlaying}
                 />
               </View>
 
@@ -202,7 +207,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.defaultBg
   },
   trackImage: {
-    marginVertical: 75
+    marginVertical: 150
   },
   trackInfo: {
     marginTop: 10
@@ -252,7 +257,10 @@ function mapDispatchToProps(dispatch) {
     toggleView: () => dispatch(togglePlayerView()),
     increment: () => dispatch(incrementSeeker()),
     reset: () => dispatch(resetSeeker()),
-    togglePlay: () => dispatch(togglePlay())
+    togglePlay: () => dispatch(togglePlay()),
+    getCurrentTrack: () => dispatch(getCurrentTrack()),
+    forward: () => dispatch(getNextTrack()),
+    backward: () => dispatch(getPrevTrack())
   };
 }
 
@@ -266,7 +274,8 @@ function mapStateToProps(state) {
     isPlaying: state.player.isPlaying,
     currentTrack: state.player.currentTrack,
     counter: state.player.counter,
-    percentage: state.player.percentage
+    percentage: state.player.percentage,
+    currentPlaylist: state.player.currentPlaylist
   };
 }
 

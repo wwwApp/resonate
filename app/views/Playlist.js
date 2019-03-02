@@ -26,6 +26,7 @@ class Playlist extends Component {
   }
 
   render() {
+    // const { navigate } = this.props.navigation;
     return (
       // Container View
       // Change the color values based on mood calculated from server for bg color
@@ -36,7 +37,7 @@ class Playlist extends Component {
         {!this.props.isLoading && [
           <View style={[styles.playButtonContainer, styles.playButtonIcon]}>
             <ButtonIcon
-              style={{color: 'black'}}
+              style={{ color: "black" }}
               type="pl-play"
               toggleIcon={this.state.toggleIcon}
               size={50}
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 40,
+    padding: 35,
     paddingTop: 50
   },
   topIconGroup: {
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   playButtonContainer: {
     position: "absolute",
     top: 130,
-    right: 35,
+    right: 30,
     zIndex: 9999
   },
   playButtonIcon: {

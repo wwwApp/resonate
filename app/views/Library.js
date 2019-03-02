@@ -1,293 +1,213 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, ScrollView, ImageBackground, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity
+} from "react-native";
+import { ButtonIcon } from "./../components/ButtonIcon";
 import { Colors } from "./../styles/Colors";
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import Icon from "react-native-vector-icons/Ionicons";
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import LinearGradient from "react-native-linear-gradient";
 import Create from "./Create";
+import Playlist from "./Playlist";
+
+var fakeData = {
+  saved: [
+    {
+      title: "Playlist Title 1",
+      image_url:
+        "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
+      creator: "Creator 1",
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+    },
+    {
+      title: "Playlist Title 2",
+      image_url:
+        "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
+      creator: "Creator 2",
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+    },
+    {
+      title: "Playlist Title 3",
+      image_url:
+        "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
+      creator: "Creator 3",
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+    }
+  ],
+  my: [
+    {
+      title: "Playlist Title 1",
+      image_url:
+        "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
+      creator: "Creator 1",
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+    },
+    {
+      title: "Playlist Title 2",
+      image_url:
+        "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
+      creator: "Creator 2",
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+    },
+    {
+      title: "Playlist Title 3",
+      image_url:
+        "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
+      creator: "Creator 3",
+      mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"]
+    }
+  ]
+};
 
 class Lib extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      saved: fakeData.saved,
+      my: fakeData.my
+    };
+  }
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       // Container View
       // Change the color values based on mood calculated from server for bg color
       <View style={styles.bg}>
-
-      <View style={{flex: .1, flexDirection: "row", height: 30}}>
-
-      <TouchableOpacity style={{height: 30, marginLeft: 30}} onPress={() => navigate('Create')}>
-        <Image source={require('../assets/add.png')} />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={{height: 30, marginLeft: 270}} onPress={() => navigate('Create')}>
-        <Image source={require('../assets/settings.png')} />
-      </TouchableOpacity>
-      
-
-      </View>
-     
-      
-       <View style={styles.libraryWrapper}>
-       <View style={styles.libTitleWrapper}>
-      <Text style={{color: "white", marginLeft: 30, fontSize: 20}}>Saved Playlists</Text>
-      </View>
-{/*       
-              //////////////////////////////////  ROW 1 */}
-      <ScrollView style={styles.libraryRow} horizontal={true} showsHorizontalScrollIndicator={false}>
-      
-      <View style={styles.starredCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-            <Image style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 50}}source={require('../assets/star.png')}></Image>   
-            <Text style={styles.starredTitle}>Starred Songs</Text>
-            
-
-            </View>
-
-          </ImageBackground>
-          
+        <View style={{ alignSelf: "flex-end", marginBottom: 30 }}>
+          <ButtonIcon type="create" onPress={() => navigate("Create")} />
         </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
 
-            <View style={styles.libCardWrapper}>
+        <View style={styles.playlistWrapper}>
+          <View>
+            <Text style={styles.h2}>Saved Playlist</Text>
+            <PlaylistView
+              playlistData={this.state.saved}
+              onPress={() => navigate("Playlist")}
+              hasStarred={true}
+            />
+          </View>
 
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-            </View>
-
-          </ImageBackground>
-          
+          <View>
+            <Text style={styles.h2}>My Playlist</Text>
+            <PlaylistView
+              playlistData={this.state.my}
+              onPress={() => navigate("Playlist")}
+              hasStarred={false}
+            />
+          </View>
         </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')}style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        
-
-
-      </ScrollView>
-
-      {/*       
-              //////////////////////////////////  ROW 2 */}
-
-<View style={styles.libTitleWrapper}>
-      <Text style={{color: "white", marginLeft: 30, fontSize: 20}}>Your Playlists</Text>
-      </View>
-      <ScrollView style={styles.libraryRow} horizontal={true} showsHorizontalScrollIndicator={false}>
-      
-      
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')}style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        
-
-
-      </ScrollView>
-       
-       </View>
-      
       </View>
       
     );
   }
 }
 
+const PlaylistView = props => {
+  var starred;
+  if (props.hasStarred) {
+    starred = (
+      <TouchableOpacity onPress={props.onPress}>
+        <LinearGradient
+          colors={["#E23955", "#553484"]}
+          style={{
+            width: 150,
+            height: 150,
+            justifyContent: "center",
+            padding: 10,
+            marginRight: 5,
+            shadowOffset: { width: 3, height: 3 },
+            shadowColor: "black",
+            shadowOpacity: 0.4
+          }}
+        >
+          <Icon
+            style={{ color: Colors.defaultIcon, textAlign: 'center' }}
+            name="ios-star"
+            size={25}
+          />
+          <Text style={[styles.title, { textAlign: "center" }]}>Starred</Text>
+        </LinearGradient>
+      </TouchableOpacity>
+    );
+  }
+  return (
+    <ScrollView horizontal={true} style={{ paddingVertical: 15 }}>
+      {starred}
+      {props.playlistData.map((item, index) => (
+        <TouchableOpacity onPress={props.onPress} key={index}>
+          <ImageBackground
+            source={{ uri: item.image_url }}
+            style={[
+              styles.playlistView,
+              { maxWidth: "100%", maxHeight: "100%" }
+            ]}
+          >
+            <LinearGradient
+              colors={[item.mood[0], item.mood[1]]}
+              style={{
+                width: "100%",
+                height: "100%",
+                flexDirection: "column-reverse",
+                padding: 10
+              }}
+            >
+              <Text style={styles.title}>{item.title}</Text>
+            </LinearGradient>
+          </ImageBackground>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
+  );
+};
+
 const styles = StyleSheet.create({
   bg: {
     backgroundColor: Colors.defaultBg,
-    flex:1,
-    paddingTop:50
-  },
- 
-  libraryRow: {
-    flex: .5,
-    flexDirection: "row",
-    height: 170,
-    paddingTop: 30,
-    paddingLeft: 30,
-  
-   
-  },
-  libCard: {
-    width: 162, 
-    height: 162, 
-    backgroundColor: '#312F2F', 
-    marginRight: 30,
-    shadowOffset:{  width: 0,  height: 0,  },
-    shadowColor: 'black',
-    shadowOpacity: 1.0,
-    shadowRadius: 10,
-   
-  },
-  playlistTitle: {
-    marginTop: 130,
-    marginLeft: 10,
-    
-    color: "white"
-  },
-  starredCard: {
-    width: 162, 
-    height: 162, 
-    backgroundColor: '#312F2F', 
-    marginRight: 30,
-    shadowOffset:{  width: 0,  height: 0,  },
-    shadowColor: 'black',
-    shadowOpacity: 1.0,
-    shadowRadius: 10,
-   
-  },
-  starredTitle: {
-    marginLeft: 'auto', 
-    marginRight: 'auto',
-    marginTop: 10,
-    color: "white"
-
-  },
-  libraryWrapper: {
     flex: 1,
-    
-    marginTop: 20
+    padding: 30,
+    paddingTop: 50
+  },
+  h2: {
+    color: Colors.defaultFont,
+    fontFamily: "Avenir",
+    fontWeight: "900",
+    fontSize: 26
+  },
+  playlistWrapper: {
+    flex: 1,
+    justifyContent: "space-around"
+  },
+  playlistView: {
+    backgroundColor: Colors.tintBottomGradient,
+    marginRight: 5,
+    width: 150,
+    height: 150,
+    shadowOffset: { width: 3, height: 3 },
+    shadowColor: "black",
+    shadowOpacity: 0.4
+  },
+  title: {
+    fontFamily: "Avenir",
+    color: "#FFF",
+    fontWeight: "700",
+    fontSize: 16
   }
 });
 
-
 const MainNavigator = createStackNavigator(
   {
-    Library: {screen: Lib},
-    Create: {screen: Create}
+    Library: { screen: Lib },
+    Create: { screen: Create },
+    Playlist: { screen: Playlist }
   },
   {
-    mode: 'modal',
-    headerMode: 'none',
+    mode: "modal",
+    headerMode: "none"
   }
 );
 

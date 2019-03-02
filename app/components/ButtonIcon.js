@@ -56,6 +56,10 @@ const ButtonIcon = props => {
             name="ios-arrow-back"
             size={35}
           />
+    case "create":
+      return (
+        <TouchableOpacity onPress={props.onPress}>
+          <Icon style={styles.iconStyle} name="ios-add" size={40} />
         </TouchableOpacity>
       );
     // Icons for track item
