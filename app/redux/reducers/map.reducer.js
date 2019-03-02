@@ -1,4 +1,6 @@
 import Geocoder from 'react-native-geocoder';
+import {search} from "./home.reducer";
+
 Geocoder.fallbackToGoogle("AIzaSyBEgLo6oarQOKYi8cVD5gO0ONLkl1yFxWY");
 
 export const GET_MAP_ADDR = 'map/LOAD_ADDR';
@@ -101,6 +103,7 @@ export const getMapAddr = (addr) => (dispatch) => {
     dispatch(receivePos(pos));
     dispatch(setRecentRegion(pos));
     dispatch(receiveLocality(res[0].locality));
+    dispatch(search());
   })
   .catch(err => console.log(err));
 }
@@ -112,7 +115,8 @@ export const getMapPos = (region) => (dispatch) => {
   }
   dispatch(requestPos(region))
   Geocoder.geocodePosition(pos).then(res => {
-    dispatch(receiveLocality(res[0].locality))
+    dispatch(receiveLocality(res[0].locality));
+    dispatch(search());
   })
   .catch(err => dispatch(mapError(err)))
 }
