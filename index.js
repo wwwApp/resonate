@@ -7,6 +7,7 @@ import {name as appName} from './app.json';
 
 
 class Resonate extends Component {
+
   render () {
     return (
       <Provider store={store}>

@@ -214,7 +214,7 @@ class Create_Mood extends Component {
 		let createData = this.props.createData;
 		let mapData = this.props.mapData;
 		var playlist = {
-			user: "5c7765a46f802f001eccceca",
+			user: this.props.user.userData._id,
 			title: createData.title,
 			description: createData.description,
 			location: {
@@ -256,7 +256,8 @@ class Create_Mood extends Component {
 
 const mapStateToPropsMood = state => ({
 	createData: state.create,
-	mapData: state.map
+	mapData: state.map,
+	user :state.user
 });
 
 const mapDispatchToPropsMood = {
@@ -368,7 +369,7 @@ const MainNavigator = createStackNavigator(
 		Details: { screen: Connected_Detail },
 		Tracks: { screen: Create_Tracks },
 		Location: { screen: Connected_Map },
-		Mood: { screen: Connnected_Mood }
+		Mood: { screen: Connnected_Mood },
 	},
 	{
 		defaultNavigationOptions: {
