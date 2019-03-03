@@ -6,6 +6,7 @@ import { PlaylistCard } from "../components/PlaylistCard";
 import { Colors } from "../styles/Colors";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
 import { setMood, search } from "../redux/reducers/home.reducer";
+import { initialize } from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 import { ButtonIcon } from "../components/ButtonIcon";
 import LinearGradient from "react-native-linear-gradient";
@@ -19,6 +20,10 @@ class Home extends Component {
 			modalVisible: false,
 			text: this.props.locality
 		};
+	}
+
+	componentDidMount() {
+		this.props.initialize();
 	}
 
 	setModalVisible(visible) {
@@ -233,7 +238,8 @@ const mapDispatchToProps = {
 	getMapAddr,
 	requestAddr,
 	setMood,
-	search
+	search,
+	initialize
 };
 
 export default connect(
