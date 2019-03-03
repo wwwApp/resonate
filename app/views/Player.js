@@ -37,7 +37,7 @@ class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: null,
+      timer: null
       // isPlaying: this.props.isPlaying
     };
   }
@@ -149,8 +149,19 @@ class Player extends Component {
                 <Text style={[styles.infoText, styles.titleText]}>
                   {this.props.currentTrack.title}
                 </Text>
+
+                {/** FIX IT: MAP OF UNDEFINED ERROR */}
+                {/* {this.props.currentTrack.artists.map((item, index) => (
+                  <Text
+                    key={index}
+                    style={[styles.infoText, styles.artistText]}
+                  >
+                    {item}
+                  </Text>
+                ))} */}
+
                 <Text style={[styles.infoText, styles.artistText]}>
-                  {this.props.currentTrack.artist}
+                  {this.props.currentTrack.artists}
                 </Text>
               </View>
 

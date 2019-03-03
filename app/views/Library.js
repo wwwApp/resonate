@@ -5,8 +5,7 @@ import {
   View,
   ScrollView,
   ImageBackground,
-  TouchableOpacity,
-  Modal
+  TouchableOpacity
 } from "react-native";
 import { ButtonIcon } from "./../components/ButtonIcon";
 import { Colors } from "./../styles/Colors";
