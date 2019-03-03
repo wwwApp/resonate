@@ -115,7 +115,7 @@ class Lib extends Component {
   }
 }
 
-var playlistView;
+
 var starred;
 var currentPlaylist;
 class PlaylistItem extends Component {

@@ -22,8 +22,6 @@ import {
 class Player extends Component {
   componentDidMount() {
     this.props.getCurrentTrack();
-    console.log(this.props.currentTrack);
-    console.log(this.props.isPlaying)
   }
 
   /**

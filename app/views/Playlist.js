@@ -15,6 +15,7 @@ import {
 import { togglePlay, pushTracks } from "../redux/reducers/player.reducer";
 import { connect } from "react-redux";
 
+var player;
 class Playlist extends Component {
   componentDidMount() {
     this.props.getPlaylist(this.props.id);
@@ -62,6 +63,16 @@ class Playlist extends Component {
   openPlayer() {
     // Only toggle from true to false on the very first click
     if (this.props.isFirstPlay) {
+      player = (
+        <View
+          style={[
+            // this.props.isFirstPlay ? { width: 0 } : {},
+            { position: "absolute", bottom: 0, right: 0, left: 0 }
+          ]}
+        >
+          <Player />
+        </View>
+      ); 
       this.props.toggleFirstPlay();
     }
   }
@@ -125,14 +136,7 @@ class Playlist extends Component {
         ]}
 
         {/** ADD PLAYER TO THE VIEW */}
-        <View
-          style={[
-            this.props.isFirstPlay ? { width: 0 } : {},
-            { position: "absolute", bottom: 0, right: 0, left: 0 }
-          ]}
-        >
-          <Player />
-        </View>
+        {player}
       </LinearGradient>
     );
   }
