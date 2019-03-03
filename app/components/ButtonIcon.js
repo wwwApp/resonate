@@ -15,7 +15,7 @@ const ButtonIcon = props => {
     case "close":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={[styles.iconStyle]} name="ios-close" size={50} />
+          <Icon style={[styles.iconStyle]} name="ios-close" size={35} />
         </TouchableOpacity>
       );
     case "more":
@@ -25,7 +25,7 @@ const ButtonIcon = props => {
             style={[
               styles.iconStyle,
               styles.verticalIcon,
-              { marginLeft: -5, marginRight: 5 }
+              { marginLeft: 5, marginRight: -5}
             ]}
             name="ios-more"
             size={35}

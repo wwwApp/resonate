@@ -97,6 +97,7 @@ class Lib extends Component {
             <Connected_PlaylistItem
               playlistData={this.state.saved}
               hasStarred={true}
+              navigate={this.props.navigation}
             />
           </View>
 
@@ -105,6 +106,7 @@ class Lib extends Component {
             <Connected_PlaylistItem
               playlistData={this.state.my}
               hasStarred={false}
+              navigate={this.props.navigation}
             />
           </View>
         </View>
@@ -113,8 +115,9 @@ class Lib extends Component {
   }
 }
 
-var playlistView;
+
 var starred;
+var currentPlaylist;
 class PlaylistItem extends Component {
   constructor(props) {
     super(props);
@@ -123,11 +126,11 @@ class PlaylistItem extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.hasStarred);
     if (this.props.hasStarred) {
       starred = (
         <TouchableOpacity
           onPress={() => this.onPress("5c77715834dcda001ee60096")}
+          // onPress={()=>{this.props.onPress; currentPlaylist="5c77715834dcda001ee60096"}}
         >
           <LinearGradient
             colors={["#E23955", "#553484"]}
@@ -157,10 +160,9 @@ class PlaylistItem extends Component {
   }
 
   onPress(playlistID) {
-    console.log(playlistID);
-    playlistView = <Playlist id={playlistID} />;
-    this.props.togglePlaylistView();
-    return playlistView;
+    currentPlaylist = playlistID;
+    const { navigate } = this.props.navigate;
+    navigate("Playlist");
   }
 
   render() {
@@ -173,10 +175,7 @@ class PlaylistItem extends Component {
         >
           {starred}
           {this.props.playlistData.map((item, index) => (
-            <TouchableOpacity
-              onPress={() => this.onPress(item.id)}
-              key={index}
-            >
+            <TouchableOpacity onPress={() => this.onPress(item.id)} key={index}>
               <ImageBackground
                 source={{ uri: item.image_url }}
                 style={[
@@ -199,11 +198,19 @@ class PlaylistItem extends Component {
             </TouchableOpacity>
           ))}
         </ScrollView>
-        <Modal visible={this.props.isVisible}>{playlistView}</Modal>
       </View>
     );
   }
 }
+
+class PlaylistView extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render(){
+    return(<Playlist id={currentPlaylist} navigation={this.props.navigation}/>);
+  }
+};
 
 const mapStateToProps = state => ({
   isVisible: state.playlist.isVisible
@@ -256,7 +263,7 @@ const MainNavigator = createStackNavigator(
   {
     Library: { screen: Lib },
     Create: { screen: Create },
-    Playlist: { screen: Playlist }
+    Playlist: { screen: PlaylistView },
   },
   {
     mode: "modal",
