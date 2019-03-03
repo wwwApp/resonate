@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Modal } from "react-native";
 import { ButtonIcon } from "../components/ButtonIcon";
 import { AlbumVis } from "../components/AlbumVis";
-/* import PlayControl from "./PlayControl"; */
-import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "../styles/Colors";
 import { PlayerBar } from "../components/PlayerBar";
 import { Seeker } from "../components/Seeker";
@@ -11,25 +9,38 @@ import GestureRecognizer from "react-native-swipe-gestures";
 import { connect } from "react-redux";
 import {
   togglePlayerView,
+  togglePlay,
   incrementSeeker,
   resetSeeker,
-  togglePlay,
   getCurrentTrack,
-  getNextTrack,
-  getPrevTrack
+  replay,
+  replay_back,
+  forward,
+  backward
 } from "../redux/reducers/player.reducer";
-/* import Modal from "react-native-modal"; */
 
 class Player extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.getCurrentTrack();
+    console.log(this.props.currentTrack);
+    console.log(this.props.isPlaying)
   }
+
+  /**
+   * Handle sync of seeker from playlist play action
+   */
+  // componentDidUpdate(prevProps, prevState) {
+  //   // only update chart if the data has changed
+  //   if (prevProps.isPlaying !== this.props.isPlaying) {
+  //     this.progressSeeker();
+  //   }
+  // }
 
   constructor(props) {
     super(props);
     this.state = {
-      toggleIcon: "ios-play",
-      timer: null
+      timer: null,
+      // isPlaying: this.props.isPlaying
     };
   }
 
@@ -44,22 +55,8 @@ class Player extends Component {
    * Handle the play/pause button press event.
    */
   async play() {
-    await this.togglePlay();
+    await this.props.togglePlay();
     await this.progressSeeker();
-  }
-
-  /**
-   * Handle toggle of play state and icon
-   */
-  async togglePlay() {
-    this.props.togglePlay();
-    let toggleIcon = "";
-    if (this.state.toggleIcon == "ios-play") {
-      toggleIcon = "ios-pause";
-    } else {
-      toggleIcon = "ios-play";
-    }
-    this.setState({ toggleIcon });
   }
 
   /**
@@ -73,7 +70,7 @@ class Player extends Component {
         // When it reaches the end of the current track
         if (this.props.counter === this.props.duration) {
           // Make some call for next track
-          this.props.forward();
+          this.forward();
         }
       }, 1000);
     } else {
@@ -87,10 +84,15 @@ class Player extends Component {
   forward() {
     this.props.reset();
     clearInterval(this.state.timer);
-    this.progressSeeker();
 
     // Code for go forward
-    this.props.forward();
+    if (this.props.currentTrackIndex === this.props.tracks.length - 1) {
+      this.props.replay();
+    } else {
+      this.props.forward();
+    }
+
+    this.progressSeeker();
   }
 
   /**
@@ -99,10 +101,15 @@ class Player extends Component {
   backward() {
     this.props.reset();
     clearInterval(this.state.timer);
-    this.progressSeeker();
 
     // Code for go backward
-    this.props.backward();
+    if (this.props.currentTrackIndex === 0) {
+      this.props.replay_back();
+    } else {
+      this.props.backward();
+    }
+
+    this.progressSeeker();
   }
 
   render() {
@@ -112,13 +119,12 @@ class Player extends Component {
         <GestureRecognizer onSwipeUp={() => this.toggleView()}>
           <PlayerBar
             isVisible={!this.props.isFull}
-            albumSource={this.props.currentTrack.album}
+            albumSource={this.props.currentTrack.image_url}
             play={() => this.play()}
             forward={() => this.forward()}
             backward={() => this.backward()}
             percentage={this.props.percentage}
-            currentTrack={this.props.currentTrack}
-            toggleIcon={this.state.toggleIcon}
+            toggleIcon={this.props.toggleIcon}
             isPlaying={this.props.isPlaying}
           />
         </GestureRecognizer>
@@ -127,12 +133,15 @@ class Player extends Component {
           <Modal visible={this.props.isFull} animationType={"slide"}>
             <View style={styles.container}>
               <View style={{ alignSelf: "flex-end" }}>
-                <ButtonIcon type="minimize" onPress={this.toggleView.bind(this)} />
+                <ButtonIcon
+                  type="minimize"
+                  onPress={this.toggleView.bind(this)}
+                />
               </View>
 
               <View style={styles.trackImage}>
                 <AlbumVis
-                  albumSource={this.props.currentTrack.album}
+                  albumSource={this.props.currentTrack.image_url}
                   size={200}
                   isPlaying={this.props.isPlaying}
                 />
@@ -179,7 +188,7 @@ class Player extends Component {
                   <ButtonIcon
                     type="pc-play"
                     size={70}
-                    toggleIcon={this.state.toggleIcon}
+                    toggleIcon={this.props.toggleIcon}
                     onPress={this.play.bind(this)}
                   />
 
@@ -257,10 +266,12 @@ function mapDispatchToProps(dispatch) {
     toggleView: () => dispatch(togglePlayerView()),
     increment: () => dispatch(incrementSeeker()),
     reset: () => dispatch(resetSeeker()),
-    togglePlay: () => dispatch(togglePlay()),
     getCurrentTrack: () => dispatch(getCurrentTrack()),
-    forward: () => dispatch(getNextTrack()),
-    backward: () => dispatch(getPrevTrack())
+    forward: () => dispatch(forward()),
+    backward: () => dispatch(backward()),
+    replay: () => dispatch(replay()),
+    replay_back: () => dispatch(replay_back()),
+    togglePlay: () => dispatch(togglePlay())
   };
 }
 
@@ -269,13 +280,14 @@ function mapDispatchToProps(dispatch) {
 // As the count value in the Redux state
 function mapStateToProps(state) {
   return {
+    tracks: state.player.tracks,
+    currentTrackIndex: state.player.currentTrackIndex,
+    currentTrack: state.player.currentTrack,
     isFull: state.player.isFull,
-    currentTrack: state.player.currentTrack,
     isPlaying: state.player.isPlaying,
-    currentTrack: state.player.currentTrack,
     counter: state.player.counter,
     percentage: state.player.percentage,
-    currentPlaylist: state.player.currentPlaylist
+    toggleIcon: state.player.toggleIcon
   };
 }
 

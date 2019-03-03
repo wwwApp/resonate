@@ -2,38 +2,68 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TrackList } from "./../components/TrackList";
 import { ButtonIcon } from "../components/ButtonIcon";
+import Player from "./Player";
 import { Tag } from "./../components/Tag";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
 import {
   getPlaylist,
-  togglePlaylistView
+  togglePlaylistView,
+  toggleHeart,
+  toggleFirstPlay
 } from "../redux/reducers/playlist.reducer";
+import { togglePlay, pushTracks } from "../redux/reducers/player.reducer";
 import { connect } from "react-redux";
 
 class Playlist extends Component {
   componentDidMount() {
     this.props.getPlaylist(this.props.id);
+    if (this.props.isHearted) {
+      this.state.toggleHeartIcon = "ios-heart";
+    } else {
+      this.state.toggleHeartIcon = "ios-heart-empty";
+    }
   }
 
   constructor(props) {
     super(props);
-    this.state = { isPlaying: false, toggleIcon: "ios-play", isHearted: false, toggleHeartIcon: "ios-heart-empty" };
+    this.state = {
+      toggleHeartIcon: "ios-heart-empty"
+    };
   }
 
-  togglePlay() {
-    // Toggle state and icon
-    const isPlaying = !this.state.isPlaying;
-    const toggleIcon = isPlaying ? "ios-pause" : "ios-play";
-    this.setState({ isPlaying, toggleIcon });
+  /**
+   * Push tracks to player and open it
+   */
+  async play() {
+    await this.props.pushTracks(this.props.playlist.tracks);
+    await this.props.togglePlay();
+    await this.openPlayer();
   }
 
-  toggleHeart(){
-    const isHearted = !this.state.isHearted;
-    const toggleHeartIcon = isHearted ? "ios-heart" : "ios-heart-empty";
-    this.setState({ isHearted, toggleHeartIcon });
+  async heart() {
+    await this.props.toggleHeart();
+    await togglePlay();
+    await this.toggleHeart();
+  }
+
+  toggleHeart() {
+    let toggleHeartIcon = "";
+    if (this.props.isHearted) {
+      toggleHeartIcon = "ios-heart";
+    } else {
+      toggleHeartIcon = "ios-heart-empty";
+    }
+    this.setState({ toggleHeartIcon });
 
     //this.props.getPlaylist("fdsafdsgjhakfgkjads")
+  }
+
+  openPlayer() {
+    // Only toggle from true to false on the very first click
+    if (this.props.isFirstPlay) {
+      this.props.toggleFirstPlay();
+    }
   }
 
   render() {
@@ -49,27 +79,28 @@ class Playlist extends Component {
             <ButtonIcon
               style={{ color: "black" }}
               type="pl-play"
-              toggleIcon={this.state.toggleIcon}
+              toggleIcon={this.props.toggleIcon}
+              // toggleIcon="ios-play"
               size={50}
-              onPress={this.togglePlay.bind(this)}
+              onPress={this.play.bind(this)}
             />
           </View>,
           <View style={styles.topIconGroup}>
-            <View style={{ flexDirection: "row" }}>
-              <ButtonIcon type="more" />
-
-              <ButtonIcon
-                type="heart"
-                onPress={this.toggleHeart.bind(this)}
-                toggleIcon={this.state.toggleHeartIcon}
-              />
-            </View>
             <ButtonIcon
-              type="close"
+              type="return"
               onPress={() => {
-                this.props.togglePlaylistView();
+                this.props.navigation.goBack(null);
               }}
             />
+            <View style={{ flexDirection: "row" }}>
+              <ButtonIcon
+                type="heart"
+                onPress={this.heart.bind(this)}
+                toggleIcon={this.state.toggleHeartIcon}
+              />
+
+              <ButtonIcon type="more" />
+            </View>
           </View>,
           <View style={{ width: "100%" }}>
             <Text style={[styles.playlistItem, styles.title, styles.txtBold]}>
@@ -92,6 +123,16 @@ class Playlist extends Component {
           </View>,
           <TrackList trackData={this.props.playlist.tracks} />
         ]}
+
+        {/** ADD PLAYER TO THE VIEW */}
+        <View
+          style={[
+            this.props.isFirstPlay ? { width: 0 } : {},
+            { position: "absolute", bottom: 0, right: 0, left: 0 }
+          ]}
+        >
+          <Player />
+        </View>
       </LinearGradient>
     );
   }
@@ -110,7 +151,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20,
-    alignItems: 'center'
+    alignItems: "center"
   },
   playlistItem: {
     fontFamily: "Avenir",
@@ -155,12 +196,20 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   playlist: state.playlist.playlist,
-  isLoading: state.playlist.loading
+  isLoading: state.playlist.loading,
+  isHearted: state.playlist.isHearted, // Needs be state.playlist.playlist.isHearted,
+  isFirstPlay: state.playlist.isFirstPlay, // once this data gets integrated in database
+  tracks: state.player.tracks,
+  toggleIcon: state.player.toggleIcon
 });
 
 const mapDispatchToProps = {
   getPlaylist,
-  togglePlaylistView
+  togglePlaylistView,
+  toggleHeart,
+  toggleFirstPlay,
+  pushTracks,
+  togglePlay
 };
 
 export default connect(

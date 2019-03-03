@@ -23,7 +23,7 @@ class PlayerBar extends Component {
 
             <View style={styles.playContainer}>
               <AlbumVis
-                albumSource={this.props.currentTrack.album}
+                albumSource={this.props.albumSource}
                 size={70}
                 isPlaying={this.props.isPlaying}
               />
