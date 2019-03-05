@@ -50,6 +50,15 @@ export const search = () => (dispatch, getState) => {
 };
 
 export function fetchPlaylists(latitude, longitude, moodX, moodY, tags) {
+	
+	console.log("Home request", {
+		latitude, 
+		longitude, 
+		moodX, 
+		moodY, 
+		tags
+	})
+
 	return {
 		type: LOAD_HOME,
 		payload: {

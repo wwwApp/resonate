@@ -16,6 +16,7 @@ export class ColorWheel extends Component {
     thumbSize: 50,
     initialColor: '#ffffff',
     onColorChange: () => {},
+    onColorChangeComplete: () => {},
     precision: 0,
   }
 
@@ -65,8 +66,9 @@ export class ColorWheel extends Component {
         this.state.pan.flattenOffset()
         const {radius} = this.calcPolar(nativeEvent)
         if (radius < 0.1) {
-          this.forceUpdate('#ffffff', {y:0,x:0})
+          this.forceUpdate('#ffffff')
         }
+        this.props.onColorChangeComplete(this.state.hsv);
       },
     })
   }
@@ -156,7 +158,8 @@ export class ColorWheel extends Component {
     this.props.onColorChange(currentColor, coordinates)
   }
 
-  forceUpdate = (color, offset) => {
+  forceUpdate = (color) => {
+    
     const {h, s, v} = colorsys.hex2Hsv(color)
     const {left, top} = this.calcCartesian(h, s / 100)
     this.setState({currentColor: color})
@@ -164,7 +167,8 @@ export class ColorWheel extends Component {
       x: left - this.props.thumbSize / 2,
       y: top - this.props.thumbSize / 2,
     })
-    this.props.onColorChange(color, {x: left - this.state.offset.x, y: top - this.state.offset.y + this.props.thumbSize*2});
+
+    this.props.onColorChange(color, {x: left - this.state.offset.x, y: top - this.state.offset.x});
   }
 
   render () {

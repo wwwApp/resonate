@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "../styles/Colors";
 
 const ButtonIcon = props => {
+
   switch (props.type) {
     // Icons for general purpose (nav, etc)
     case "return":
@@ -15,7 +16,7 @@ const ButtonIcon = props => {
     case "close":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={[styles.iconStyle]} name="ios-close" size={35} />
+          <Icon style={[styles.iconStyle]} name="ios-close" size={props.size ? props.size : 35} />
         </TouchableOpacity>
       );
     case "more":
@@ -37,7 +38,7 @@ const ButtonIcon = props => {
         <TouchableOpacity onPress={props.onPress}>
           <Icon
             style={styles.iconStyle}
-            size={35}
+            size={props.size ? props.size : 35}
             name={props.toggleIcon}
           />
         </TouchableOpacity>
@@ -96,6 +97,16 @@ const ButtonIcon = props => {
       return (
         <TouchableOpacity onPress={props.onPress}>
           <Icon style={styles.iconStyle} name="ios-repeat" size={35} />
+        </TouchableOpacity>
+      );
+      case "play":
+      return (
+        <TouchableOpacity onPress={props.onPress}>
+          <Icon
+            style={styles.iconStyle}
+            name="ios-play"
+            size={props.size}
+          />
         </TouchableOpacity>
       );
     // Icons from play controls

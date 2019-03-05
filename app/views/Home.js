@@ -122,7 +122,7 @@ class Home extends Component {
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
-							{this.props.playlists.map((item,index) => (
+							{this.props.playlists &&this.props.playlists.map((item,index) => (
 								<PlaylistCard playlist={item} key={index}/>
 							))}
 						</ScrollView>
@@ -134,7 +134,7 @@ class Home extends Component {
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
-							{this.props.playlists.map((item,index) => (
+							{this.props.playlists &&this.props.playlists.map((item,index) => (
 								<PlaylistCard playlist={item} key={index}/>
 							))}
 						</ScrollView>
@@ -147,6 +147,7 @@ class Home extends Component {
 					<View style={{ paddingTop: 40, flex: 1, alignItems: "flex-end", backgroundColor: Colors.defaultBg + "EE" }}>
 						<ButtonIcon
 							type={"close"}
+							size={60}
 							onPress={() => {
 								this.setModalVisible(false);
 							}}
@@ -154,6 +155,8 @@ class Home extends Component {
 						<MoodPicker
 							onColorChange={(color, coordinates) => {
 								this.props.setMood(color, coordinates);
+							}}
+							onColorChangeComplete={(color) => {
 								this.props.search();
 							}}
 							initialColor={this.props.color}
