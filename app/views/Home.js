@@ -5,7 +5,8 @@ import Map from "../components/Map";
 import { PlaylistCard } from "../components/PlaylistCard";
 import { Colors } from "../styles/Colors";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
-import { setMood } from "../redux/reducers/home.reducer";
+import { setMood, search } from "../redux/reducers/home.reducer";
+import { initialize } from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 import { ButtonIcon } from "../components/ButtonIcon";
 import LinearGradient from "react-native-linear-gradient";
@@ -19,6 +20,10 @@ class Home extends Component {
 			modalVisible: false,
 			text: this.props.locality
 		};
+	}
+
+	componentDidMount() {
+		this.props.initialize();
 	}
 
 	setModalVisible(visible) {
@@ -97,12 +102,17 @@ class Home extends Component {
 							top: 0,
 							right: 0,
 							blur: 10,
-							paddingTop:5
+							paddingTop: 5
 						}}
 						colors={[Colors.defaultBg, Colors.defaultBg + "00"]}
-						start={{ x: 0, y: .2 }} end={{ x: 0, y: 1 }}
-						>
-						<ButtonIcon type={this.state.isOpen? "maximize" : "minimize"} onPress={() => {this.onPress()}}/>
+						start={{ x: 0, y: 0.2 }}
+						end={{ x: 0, y: 1 }}>
+						<ButtonIcon
+							type={this.state.isOpen ? "maximize" : "minimize"}
+							onPress={() => {
+								this.onPress();
+							}}
+						/>
 					</LinearGradient>
 
 					{/*********************************** SCROLLVIEW 1 *********************************************/}
@@ -112,9 +122,9 @@ class Home extends Component {
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
-							<PlaylistCard />
-							<PlaylistCard />
-							<PlaylistCard />
+							{this.props.playlists &&this.props.playlists.map((item,index) => (
+								<PlaylistCard playlist={item} key={index}/>
+							))}
 						</ScrollView>
 
 						{/*********************************** SCROLLVIEW 2 *********************************************/}
@@ -124,9 +134,9 @@ class Home extends Component {
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
-							<PlaylistCard />
-							<PlaylistCard />
-							<PlaylistCard />
+							{this.props.playlists &&this.props.playlists.map((item,index) => (
+								<PlaylistCard playlist={item} key={index}/>
+							))}
 						</ScrollView>
 					</ScrollView>
 				</View>
@@ -137,11 +147,20 @@ class Home extends Component {
 					<View style={{ paddingTop: 40, flex: 1, alignItems: "flex-end", backgroundColor: Colors.defaultBg + "EE" }}>
 						<ButtonIcon
 							type={"close"}
+							size={60}
 							onPress={() => {
 								this.setModalVisible(false);
 							}}
 						/>
-						<MoodPicker onColorChange={(color, coordinates) => this.props.setMood(color, coordinates)} initialColor={this.props.color} />
+						<MoodPicker
+							onColorChange={(color, coordinates) => {
+								this.props.setMood(color, coordinates);
+							}}
+							onColorChangeComplete={(color) => {
+								this.props.search();
+							}}
+							initialColor={this.props.color}
+						/>
 					</View>
 				</Modal>
 			</Animated.View>
@@ -214,13 +233,16 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
 	locality: state.map.searchText,
 	coordinates: state.home.moodCoordinates,
-	color: state.home.moodColor
+	color: state.home.moodColor,
+	playlists: state.home.playlists
 });
 
 const mapDispatchToProps = {
 	getMapAddr,
 	requestAddr,
-	setMood
+	setMood,
+	search,
+	initialize
 };
 
 export default connect(

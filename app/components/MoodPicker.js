@@ -6,6 +6,7 @@ import { Tag } from './Tag';
 class MoodPicker extends React.Component {
   static defaultProps = {
     onColorChange: () => {},
+    onColorChangeComplete: () => {},
     initialColor: "#ffffff"
   }
 
@@ -21,9 +22,10 @@ class MoodPicker extends React.Component {
           <ColorWheel
               initialColor={this.props.initialColor}
               onColorChange={(color, coordinates) => this.props.onColorChange(color,coordinates)}
+              onColorChangeComplete={(color) => this.props.onColorChangeComplete(color)}
               style={{
               width: Dimensions.get('window').width,
-              maxHeight: 400
+              maxHeight: Dimensions.get('window').width
                         }}
               thumbStyle={{ height: 30, width: 30, borderRadius: 30}}
                   />

@@ -12,10 +12,6 @@ export const UPLOAD_PLAYLIST = "create/UPLOAD_PLAYLIST";
 export const UPLOAD_PLAYLIST_SUCCESS = "create/UPLOAD_PLAYLIST_SUCCESS";
 export const UPLOAD_PLAYLIST_FAIL = "create/UPLOAD_PLAYLIST_FAIL";
 
-export const INIT = "spotify/INIT";
-export const INIT_SUCCESS = "spotify/INIT_SUCCESS";
-export const INIT_FAIL = "spotify/INIT_FAIL";
-
 export const SET_MOOD = "create/SET_MOOD";
 export const SET_TITLE = "create/SET_TITLE";
 export const SET_DESC = "create/SET_DESC";
@@ -28,7 +24,6 @@ defaultState = {
 	searchResults: [],
 	trackQueue: [],
 	term: "",
-	init: false,
 	moodColor: "#ffffff",
 	moodCoordinates: {
 		x: 0,
@@ -51,8 +46,6 @@ export default function reducer(state = defaultState, action) {
 			} else {
 				return { ...state, loading: false, searchResults: [] };
 			}
-		case INIT_SUCCESS:
-			return { ...state, init: true };
 		case SET_LISTS:
 			return { ...state, searchResults: action.searchResults, trackQueue: action.trackQueue };
 		case SET_TITLE:
@@ -116,23 +109,6 @@ export function setImg(data) {
 	};
 }
 
-export function initSpotify() {
-	const spotifyOptions = {
-		clientID: "dcd8765def1247768928a9a0887e625e",
-		redirectURL: "http://resonate.openode.io/callback",
-		scopes: ["user-read-private", "playlist-read", "playlist-read-private", "streaming"],
-		tokenSwapURL: "http://resonate.openode.io/api/token/swap",
-		tokenRefreshURL: "http://resonate.openode.io/api/token/refresh"
-	};
-	const loggedIn = Spotify.initialize(spotifyOptions);
-	// if (!loggedIn) {
-	// }
-	Spotify.login();
-
-	return {
-		type: INIT_SUCCESS
-	};
-}
 
 export function dragItem(searchRes, queue, index, offset, fromSearch) {
 	if (fromSearch) {
@@ -198,6 +174,7 @@ export function uploadPhoto(photo, userId) {
 }
 
 export function uploadPlaylist(playlist) {
+	console.log(playlist);
 	return {
 		type: UPLOAD_PLAYLIST,
 		payload: {

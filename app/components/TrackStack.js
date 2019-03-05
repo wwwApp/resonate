@@ -5,7 +5,7 @@ import {
 } from "react-native";
 import { Colors } from "../styles/Colors";
 import LinearGradient from "react-native-linear-gradient";
-import {initSpotify, searchTrack, dragItem} from "../redux/reducers/create.reducer";
+import { searchTrack, dragItem} from "../redux/reducers/create.reducer";
 import { connect } from "react-redux";
 
 class TrackView extends Component {
@@ -209,9 +209,6 @@ class TrackStack extends Component {
     this.handleScrollTop(event, true);
   }
 
-  componentDidMount() {
-    this.props.initSpotify();
-  }
   
   render() {
     var paddingStyle = {
@@ -328,7 +325,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-	initSpotify,
   searchTrack,
   dragItem
 };
