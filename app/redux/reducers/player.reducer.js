@@ -8,11 +8,14 @@ export const FORWARD = "player/forward";
 export const BACKWARD = "player/backward";
 export const REPLAY = "player/replay";
 export const REPLAY_BACK = "player/replay_back";
+export const TOGGLE_SHUFFLE = "player/toggle_shuffle";
+export const SHUFFLE = "player/shuffle";
 
 var defaultState = {
   isPlaying: false,
   toggleIcon: "ios-play",
   isFull: false,
+  isShuffle: false,
   counter: 0,
   percentage: 0,
   currentTrack: {},
@@ -94,6 +97,18 @@ export default function reducer(state = defaultState, action) {
         currentTrackIndex: state.tracks.length - 1,
         currentTrack: state.tracks[state.currentTrackIndex]
       };
+    case TOGGLE_SHUFFLE:
+      return {
+        ...state,
+        isShuffle: !state.isShuffle
+      };
+    case SHUFFLE:
+      return {
+        ...state,
+        currnetTrackIndex: Math.floor(Math.random() * state.tracks.length),
+        currentTrack: state.tracks[state.currentTrackIndex]
+      };
+
     default:
       return state;
   }
@@ -157,5 +172,17 @@ export function forward() {
 export function backward() {
   return {
     type: BACKWARD
+  };
+}
+
+export function toggleShuffle() {
+  return {
+    type: TOGGLE_SHUFFLE
+  };
+}
+
+export function shuffle() {
+  return {
+    type: SHUFFLE
   };
 }
