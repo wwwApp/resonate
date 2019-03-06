@@ -4826,6 +4826,11 @@ react-native-events@~1.0.10:
   dependencies:
     events "^1.1.1"
 
+react-native-fast-image@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-5.2.0.tgz#6730eb06951ea6f9a79abe02a733bc05b7a73412"
+  integrity sha512-S+2gmv9HfLc7CGjjnQ3kO/QoZD9BJnjfwWhsJWgjEvaeOPbpHZaXSUkINSqLcHD5KIHcYidu+U2lgXdEv4Jamg==
+
 react-native-geocoder@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/react-native-geocoder/-/react-native-geocoder-0.5.0.tgz#ff4b9c55d5768a4784eefccb411761c82e067579"
@@ -4978,6 +4983,13 @@ react-navigation-material-bottom-tabs@^1.0.0:
     hoist-non-react-statics "^2.5.0"
     prop-types "^15.6.0"
     react-navigation-tabs "1.0.0"
+
+react-navigation-redux-helpers@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-navigation-redux-helpers/-/react-navigation-redux-helpers-3.0.0.tgz#fdb7bc7d8ba6c84ac07f21783b98f5f9bd77a64d"
+  integrity sha512-NSDxrBVNWpHNXw5fyhu25USJe3bL6J5PzEnAb/S2gSWgXBPrZbz/+JoljmNpLyeWVpa0nKnn01b/FhKlRjlJew==
+  dependencies:
+    invariant "^2.2.2"
 
 react-navigation-stack@1.0.6:
   version "1.0.6"

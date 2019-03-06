@@ -1,13 +1,15 @@
+export const SET_PLAYLIST = "playlist/SET";
 export const GET_PLAYLIST = "playlist/LOAD";
 export const GET_PLAYLIST_SUCCESS = "playlist/LOAD_SUCCESS";
 export const GET_PLAYLIST_FAIL = "playlist/LOAD_FAIL";
+
 export const TOGGLE_PLAYLIST_VIEW = "playlist/TOGGLE_PLAYLIST_VIEW";
 export const TOGGLE_HEART = "playlist/TOGGLE_HEART";
 export const TOGGLE_FIRST_PLAY = "playlist/TOGGLE_FIRST_PLAY";
 export const TOGGLE_PLAY = "playlist/TOGGLE_PLAY";
 
 var defaultState = {
-  loading: true,
+  loading: false,
   playlist: {},
   isVisible: false,
   isHearted: false,
@@ -18,6 +20,8 @@ var defaultState = {
 
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
+    case SET_PLAYLIST:
+      return { ...state, playlist: action.playlist };
     case GET_PLAYLIST:
       return { ...state, loading: true };
     case GET_PLAYLIST_SUCCESS:
@@ -68,6 +72,13 @@ export function getPlaylist(id) {
         url: `/playlists/${id}`
       }
     }
+  };
+}
+
+export function setPlaylist(data) {
+  return {
+    type: SET_PLAYLIST,
+    playlist: data
   };
 }
 

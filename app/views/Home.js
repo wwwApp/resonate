@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Image, TouchableOpacity,
 import { MoodPicker } from "../components/MoodPicker.js";
 import Map from "../components/Map";
 import { PlaylistCard } from "../components/PlaylistCard";
+import Playlist from "./Playlist";
 import { Colors } from "../styles/Colors";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
 import { setMood, search } from "../redux/reducers/home.reducer";
@@ -10,6 +11,7 @@ import { initialize } from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 import { ButtonIcon } from "../components/ButtonIcon";
 import LinearGradient from "react-native-linear-gradient";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
 class Home extends Component {
 	constructor(props) {
@@ -123,7 +125,7 @@ class Home extends Component {
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
 							{this.props.playlists &&this.props.playlists.map((item,index) => (
-								<PlaylistCard playlist={item} key={index}/>
+								<PlaylistCard onPress={()=>{this.props.navigation.navigate("Playlist", {data: item})}} playlist={item} key={index}/>
 							))}
 						</ScrollView>
 
@@ -135,7 +137,7 @@ class Home extends Component {
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
 							{this.props.playlists &&this.props.playlists.map((item,index) => (
-								<PlaylistCard playlist={item} key={index}/>
+								<PlaylistCard onPress={()=>{this.props.navigation.navigate("Playlist", {data: item})}} playlist={item} key={index}/>
 							))}
 						</ScrollView>
 					</ScrollView>
@@ -167,6 +169,8 @@ class Home extends Component {
 		);
 	}
 }
+
+
 
 const styles = StyleSheet.create({
 	container: {
@@ -245,7 +249,30 @@ const mapDispatchToProps = {
 	initialize
 };
 
-export default connect(
+const Home_connected = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Home);
+
+class PlaylistView extends Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		return <Playlist navigation={this.props.navigation} />;
+	}
+}
+
+const MainNavigator = createStackNavigator(
+	{
+		Home: { screen: Home_connected },
+		Playlist: { screen: PlaylistView }
+	},
+	{
+		mode: "modal",
+		headerMode: "none"
+	}
+);
+
+
+export default MainNavigator;
