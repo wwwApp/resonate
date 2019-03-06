@@ -63,7 +63,8 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         counter: state.counter + 1,
-        percentage: (state.counter / state.currentTrack.duration) * 100
+        percentage:
+          (state.counter / Math.floor(state.currentTrack.duration / 1000)) * 100
       };
     case RESET:
       return { ...state, counter: 0, percentage: 0 };

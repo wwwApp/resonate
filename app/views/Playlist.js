@@ -38,13 +38,12 @@ class Playlist extends Component {
    */
   async play() {
     await this.props.pushTracks(this.props.playlist.tracks);
-    await this.props.togglePlay();
+    // await this.props.togglePlay();
     await this.openPlayer();
   }
 
   async heart() {
     await this.props.toggleHeart();
-    await togglePlay();
     await this.toggleHeart();
   }
 
@@ -90,8 +89,8 @@ class Playlist extends Component {
             <ButtonIcon
               style={{ color: "black" }}
               type="pl-play"
-              toggleIcon={this.props.toggleIcon}
-              // toggleIcon="ios-play"
+              // toggleIcon={this.props.toggleIcon}
+              toggleIcon="ios-play"
               size={50}
               onPress={this.play.bind(this)}
             />

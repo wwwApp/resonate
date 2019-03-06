@@ -15,6 +15,8 @@ import LinearGradient from "react-native-linear-gradient";
 import Create from "./Create";
 import Playlist from "./Playlist";
 import { togglePlaylistView } from "../redux/reducers/playlist.reducer";
+// import { fetchSavedPlaylists } from "../redux/reducers/library.reducer";
+import { initialize } from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 
 var fakeData = {
@@ -25,7 +27,7 @@ var fakeData = {
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 1",
       mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
-      id: "5c77715834dcda001ee60096"
+      id: "5c800e85ff50f6001e086bae"
     },
     {
       title: "Playlist Title 2",
@@ -33,7 +35,7 @@ var fakeData = {
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 2",
       mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
-      id: "5c77715834dcda001ee60096"
+      id: "5c800e85ff50f6001e086bae"
     },
     {
       title: "Playlist Title 3",
@@ -41,7 +43,7 @@ var fakeData = {
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 3",
       mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
-      id: "5c77715834dcda001ee60096"
+      id: "5c800e85ff50f6001e086bae"
     }
   ],
   my: [
@@ -51,7 +53,7 @@ var fakeData = {
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 1",
       mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
-      id: "5c77715834dcda001ee60096"
+      id: "5c800e85ff50f6001e086bae"
     },
     {
       title: "Playlist Title 2",
@@ -59,7 +61,7 @@ var fakeData = {
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 2",
       mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
-      id: "5c77715834dcda001ee60096"
+      id: "5c800e85ff50f6001e086bae"
     },
     {
       title: "Playlist Title 3",
@@ -67,7 +69,7 @@ var fakeData = {
         "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
       creator: "Creator 3",
       mood: ["rgba(84,73,120,0.8)", "rgba(28,20,56,0.8)"],
-      id: "5c77715834dcda001ee60096"
+      id: "5c800e85ff50f6001e086bae"
     }
   ]
 };
@@ -80,6 +82,7 @@ class Lib extends Component {
       my: fakeData.my
     };
   }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -124,11 +127,16 @@ class PlaylistItem extends Component {
     this.onPress = this.onPress.bind(this);
   }
 
+  componentDidMount() {
+    this.props.initialize()
+    // this.props.fetchSavedPlaylists()
+  }
+
   componentWillMount() {
     if (this.props.hasStarred) {
       starred = (
         <TouchableOpacity
-          onPress={() => this.onPress("5c77715834dcda001ee60096")}
+          onPress={() => this.onPress("5c800e85ff50f6001e086bae")}
           // onPress={()=>{this.props.onPress; currentPlaylist="5c77715834dcda001ee60096"}}
         >
           <LinearGradient
@@ -212,11 +220,14 @@ class PlaylistView extends Component {
 };
 
 const mapStateToProps = state => ({
-  isVisible: state.playlist.isVisible
+  isVisible: state.playlist.isVisible,
+  // savedPlaylists: state.library.savedPlaylists
 });
 
 const mapDispatchToProps = {
-  togglePlaylistView
+  togglePlaylistView,
+  // fetchSavedPlaylists,
+  initialize
 };
 
 const Connected_PlaylistItem = connect(
