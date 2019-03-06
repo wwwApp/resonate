@@ -16,7 +16,9 @@ import {
   replay,
   replay_back,
   forward,
-  backward
+  backward,
+  toggleShuffle,
+  shuffle
 } from "../redux/reducers/player.reducer";
 
 class Player extends Component {
@@ -37,7 +39,7 @@ class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: null,
+      timer: null
       // isPlaying: this.props.isPlaying
     };
   }
@@ -84,10 +86,14 @@ class Player extends Component {
     clearInterval(this.state.timer);
 
     // Code for go forward
-    if (this.props.currentTrackIndex === this.props.tracks.length - 1) {
-      this.props.replay();
+    if (!this.props.isShuffle) {
+      if (this.props.currentTrackIndex === this.props.tracks.length - 1) {
+        this.props.replay();
+      } else {
+        this.props.forward();
+      }
     } else {
-      this.props.forward();
+      this.props.shuffle();
     }
 
     this.progressSeeker();
@@ -101,10 +107,14 @@ class Player extends Component {
     clearInterval(this.state.timer);
 
     // Code for go backward
-    if (this.props.currentTrackIndex === 0) {
-      this.props.replay_back();
+    if (!this.props.isShuffle) {
+      if (this.props.currentTrackIndex === 0) {
+        this.props.replay_back();
+      } else {
+        this.props.backward();
+      }
     } else {
-      this.props.backward();
+      this.props.shuffle();
     }
 
     this.progressSeeker();
@@ -149,8 +159,19 @@ class Player extends Component {
                 <Text style={[styles.infoText, styles.titleText]}>
                   {this.props.currentTrack.title}
                 </Text>
+
+                {/** FIX IT: MAP OF UNDEFINED ERROR */}
+                {/* {this.props.currentTrack.artists.map((item, index) => (
+                  <Text
+                    key={index}
+                    style={[styles.infoText, styles.artistText]}
+                  >
+                    {item}
+                  </Text>
+                ))} */}
+
                 <Text style={[styles.infoText, styles.artistText]}>
-                  {this.props.currentTrack.artist}
+                  {this.props.currentTrack.artists}
                 </Text>
               </View>
 
@@ -159,7 +180,11 @@ class Player extends Component {
                   <ButtonIcon type="pl-star" />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <ButtonIcon type="pl-shuffle" />
+                  <ButtonIcon
+                    type="pl-shuffle"
+                    isActive={this.props.isShuffle}
+                    onPress={this.props.toggleShuffle}
+                  />
                 </TouchableOpacity>
               </View>
 
@@ -269,7 +294,9 @@ function mapDispatchToProps(dispatch) {
     backward: () => dispatch(backward()),
     replay: () => dispatch(replay()),
     replay_back: () => dispatch(replay_back()),
-    togglePlay: () => dispatch(togglePlay())
+    togglePlay: () => dispatch(togglePlay()),
+    toggleShuffle: () => dispatch(toggleShuffle()),
+    shuffle: () => dispatch(shuffle())
   };
 }
 
@@ -285,7 +312,8 @@ function mapStateToProps(state) {
     isPlaying: state.player.isPlaying,
     counter: state.player.counter,
     percentage: state.player.percentage,
-    toggleIcon: state.player.toggleIcon
+    toggleIcon: state.player.toggleIcon,
+    isShuffle: state.player.isShuffle
   };
 }
 

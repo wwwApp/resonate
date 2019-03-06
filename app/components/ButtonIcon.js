@@ -26,7 +26,7 @@ const ButtonIcon = props => {
             style={[
               styles.iconStyle,
               styles.verticalIcon,
-              { marginLeft: 5, marginRight: -5}
+              { marginLeft: 5, marginRight: -5 }
             ]}
             name="ios-more"
             size={35}
@@ -96,7 +96,11 @@ const ButtonIcon = props => {
     case "pl-shuffle":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={styles.iconStyle} name="ios-repeat" size={35} />
+          <Icon
+            style={[props.isActive ? styles.iconStyle : styles.inactiveIconStyle]}
+            name="ios-shuffle"
+            size={35}
+          />
         </TouchableOpacity>
       );
       case "play":
@@ -168,6 +172,9 @@ const ButtonIcon = props => {
 const styles = StyleSheet.create({
   iconStyle: {
     color: Colors.defaultIcon
+  },
+  inactiveIconStyle: {
+    color: Colors.defaultIconInactive
   },
   verticalIcon: {
     transform: [{ rotate: "270deg" }]

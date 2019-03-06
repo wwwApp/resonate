@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ScrollView, ImageBackground, TouchableOpacity, Modal } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity
+} from "react-native";
 import { ButtonIcon } from "./../components/ButtonIcon";
 import { Colors } from "./../styles/Colors";
 import Icon from "react-native-vector-icons/Ionicons";
