@@ -6,6 +6,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "../styles/Colors";
 import { ButtonIcon } from "./ButtonIcon";
 
+
 class PlayerBar extends Component {
   render() {
     if (this.props.isVisible === true) {
