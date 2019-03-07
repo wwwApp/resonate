@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Modal,  Dimensions, Im
 import { ColorWheel } from 'react-native-color-wheel';
 import { Tag } from './Tag';
 
-class TrippleDotMenu extends React.Component {
+class TripleDotMenu extends React.Component {
 
 
 
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
     
   });
 
-  export { TrippleDotMenu };
+  export { TripleDotMenu };
