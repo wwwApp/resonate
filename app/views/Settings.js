@@ -4,7 +4,8 @@ import { Colors } from "./../styles/Colors";
 
 class Settings extends Component {
   
-    
+
+
   render() {
     return(
       <View style={styles.container}>
@@ -15,9 +16,17 @@ class Settings extends Component {
       </View>
 
       <View style={styles.settings}>
-        <View style={styles.row}><Text style={styles.settingText}>Notifications </Text><View style={styles.switchContainer}><Switch style={styles.switch}></Switch></View></View>
+        <View style={styles.row}><Text style={styles.settingText}>Notifications </Text>
+        <View style={styles.switchContainer}> 
+        <Switch></Switch>
+        
+            </View></View>
 
-        <View style={styles.row}><Text style={styles.settingText}>Location</Text><View style={styles.switchContainer}><Switch style={styles.switch}></Switch></View></View>
+        <View style={styles.row}><Text style={styles.settingText}>Location</Text>
+        <View style={styles.switchContainer}> 
+        <Switch></Switch>
+        </View>
+        </View>
 
         <View style={styles.row}><Text style={styles.settingText}>Import Playlist</Text></View>
 
@@ -26,7 +35,8 @@ class Settings extends Component {
       
       </View>
       </View>
-    
+      
+      
     );
     }
    

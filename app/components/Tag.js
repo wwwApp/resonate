@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Animated, TouchableOpacity } from "react-native";
 import { Colors } from "./../styles/Colors";
 
 class Tag extends Component {
@@ -12,19 +12,48 @@ class Tag extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tagData: props.tagData
+      tagData: props.tagData,
+      isChosen: false,
+      background: new Animated.Value("white")
     };
   }
 
+  onChoose = () => {
+    console.log(this.state.background)
+    if (this.state.isChosen) {
+      Animated.timing(this.state.background, {
+        toValue: "#312F2F"
+        
+      }).start()
+    } else {
+      Animated.timing(this.state.background, {
+        toValue: "white",
+      
+      }).start()
+
+    }
+    this.setState({isChosen: !this.state.isChosen})
+  }
+
   render() {
+    const backgroundStyle = {
+      backgroundColor: this.state.background
+    }
     return (
-      <View style={styles.tagContainer}>
+     
+      <Animated.View style={styles.tagContainer}>
         {this.state.tagData.map((item, index) => (
-          <Text key={index} style={styles.tagName}>
-            {item}
-          </Text>
+           <TouchableOpacity onPress={this.onChoose}>
+           <View style={backgroundStyle}>
+            <Text key={index} style={styles.tagName}>
+              {item}
+            </Text>
+           </View>
+          
+          </TouchableOpacity>
         ))}
-      </View>
+      </Animated.View>
+      
     );
   }
 }

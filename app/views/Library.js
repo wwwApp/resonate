@@ -1,10 +1,25 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, ScrollView, ImageBackground, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView, ImageBackground, TouchableOpacity, Image, Modal } from "react-native";
 import { Colors } from "./../styles/Colors";
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import Create from "./Create";
-
+import { TrippleDotMenu } from "../components/TrippleDotMenu";
 class Lib extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+  
+  
+      modalVisible: false,
+    };
+  }
+
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
   render() {
     const {navigate} = this.props.navigation;
     return (
@@ -18,7 +33,9 @@ class Lib extends Component {
         <Image source={require('../assets/add.png')} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={{height: 30, marginLeft: 270}} onPress={() => navigate('Create')}>
+      <TouchableOpacity style={{height: 30, marginLeft: 270}} onPress={() => {
+                  this.setModalVisible(true);
+                }}>
         <Image source={require('../assets/settings.png')} />
       </TouchableOpacity>
       
@@ -215,6 +232,17 @@ class Lib extends Component {
        
        </View>
       
+       <Modal
+        animationType="slide"
+        transparent={true}    
+        visible={this.state.modalVisible}  >
+
+
+        <TrippleDotMenu closeTd={() => {this.setModalVisible(false)} }/>
+
+        
+        </Modal>
+
       </View>
       
     );

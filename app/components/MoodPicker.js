@@ -51,8 +51,8 @@ class MoodPicker extends React.Component {
             </View>   
 
             <ScrollView style={styles.tags} horizontal={true} showsHorizontalScrollIndicator={false}> 
-<Tag tagData={["Holiday", "Vacation", "Late Night", "Early Morning", "Celebration", "Classical", "Driving", "Home", "2000's", "1960's", "1980's", "International", "Religious"]} />
-</ScrollView>
+              <Tag tagData={["Holiday", "Vacation", "Late Night", "Early Morning", "Celebration", "Classical", "Driving", "Home", "2000's", "1960's", "1980's", "International", "Religious"]} />
+            </ScrollView>
             
       </View>
   
@@ -65,7 +65,6 @@ class MoodPicker extends React.Component {
 const styles = StyleSheet.create({
     
     moodPicker: {
-      
       backgroundColor: "#312F2F",
       height: 1000,
       opacity: .95,
