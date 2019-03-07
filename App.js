@@ -43,9 +43,8 @@ class Test1 extends Component {
 
 const BottomNav = createBottomTabNavigator(
   {
-    Library: { screen: Library },
-    Player: { screen: Test1 },
-    Home: { screen: Home }
+    Home: { screen: Home },
+    Library: { screen: Library }
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
