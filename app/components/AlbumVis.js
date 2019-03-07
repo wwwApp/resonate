@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Image } from "react-native";
-
+import FastImage from 'react-native-fast-image';
 class AlbumVis extends Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          source={require("./../assets/resonateAnim.gif")}
+        <FastImage
+          source={require("./../assets/resonateAnim_2.gif")}
           resizeMode="cover"
           style={[
             this.props.isPlaying
@@ -15,8 +15,9 @@ class AlbumVis extends Component {
               : { width: 0 }
           ]}
         />
-        <Image
-          source={{ uri: this.props.albumSource }}
+        <FastImage
+          source={{ uri: this.props.albumSource }
+          }
           style={[
             styles.top,
             {

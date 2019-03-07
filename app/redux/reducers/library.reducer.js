@@ -1,15 +1,15 @@
 // import Spotify from "rn-spotify-sdk";
 
 export const FETCH_SAVED_PLAYLISTS = "library/FETCH_SAVED_PLAYLIST"
-export const FETCH_SAVED_PLAYLISTS_SUCCESS = "library/FETCH_SAVED_PLAYLIST_SUCCESS"
-export const FETCH_SAVED_PLAYLISTS_FAIL = "library/FETCH_SAVED_PLAYLIST_FAIL"
+export const FETCH_SAVED_PLAYLISTS_SUCCESS = "library/FETCH_SAVED_PLAYLISTS_SUCCESS"
+export const FETCH_SAVED_PLAYLISTS_FAIL = "library/FETCH_SAVED_PLAYLISTS_FAIL"
 
-defaultState = {
-    savedPlaylists = {},
+var defaultState = {
+    savedPlaylists: {},
     loading: true,
 };
 
-export default function reducer(state = defaultStateUser, action) {
+export default function reducer(state = defaultState, action) {
 	switch (action.type) {
         case FETCH_SAVED_PLAYLISTS:
             return {

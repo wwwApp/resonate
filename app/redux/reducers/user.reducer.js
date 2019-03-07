@@ -64,7 +64,7 @@ export function logoutSpotify() {
 export const fetchUserData = () => (dispatch, getState) => {
 	Spotify.getMe().then((me) => {
 		console.log(me)
-		dispatch(getUserBySpotifyId(me.spotify_id)).then((result) => {
+		dispatch(getUserBySpotifyId(me.id)).then((result) => {
 			console.log(result);
 			if (result.type == GET_USER_SPOTIFY_FAIL) {
 				// User doesn't yet exist in database

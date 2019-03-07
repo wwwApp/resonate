@@ -143,6 +143,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fast-image')
     compile project(':rn-spotify-sdk')
     compile project(':react-native-events')
     compile project(':react-native-image-picker')
