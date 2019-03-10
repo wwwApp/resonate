@@ -15,8 +15,6 @@ class TrackList extends Component {
     this.state = {
       isStarred: this.setIsStarred()
     };
-
-    this.toggleStar = this.toggleStar.bind(this);
   }
 
   setIsStarred() {

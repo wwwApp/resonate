@@ -106,7 +106,7 @@ class Playlist extends Component {
 							<Text style={[styles.playlistItem, styles.title, styles.txtBold]}>{data.title}</Text>
 							<Text style={[styles.playlistItem, styles.location, styles.txtLight]}>{data.location_name || "location"}</Text>
 							<View style={[styles.playlistItem, styles.tag]}>
-								<Tag tagData={data.tags} />
+								<Tag tagData={data.tags} isSelectable={false}/>
 							</View>
 							<Text style={styles.playlistItem}>{data.description}</Text>
 							<Text style={[styles.playlistItem, styles.user, styles.txtLight]}>@{data.user.display_name}</Text>

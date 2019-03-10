@@ -7,6 +7,7 @@ const Colors = {
     defaultIconInactive: '#7c7c7c',
     defaultIcon: 'white',
     defaultFont: 'white',
+    selectedFont: '#312F2F',
     seekerInactive: '#AFAFAF',
     seekerActive: 'white',
     minPlayerTopGradient: 'rgba(84,73,120,0)',
