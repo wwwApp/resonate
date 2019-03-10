@@ -16,7 +16,7 @@ const ButtonIcon = props => {
     case "close":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={[styles.iconStyle]} name="ios-close" size={props.size ? props.size : 35} />
+          <Icon style={[styles.iconStyle]} name="ios-close" size={props.size ? props.size : 50} />
         </TouchableOpacity>
       );
     case "more":
@@ -73,7 +73,7 @@ const ButtonIcon = props => {
     case "track-star":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={styles.iconStyle} name="ios-star-outline" size={25} />
+          <Icon style={styles.iconStyle} name={props.isStarred ? "ios-star" : "ios-star-outline"} size={25} />
         </TouchableOpacity>
       );
     case "track-more":
@@ -90,7 +90,7 @@ const ButtonIcon = props => {
     case "pl-star":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={styles.iconStyle} name="ios-star-outline" size={35} />
+          <Icon style={styles.iconStyle} name={props.isStarred ? "ios-star" : "ios-star-outline"} size={35} />
         </TouchableOpacity>
       );
     case "pl-shuffle":

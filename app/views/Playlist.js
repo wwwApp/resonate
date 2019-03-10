@@ -36,7 +36,6 @@ class Playlist extends Component {
 	 */
 	async play() {
 		await this.props.pushTracks(this.props.navigation.getParam("data", {}).tracks);
-		await this.props.togglePlay();
 		await this.openPlayer();
 	}
 
@@ -83,8 +82,8 @@ class Playlist extends Component {
 							<ButtonIcon
 								style={{ color: "black" }}
 								type="pl-play"
-								toggleIcon={this.props.toggleIcon}
-								// toggleIcon="ios-play"
+								// toggleIcon={this.props.toggleIcon}
+								toggleIcon="ios-play"
 								size={50}
 								onPress={this.play.bind(this)}
 							/>
@@ -106,7 +105,7 @@ class Playlist extends Component {
 							<Text style={[styles.playlistItem, styles.title, styles.txtBold]}>{data.title}</Text>
 							<Text style={[styles.playlistItem, styles.location, styles.txtLight]}>{data.location_name || "location"}</Text>
 							<View style={[styles.playlistItem, styles.tag]}>
-								<Tag tagData={data.tags} />
+								<Tag tagData={data.tags} isSelectable={false}/>
 							</View>
 							<Text style={styles.playlistItem}>{data.description}</Text>
 							<Text style={[styles.playlistItem, styles.user, styles.txtLight]}>@{data.user.display_name}</Text>

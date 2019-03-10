@@ -39,7 +39,8 @@ class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: null
+      timer: null,
+      isStarred: false
       // isPlaying: this.props.isPlaying
     };
   }
@@ -68,7 +69,10 @@ class Player extends Component {
         this.props.increment();
 
         // When it reaches the end of the current track
-        if (this.props.counter === this.props.duration) {
+        if (
+          this.props.counter ===
+          Math.floor(this.props.currentTrack.duration / 1000)
+        ) {
           // Make some call for next track
           this.forward();
         }
@@ -118,6 +122,11 @@ class Player extends Component {
     }
 
     this.progressSeeker();
+  }
+
+  toggleStar() {
+    const isStarred = !this.state.isStarred;
+    this.setState({ isStarred });
   }
 
   render() {
@@ -177,7 +186,11 @@ class Player extends Component {
 
               <View style={styles.row}>
                 <TouchableOpacity>
-                  <ButtonIcon type="pl-star" />
+                  <ButtonIcon
+                    type="pl-star"
+                    isStarred={this.state.isStarred}
+                    onPress={this.toggleStar.bind(this)}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity>
                   <ButtonIcon
