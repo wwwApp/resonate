@@ -22,23 +22,23 @@ class PlaylistCard extends Component {
 									<ButtonIcon type="play" size={65}/>
 								</View>
 
-								<Text style={{ color: "white", marginLeft: 10, fontSize: 24, fontWeight: "bold", fontFamily: "Avenir" }}>{this.props.playlist.title}</Text>
+								<Text numberOfLines={1} style={{ color: "white", marginLeft: 10, fontSize: 24, fontWeight: "bold", fontFamily: "Avenir" }}>{this.props.playlist.title}</Text>
 							</LinearGradient>
 						</ImageBackground>
 					</View>
 
 					<View style={styles.cardBottom}>
 						<View>
-							<Text style={styles.songTitle}>Song Title</Text>
-							<Text style={styles.artistName}>Artist</Text>
+							<Text numberOfLines={1} style={styles.songTitle}>{this.props.playlist.tracks[0].title}</Text>
+							<Text numberOfLines={1} style={styles.artistName}>{this.props.playlist.tracks[0].artists[0]}</Text>
 						</View>
 						<View>
-							<Text style={styles.songTitle}>Song Title</Text>
-							<Text style={styles.artistName}>Artist</Text>
+							<Text numberOfLines={1} style={styles.songTitle}>{this.props.playlist.tracks[1].title}</Text>
+							<Text numberOfLines={1} style={styles.artistName}>{this.props.playlist.tracks[1].artists[0]}</Text>
 						</View>
 						<View>
-							<Text style={styles.songTitle}>Song Title</Text>
-							<Text style={styles.artistName}>Artist</Text>
+							<Text numberOfLines={1} style={styles.songTitle}>{this.props.playlist.tracks[2].title}</Text>
+							<Text numberOfLines={1} style={styles.artistName}>{this.props.playlist.tracks[2].artists[0]}</Text>
 						</View>
 					</View>
 				</View>

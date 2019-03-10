@@ -18,7 +18,10 @@ export const GET_USER_SPOTIFY_FAIL = "user/GET_USER_SPOTIFY_FAIL";
 
 
 let defaultStateUser = {
-	userData: {},
+	userData: {
+		saved_playlists: [],
+		created_playlists: []
+	},
 	spotifyInitialized: false,
 	isLoggedIn: false
 };
@@ -35,7 +38,7 @@ export default function reducer(state = defaultStateUser, action) {
 		case CREATE_USER_SUCCESS:
 			return { ...state, userData: action.payload.data}
 		case LOGOUT:
-			return { ...state, isLoggedIn: false, userData: {} };
+			return { ...state, isLoggedIn: false, userData: defaultStateUser.userData };
 		default:
 			return state;
 	}
