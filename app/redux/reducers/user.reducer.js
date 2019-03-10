@@ -12,6 +12,10 @@ export const GET_USER = "user/GET_USER";
 export const GET_USER_SUCCESS = "user/GET_USER_SUCCESS";
 export const GET_USER_FAIL = "user/GET_USER_FAIL";
 
+export const HEART_PLAYLIST = "user/HEART_PLAYLIST";
+export const HEART_PLAYLIST_SUCCESS = "user/HEART_PLAYLIST_SUCCESS";
+export const HEART_PLAYLIST_FAIL = "user/HEART_PLAYLIST_FAIL";
+
 export const GET_USER_SPOTIFY = "user/GET_USER_SPOTIFY";
 export const GET_USER_SPOTIFY_SUCCESS = "user/GET_USER_SPOTIFY_SUCCESS";
 export const GET_USER_SPOTIFY_FAIL = "user/GET_USER_SPOTIFY_FAIL";
@@ -37,6 +41,10 @@ export default function reducer(state = defaultStateUser, action) {
 			return { ...state, userData: action.payload.data}
 		case CREATE_USER_SUCCESS:
 			return { ...state, userData: action.payload.data}
+		case HEART_PLAYLIST_SUCCESS:
+			return { ...state, userData: action.payload.data}
+		case HEART_PLAYLIST_FAIL:
+			console.log(action)
 		case LOGOUT:
 			return { ...state, isLoggedIn: false, userData: defaultStateUser.userData };
 		default:
@@ -153,4 +161,20 @@ export function createUser(user) {
 			}
 		}
 	};
+}
+
+function getHeartPlaylist (playlistId, userId) {
+	return {
+		type: HEART_PLAYLIST,
+		payload: {
+			request: {
+				method: "GET",
+				url: `/playlists/heart/${playlistId}/${userId}`
+			}
+		}
+	};
+}
+
+export const heartPlaylist = (playlistId) => (dispatch, getState) =>  {
+	dispatch(getHeartPlaylist(playlistId, getState().user.userData._id))
 }

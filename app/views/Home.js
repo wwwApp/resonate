@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, ScrollView, TextInput, Image, TouchableOpacity, Modal, Animated } from "react-native";
 import { MoodPicker } from "../components/MoodPicker.js";
 import Map from "../components/Map";
-import { PlaylistCard } from "../components/PlaylistCard";
+import PlaylistCard from "../components/PlaylistCard";
 import Playlist from "./Playlist";
 import { Colors } from "../styles/Colors";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";

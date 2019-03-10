@@ -21,7 +21,7 @@ class Create_Details extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerRight: (
 			<View style={{ marginRight: 16, alignItems: "center" }}>
-				<ButtonIcon type="close" onPress={() => navigation.dismiss()} />
+				<ButtonIcon size={50} type="close" onPress={() => navigation.dismiss()} />
 			</View>
 		)
 	});
@@ -101,7 +101,7 @@ class Create_Map extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerRight: (
 			<View style={{ marginRight: 16, alignItems: "center" }}>
-				<ButtonIcon type="close" onPress={() => navigation.dismiss()} />
+				<ButtonIcon size={50} type="close" onPress={() => navigation.dismiss()} />
 			</View>
 		),
 		headerLeft: (
@@ -164,7 +164,7 @@ class Create_Tracks extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerRight: (
 			<View style={{ marginRight: 16, alignItems: "center" }}>
-				<ButtonIcon type="close" onPress={() => navigation.dismiss()} />
+				<ButtonIcon size={50} type="close" onPress={() => navigation.dismiss()} />
 			</View>
 		),
 		headerLeft: (
@@ -199,7 +199,7 @@ class Create_Mood extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerRight: (
 			<View style={{ marginRight: 16 }}>
-				<ButtonIcon type="close" onPress={() => navigation.dismiss()} />
+				<ButtonIcon size={50} type="close" onPress={() => navigation.dismiss()} />
 			</View>
 		),
 		headerLeft: (

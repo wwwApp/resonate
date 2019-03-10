@@ -6,8 +6,9 @@ import Player from "./Player";
 import { Tag } from "./../components/Tag";
 import LinearGradient from "react-native-linear-gradient";
 import { Colors } from "./../styles/Colors";
-import { setPlaylist, togglePlaylistView, toggleHeart, toggleFirstPlay } from "../redux/reducers/playlist.reducer";
+import { setPlaylist, togglePlaylistView, toggleFirstPlay } from "../redux/reducers/playlist.reducer";
 import { togglePlay, pushTracks } from "../redux/reducers/player.reducer";
+import {heartPlaylist} from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 import changeHue from "../styles/changeHue";
 
@@ -39,22 +40,8 @@ class Playlist extends Component {
 		await this.openPlayer();
 	}
 
-	async heart() {
-		await this.props.toggleHeart();
-		await togglePlay();
-		await this.toggleHeart();
-	}
-
-	toggleHeart() {
-		let toggleHeartIcon = "";
-		if (this.props.isHearted) {
-			toggleHeartIcon = "ios-heart";
-		} else {
-			toggleHeartIcon = "ios-heart-empty";
-		}
-		this.setState({ toggleHeartIcon });
-
-		//this.props.getPlaylist("fdsafdsgjhakfgkjads")
+	heart() {
+		this.props.heartPlaylist(this.props.navigation.getParam("data", {})._id);
 	}
 
 	openPlayer() {
@@ -73,8 +60,19 @@ class Playlist extends Component {
 		}
 	}
 
+	matchId(element) {
+		return element._id == this._id;
+	}
+	
 	render() {
 		var data = this.props.navigation.getParam("data", {});
+		var toggleHeartIcon;
+		let index = this.props.saved_playlists.findIndex(this.matchId, data);
+		if (index > -1) {
+			toggleHeartIcon = "ios-heart";
+		} else {
+			toggleHeartIcon = "ios-heart-empty";
+		}
 		return (
 			// Container View
 			// Change the color values based on mood calculated from server for bg color
@@ -99,7 +97,7 @@ class Playlist extends Component {
 								}}
 							/>
 							<View style={{ flexDirection: "row" }}>
-								<ButtonIcon type="heart" onPress={this.heart.bind(this)} toggleIcon={this.state.toggleHeartIcon} />
+								<ButtonIcon type="heart" onPress={this.heart.bind(this)} toggleIcon={toggleHeartIcon} />
 
 								<ButtonIcon type="more" />
 							</View>
@@ -183,16 +181,16 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
 	playlist: state.playlist.playlist,
 	isLoading: state.playlist.loading,
-	isHearted: state.playlist.isHearted, // Needs be state.playlist.playlist.isHearted,
 	isFirstPlay: state.playlist.isFirstPlay, // once this data gets integrated in database
 	tracks: state.player.tracks,
-	toggleIcon: state.player.toggleIcon
+	toggleIcon: state.player.toggleIcon,
+	saved_playlists: state.user.userData.saved_playlists
 });
 
 const mapDispatchToProps = {
 	setPlaylist,
 	togglePlaylistView,
-	toggleHeart,
+	heartPlaylist,
 	toggleFirstPlay,
 	pushTracks,
 	togglePlay
