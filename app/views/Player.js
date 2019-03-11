@@ -22,9 +22,6 @@ import {
 } from "../redux/reducers/player.reducer";
 
 class Player extends Component {
-  componentDidMount() {
-    this.props.getCurrentTrack();
-  }
 
   /**
    * Handle sync of seeker from playlist play action
@@ -35,6 +32,10 @@ class Player extends Component {
   //     this.progressSeeker();
   //   }
   // }
+
+  componentDidMount() {
+    this.play();
+  }
 
   constructor(props) {
     super(props);
@@ -130,9 +131,16 @@ class Player extends Component {
   }
 
   render() {
+
+    if (this.props.currentTrackIndex == -1) {
+      return (
+        <View style={this.props.style}></View>
+      )
+    }
+    
     return (
       // Container View
-      <View>
+      <View style={this.props.style}>
         <GestureRecognizer onSwipeUp={() => this.toggleView()}>
           <PlayerBar
             isVisible={!this.props.isFull}

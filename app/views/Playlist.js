@@ -36,27 +36,11 @@ class Playlist extends Component {
 	 */
 	async play() {
 		await this.props.pushTracks(this.props.navigation.getParam("data", {}).tracks);
-		await this.openPlayer();
+		console.log(this.props.navigation.getParam("data", {}).tracks);
 	}
 
 	heart() {
 		this.props.heartPlaylist(this.props.navigation.getParam("data", {})._id);
-	}
-
-	openPlayer() {
-		// Only toggle from true to false on the very first click
-		if (this.props.isFirstPlay) {
-			player = (
-				<View
-					style={[
-						// this.props.isFirstPlay ? { width: 0 } : {},
-						{ position: "absolute", bottom: 0, right: 0, left: 0 }
-					]}>
-					<Player />
-				</View>
-			);
-			this.props.toggleFirstPlay();
-		}
 	}
 
 	matchId(element) {

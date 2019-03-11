@@ -19,32 +19,8 @@ var defaultState = {
   counter: 0,
   percentage: 0,
   currentTrack: {},
-  currentTrackIndex: 0,
-  tracks:
-    // {}
-    [
-      {
-        title: "Track Name 1",
-        artist: "Artist Name 1",
-        image_url:
-          "https://images-na.ssl-images-amazon.com/images/I/A1QsthUoerL._SY355_.jpg",
-        duration: 180
-      },
-      {
-        title: "Track Name 2",
-        artist: "Artist Name 2",
-        image_url:
-          "https://ksassets.timeincuk.net/wp/uploads/sites/55/2013/04/falloutboy.jpg",
-        duration: 160
-      },
-      {
-        title: "Track Name 3",
-        artist: "Artist Name 3",
-        image_url:
-          "https://djbooth.net/.image/t_share/MTUzNDg2MDEwMDAyODQzNTA1/fall-out-boy-make-america-psycho-againjpg.jpg",
-        duration: 100
-      }
-    ]
+  currentTrackIndex: -1,
+  tracks: []
 };
 
 export default function reducer(state = defaultState, action) {
@@ -58,7 +34,11 @@ export default function reducer(state = defaultState, action) {
         toggleIcon: state.isPlaying ? "ios-play" : "ios-pause"
       };
     case PUSH_TRACKS:
-      return { ...state, tracks: action.tracks };
+      return { ...state, tracks: action.tracks, currentTrackIndex: 0,
+      currentTrack: action.tracks[0],
+      counter: 0, 
+      percentage: 0
+      };
     case INCREMENT:
       return {
         ...state,
