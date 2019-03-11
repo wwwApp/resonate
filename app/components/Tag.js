@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Text } from "react-native";
+import React, { Component } from "react";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Colors } from "./../styles/Colors";
 
 class Tag extends Component {
@@ -12,17 +12,49 @@ class Tag extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tagData: props.tagData
+      tagData: props.tagData,
+      isSelected: this.setIsSelected()
     };
+  }
+
+  setIsSelected() {
+    let temp = new Array();
+    for (let i = 0; i < this.props.tagData.length; i++) {
+      temp.push(false);
+    }
+
+    return temp;
+  }
+
+  toggleTag(index) {
+    if (this.props.isSelectable) {
+      let isSelected = this.state.isSelected;
+      isSelected[index] = !this.state.isSelected[index];
+      this.setState({ isSelected });
+    }
   }
 
   render() {
     return (
       <View style={styles.tagContainer}>
         {this.state.tagData.map((item, index) => (
-          <Text key={index} style={styles.tagName}>
-            {item}
-          </Text>
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.tagStyle,
+              this.state.isSelected[index] ? styles.selectedStyle : {}
+            ]}
+            onPress={() => this.toggleTag(index)}
+          >
+            <Text
+              style={[
+                styles.tagText,
+                this.state.isSelected[index] ? styles.selectedText : {}
+              ]}
+            >
+              {item}
+            </Text>
+          </TouchableOpacity>
         ))}
       </View>
     );
@@ -33,16 +65,24 @@ const styles = StyleSheet.create({
   tagContainer: {
     flexDirection: "row"
   },
-  tagName: {
+  tagText: {
     color: Colors.defaultFont,
     fontSize: 10,
-    fontFamily: "Avenir",
+    fontFamily: "Avenir"
+  },
+  tagStyle: {
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 13,
     paddingVertical: 5,
     paddingHorizontal: 15,
     marginRight: 10
+  },
+  selectedStyle: {
+    backgroundColor: "white"
+  },
+  selectedText: {
+    color: Colors.selectedFont
   }
 });
 

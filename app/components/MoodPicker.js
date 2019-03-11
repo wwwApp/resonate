@@ -32,7 +32,7 @@ class MoodPicker extends React.Component {
 
             </View>   
 
-            <Tag tagData={["Party", "Beach", "Warm Weather"]} />
+            <Tag isSelectable={true} tagData={["Party", "Beach", "Warm Weather"]} />
       </View>
   
     )

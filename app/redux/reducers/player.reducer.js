@@ -35,13 +35,16 @@ export default function reducer(state = defaultState, action) {
       };
     case PUSH_TRACKS:
       return { ...state, tracks: action.tracks, currentTrackIndex: 0,
-      currentTrack: action.tracks[0]
+      currentTrack: action.tracks[0],
+      counter: 0, 
+      percentage: 0
       };
     case INCREMENT:
       return {
         ...state,
         counter: state.counter + 1,
-        percentage: (state.counter / state.currentTrack.duration) * 100
+        percentage:
+          (state.counter / Math.floor(state.currentTrack.duration / 1000)) * 100
       };
     case RESET:
       return { ...state, counter: 0, percentage: 0 };
