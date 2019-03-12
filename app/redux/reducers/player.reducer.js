@@ -58,25 +58,25 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         currentTrackIndex: state.currentTrackIndex + 1,
-        currentTrack: state.tracks[state.currentTrackIndex]
+        currentTrack: state.tracks[state.currentTrackIndex + 1]
       };
     case BACKWARD:
       return {
         ...state,
         currentTrackIndex: state.currentTrackIndex - 1,
-        currentTrack: state.tracks[state.currentTrackIndex]
+        currentTrack: state.tracks[state.currentTrackIndex - 1]
       };
     case REPLAY:
       return {
         ...state,
         currentTrackIndex: 0,
-        currentTrack: state.tracks[state.currentTrackIndex]
+        currentTrack: state.tracks[0]
       };
     case REPLAY_BACK:
       return {
         ...state,
         currentTrackIndex: state.tracks.length - 1,
-        currentTrack: state.tracks[state.currentTrackIndex]
+        currentTrack: state.tracks[state.tracks.length - 1]
       };
     case TOGGLE_SHUFFLE:
       return {

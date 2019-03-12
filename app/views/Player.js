@@ -34,7 +34,7 @@ class Player extends Component {
   // }
 
   componentDidMount() {
-    // this.play();
+    this.play();
   }
 
   constructor(props) {
