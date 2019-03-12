@@ -111,6 +111,8 @@ export default function reducer(state = defaultState, action) {
 				return { ...state, moodColor: action.color, moodCoordinates: action.coordinates, tags: checkWhichTags(action.coordinates), selectedTags: []};
 			}
 			return { ...state, moodColor: action.color, moodCoordinates: action.coordinates };
+		case UPLOAD_PLAYLIST_SUCCESS:
+			return defaultState;
 		default:
 			return state;
 	}
