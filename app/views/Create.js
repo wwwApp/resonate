@@ -10,7 +10,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Map from "../components/Map";
 import { MoodPicker } from "../components/MoodPicker";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
-import { setMood,  setTitle, setDesc, setImg, uploadPhoto, uploadPlaylist } from "../redux/reducers/create.reducer";
+import { setMood,  setTitle, setDesc, setImg, uploadPhoto, uploadPlaylist, toggleTag } from "../redux/reducers/create.reducer";
 import { connect } from "react-redux";
 
 class Create_Details extends Component {
@@ -220,7 +220,7 @@ class Create_Mood extends Component {
 			location: {
 				coordinates: [mapData.region.longitude, mapData.region.latitude]
 			},
-			tags: ["workout", "fun"],
+			tags: createData.selectedTags,
 			tracks: createData.trackQueue,
 			location_name: mapData.locality,
 			image_path: "",
@@ -244,8 +244,13 @@ class Create_Mood extends Component {
 		return (
 			// Container View
 			// Change the color values based on mood calculated from server for bg color
-			<View style={[styles.bg, { paddingBottom: 16 }]}>
-				<MoodPicker onColorChange={(color, coordinates) => {this.props.setMood(color, coordinates)}}/>
+			<View style={[styles.bg, { paddingBottom: 16, flex:1 }]}>
+				<MoodPicker 
+					onColorChange={(color, coordinates) => {this.props.setMood(color, coordinates)}}
+					tags={this.props.tags}
+					selectedTags={this.props.selectedTags}
+					onTagPress={(tag) => this.props.toggleTag(tag)}
+				/>
 				<TouchableOpacity onPress={() => {this.onSubmit()}}>
 					<Text style={styles.continueButton}>Done</Text>
 				</TouchableOpacity>
@@ -257,13 +262,16 @@ class Create_Mood extends Component {
 const mapStateToPropsMood = state => ({
 	createData: state.create,
 	mapData: state.map,
-	user :state.user
+	user :state.user,
+	tags :state.create.tags,
+	selectedTags :state.create.selectedTags
 });
 
 const mapDispatchToPropsMood = {
 	setMood,
 	uploadPhoto,
-	uploadPlaylist
+	uploadPlaylist,
+	toggleTag
 };
  
 const Connnected_Mood = connect(

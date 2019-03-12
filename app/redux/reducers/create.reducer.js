@@ -4,6 +4,8 @@ export const SEARCH = "create/SEARCH";
 export const SEARCH_SUCCESS = "create/SEARCH_SUCCESS";
 export const SEARCH_FAIL = "create/SEARCH_FAIL";
 
+export const CREATE_TOGGLE_TAG = "create/TOGGLE_TAG";
+
 export const UPLOAD_PHOTO = "create/UPLOAD_PHOTO";
 export const UPLOAD_PHOTO_SUCCESS = "create/UPLOAD_PHOTO_SUCCESS";
 export const UPLOAD_PHOTO_FAIL = "create/UPLOAD_PHOTO_FAIL";
@@ -19,6 +21,17 @@ export const SET_IMG = "create/SET_IMG";
 
 export const SET_LISTS = "create/SET_LISTS";
 
+let tags = {
+	generic: ["Holiday", "Vacation", "Late Night", "Early Morning", "Celebration", "Classical", "Driving", "Home", "International", "Religious"],
+	calm: ["Background", "Jazzy", "Sleepy", "Ambient", "Slow Dance", "Solo Piano", "Daydreaming", "Autumn"],
+	sad: ["Rainy days", "Sad Rock", "Sad Beats", "Emo", "Ballad", "Nostalgia", "Break up", "In the dumps", "Winter",
+	],
+	energetic: ["Motivation", "Party", "High School", "Night Out", "Exercise/Workout", "Latin", "Club", "Summer"
+	],
+	happy: ["Spring", "Sunny", "In Love", "Open Road", "Beach", "Pop", "Wake Up", "Country", "Surf Rock", "Spring"
+	]
+}
+
 defaultState = {
 	loading: false,
 	searchResults: [],
@@ -33,8 +46,31 @@ defaultState = {
 	title: "",
 	description: "",
 	image_url: "",
-	local_image_data: {}
+	local_image_data: {},
+	tags: tags.generic,
+	selectedTags: []
 };
+
+function checkWhichTags(coordinates) {
+	var x = coordinates.x;
+	var y = coordinates.y;
+	if (Math.abs(x) < 40 && Math.abs(y) < 40) {
+		return tags.generic;
+	}
+
+	if (x >= 0 && y >= 0) {
+		return tags.calm
+	}
+	if (x >= 0 && y < 0) {
+		return tags.happy
+	}
+	if (x < 0 && y < 0) {
+		return tags.sad
+	}
+	if (x < 0 && y >= 0) {
+		return tags.energetic
+	}
+}
 
 export default function reducer(state = defaultState, action) {
 	switch (action.type) {
@@ -46,6 +82,15 @@ export default function reducer(state = defaultState, action) {
 			} else {
 				return { ...state, loading: false, searchResults: [] };
 			}
+		case CREATE_TOGGLE_TAG:
+			var selectedTagsNew = state.selectedTags.slice(0);
+			let index = selectedTagsNew.indexOf(action.tag);
+			if (index >= 0) {
+				selectedTagsNew.splice(index, 1);
+			} else {
+				selectedTagsNew.push(action.tag);
+			}
+			return { ...state, selectedTags: selectedTagsNew};
 		case SET_LISTS:
 			return { ...state, searchResults: action.searchResults, trackQueue: action.trackQueue };
 		case SET_TITLE:
@@ -62,6 +107,9 @@ export default function reducer(state = defaultState, action) {
 				loading: false
 			};
 		case SET_MOOD:
+			if (state.tags != checkWhichTags(action.coordinates)) {
+				return { ...state, moodColor: action.color, moodCoordinates: action.coordinates, tags: checkWhichTags(action.coordinates), selectedTags: []};
+			}
 			return { ...state, moodColor: action.color, moodCoordinates: action.coordinates };
 		default:
 			return state;
@@ -74,6 +122,14 @@ function setSearchTerm(term) {
 		term: term
 	};
 }
+
+export function toggleTag(tag) {
+	return {
+		type: CREATE_TOGGLE_TAG,
+		tag: tag
+	};
+}
+
 
 export function receiveResults(results, term) {
 	return {
