@@ -136,7 +136,7 @@ class Home extends Component {
 						style={styles.mainWrapper}
 					>
 						<View>
-							<Text style={[{ color: "white", fontSize: 20 }, styles.sidePadding]}>Top Charts</Text>
+							<Text style={[{ color: "white", fontSize: 24, fontFamily:'Avenir', fontWeight:"700" }, styles.sidePadding]}>Top Charts</Text>
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
@@ -155,7 +155,7 @@ class Home extends Component {
 						{/*********************************** SCROLLVIEW 2 *********************************************/}
 
 						<View>
-							<Text style={[{ color: "white", fontSize: 20 }, styles.sidePadding]}>Recommended</Text>
+							<Text style={[{ color: "white", fontSize: 24, fontFamily:'Avenir', fontWeight:"700" }, styles.sidePadding]}>Recommended</Text>
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
