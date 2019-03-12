@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
 		height: 360,
 		backgroundColor: "#312F2F",
 		marginRight: 30,
-		shadowOffset: { width: 0, height: 0 },
+		shadowOffset: { width: 0, height: 5 },
 		shadowColor: "black",
-		shadowOpacity: 1.0,
-		shadowRadius: 10
+		shadowOpacity: 0.7,
+		shadowRadius: 20
 	},
 	cardTop: {
 		height: 200,

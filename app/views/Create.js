@@ -11,6 +11,7 @@ import Map from "../components/Map";
 import { MoodPicker } from "../components/MoodPicker";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
 import { setMood,  setTitle, setDesc, setImg, uploadPhoto, uploadPlaylist, toggleTag } from "../redux/reducers/create.reducer";
+import { fetchUserData } from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 
 class Create_Details extends Component {
@@ -233,6 +234,7 @@ class Create_Mood extends Component {
 			playlist.image_path = res.payload.data.image_url
 			this.props.uploadPlaylist(playlist).then((res) => {
 				console.log(res)
+				this.props.fetchUserData()
 				const { navigate } = this.props.navigation;
 				navigate("Library");
 			})
@@ -271,7 +273,8 @@ const mapDispatchToPropsMood = {
 	setMood,
 	uploadPhoto,
 	uploadPlaylist,
-	toggleTag
+	toggleTag,
+	fetchUserData
 };
  
 const Connnected_Mood = connect(

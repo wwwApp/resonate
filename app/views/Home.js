@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ScrollView, TextInput, Image, TouchableOpacity, Modal, Animated } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Modal, Animated, RefreshControl } from "react-native";
 import { MoodPicker } from "../components/MoodPicker.js";
 import Map from "../components/Map";
 import PlaylistCard from "../components/PlaylistCard";
@@ -12,13 +12,14 @@ import { connect } from "react-redux";
 import { ButtonIcon } from "../components/ButtonIcon";
 import LinearGradient from "react-native-linear-gradient";
 import { createStackNavigator, createAppContainer } from "react-navigation";
+import Icon from "react-native-vector-icons/Ionicons";
 
 class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			isOpen: false,
-			topY: new Animated.Value(60),
+			topY: new Animated.Value(50),
 			modalVisible: false,
 			text: this.props.locality
 		};
@@ -35,7 +36,7 @@ class Home extends Component {
 	onPress = () => {
 		if (this.state.isOpen) {
 			Animated.spring(this.state.topY, {
-				toValue: 60,
+				toValue: 50,
 				friction: 6
 			}).start();
 		} else {
@@ -69,9 +70,10 @@ class Home extends Component {
 				{/*********************************** MAP *********************************************/}
 				<View style={styles.map}>
 					<Map paddingBottom={45} />
-					<View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-start", marginTop: 65, position: "absolute", paddingLeft: 16, paddingRight: 16 }}>
+					<View style={{ flex: 1, flexDirection: "row", justifyContent: "flex-start", marginTop: 60, position: "absolute", paddingLeft: 16, paddingRight: 16 }}>
+						<Icon style={{color: Colors.defaultIcon, marginRight:10}} name="ios-search" size={35} />
 						<TextInput
-							style={{ flex: 1, color: "white", fontSize: 28, fontWeight: "bold", paddingRight: 20, lineHeight: 42 }}
+							style={{ flex: 1, color: "white", fontSize: 28, fontWeight: "bold", paddingRight: 20}}
 							onChangeText={this.onChangeText}
 							onSubmitEditing={this.onSubmit}
 							value={this.props.locality}
@@ -118,9 +120,23 @@ class Home extends Component {
 					</LinearGradient>
 
 					{/*********************************** SCROLLVIEW 1 *********************************************/}
-					<ScrollView style={styles.mainWrapper}>
+					<ScrollView refreshControl={
+						<RefreshControl
+							tintColor={'white'}
+							refreshing={this.props.loading}
+							onRefresh={() => {
+								this.props.search()
+							}}
+							style={{
+								transform: [
+									{translateY:30}
+								]
+							}}
+						/>}
+						style={styles.mainWrapper}
+					>
 						<View>
-							<Text style={[{ color: "white", fontSize: 20 }, styles.sidePadding]}>Top Charts</Text>
+							<Text style={[{ color: "white", fontSize: 24, fontFamily:'Avenir', fontWeight:"700" }, styles.sidePadding]}>Top Charts</Text>
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
@@ -139,7 +155,7 @@ class Home extends Component {
 						{/*********************************** SCROLLVIEW 2 *********************************************/}
 
 						<View>
-							<Text style={[{ color: "white", fontSize: 20 }, styles.sidePadding]}>Recommended</Text>
+							<Text style={[{ color: "white", fontSize: 24, fontFamily:'Avenir', fontWeight:"700" }, styles.sidePadding]}>Recommended</Text>
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
@@ -161,7 +177,7 @@ class Home extends Component {
 
 				<Modal animationType="slide" transparent={true} visible={this.state.modalVisible}>
 					<View style={{ paddingTop: 40, flex: 1, alignItems: "flex-end", backgroundColor: Colors.defaultBg + "EE" }}>
-						<View style={{paddingRight:16, height:60, zIndex: 10}}>
+						<View style={{ paddingRight: 16, height: 60, zIndex: 10 }}>
 							<ButtonIcon
 								type={"close"}
 								size={60}
@@ -210,15 +226,16 @@ const styles = StyleSheet.create({
 	},
 	mainWrapper: {
 		flex: 1,
-		// marginTop: 50,
+		marginTop: 50,
 		zIndex: 10,
-		paddingTop: 55
+		overflow:"visible"
 	},
 	playlistRow: {
 		flex: 1,
 		flexDirection: "row",
 		height: 400,
-		paddingTop: 20
+		paddingTop: 20,
+		overflow: 'visible'
 	},
 	cardWrapper: {
 		flex: 1,
@@ -239,7 +256,10 @@ const styles = StyleSheet.create({
 		borderColor: Colors.defaultIcon,
 		borderRadius: 100,
 		alignItems: "center",
-		justifyContent: "center"
+		justifyContent: "center",
+		transform: [
+			{translateY: -5}
+		]
 	},
 	moodIconInner: {
 		width: 12,
@@ -261,6 +281,8 @@ const mapStateToProps = state => ({
 	playlists: state.home.playlists,
 	tags: state.home.tags,
 	selectedTags: state.home.selectedTags,
+	loading: state.home.loading
+
 });
 
 const mapDispatchToProps = {

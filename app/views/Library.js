@@ -47,43 +47,40 @@ class PlaylistItem extends Component {
 		this.onPress = this.onPress.bind(this);
 	}
 
-	componentWillMount() {
+	onPress(playlistData) {
+		this.props.navigation.navigate("Playlist", {data: playlistData})
+	}
+
+	render() {
+		var starred;
 		if (this.props.hasStarred) {
 			starred = (
-				<TouchableOpacity
-					onPress={() => this.onPress("5c800e85ff50f6001e086bae")}
-				>
+				<TouchableOpacity>
 					<LinearGradient
 						colors={["#E23955", "#553484"]}
 						style={{
-							width: 150,
-							height: 150,
+							width: 160,
+							height: 160,
 							justifyContent: "center",
 							padding: 10,
-							marginRight: 5,
+							marginRight: 12,
 							shadowOffset: { width: 3, height: 3 },
 							shadowColor: "black",
 							shadowOpacity: 0.4
 						}}>
 						<Icon style={{ color: Colors.defaultIcon, textAlign: "center" }} name="ios-star" size={25} />
-						<Text style={[styles.title, { textAlign: "center" }]}>Starred</Text>
+						<Text style={[styles.title, {position:'absolute', bottom:10, left:10}]}>Starred Tracks</Text>
 					</LinearGradient>
 				</TouchableOpacity>
 			);
 		} else {
 			starred = null;
 		}
-	}
 
-	onPress(playlistData) {
-		this.props.navigation.navigate("Playlist", {data: playlistData})
-	}
-
-	render() {
 		var baseUrl = "http://resonate.openode.io/api/";
 		return (
 			<View>
-				<ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ paddingVertical: 15,paddingHorizontal: 16, overflow:'visible'}}>
+				<ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ paddingVertical: 15,paddingHorizontal: 16, overflow:'visible', height:190}}>
 					{starred}
 					{this.props.playlistData.map((item, index) => (
 						<TouchableOpacity onPress={() => this.onPress(item)} key={index}>
@@ -93,10 +90,19 @@ class PlaylistItem extends Component {
 									style={{
 										width: "100%",
 										height: "100%",
+										maxWidth: "100%", maxHeight: "100%" 
+									}}>
+									<LinearGradient
+									colors={["#0000", "#0005"]}
+									style={{
+										width: "100%",
+										height: "100%",
+										maxWidth: "100%", maxHeight: "100%",
 										flexDirection: "column-reverse",
 										padding: 10
 									}}>
 									<Text style={styles.title}>{item.title}</Text>
+								</LinearGradient>
 								</LinearGradient>
 							</ImageBackground>
 						</TouchableOpacity>
@@ -157,14 +163,13 @@ const styles = StyleSheet.create({
 	},
 	playlistWrapper: {
 		flex: 1,
-		height: 150,
-		justifyContent: "space-around"
+		justifyContent: "space-evenly"
 	},
 	playlistView: {
 		backgroundColor: Colors.tintBottomGradient,
-		marginRight: 8,
-		width: 150,
-		height: 150,
+		marginRight: 12,
+		width: 160,
+		height: 160,
 		shadowOffset: { width: 3, height: 3 },
 		shadowColor: "black",
 		shadowOpacity: 0.4
@@ -173,7 +178,7 @@ const styles = StyleSheet.create({
 		fontFamily: "Avenir",
 		color: "#FFF",
 		fontWeight: "700",
-		fontSize: 16
+		fontSize: 18
 	}
 });
 

@@ -23,7 +23,7 @@ defaultStateHome = {
 		x: 0,
 		y: 0
 	},
-	loading: true,
+	loading: false,
 	playlists: [],
 	tags: tags.generic,
 	selectedTags: []
@@ -44,10 +44,10 @@ function checkWhichTags(coordinates) {
 		return tags.happy
 	}
 	if (x < 0 && y < 0) {
-		return tags.sad
+		return tags.energetic
 	}
 	if (x < 0 && y >= 0) {
-		return tags.energetic
+		return tags.sad
 	}
 }
 
