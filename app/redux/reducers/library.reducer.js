@@ -1,5 +1,3 @@
-// import Spotify from "rn-spotify-sdk";
-
 export const FETCH_SAVED_PLAYLISTS = "library/FETCH_SAVED_PLAYLIST"
 export const FETCH_SAVED_PLAYLISTS_SUCCESS = "library/FETCH_SAVED_PLAYLISTS_SUCCESS"
 export const FETCH_SAVED_PLAYLISTS_FAIL = "library/FETCH_SAVED_PLAYLISTS_FAIL"

@@ -23,6 +23,9 @@ export const GET_USER_SPOTIFY_FAIL = "user/GET_USER_SPOTIFY_FAIL";
 
 let defaultStateUser = {
 	userData: {
+		display_name: "display_name",
+		image_url: "https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg",
+		spotify_id: "spotify_id",
 		saved_playlists: [],
 		created_playlists: []
 	},

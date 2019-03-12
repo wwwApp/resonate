@@ -1,60 +1,86 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Switch
-} from "react-native";
+import { StyleSheet, Text, View, Switch, Image } from "react-native";
 import { Colors } from "./../styles/Colors";
 import { ButtonIcon } from "./../components/ButtonIcon";
+import { connect } from "react-redux";
 
 class Settings extends Component {
+  constructor() {
+    super();
+    this.state = {
+      notiSwitchValue: false,
+      locSwitchValue: false
+    };
+  }
+
+  toggleNotiSwitch = value => {
+    this.setState({ notiSwitchValue: value });
+  };
+
+  toggleLocSwitch = value => {
+    this.setState({ locSwitchValue: value });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.user}>
-          {/* <Image
-            style={styles.anim}
-            source={require("../assets/resonateAnim.gif")}
-          /> */}
-          <View style={styles.circle} />
-          <Text style={[styles.name, styles.text]}>John Smith</Text>
-          <Text style={styles.text}>@spotifyUsername</Text>
+          <Image
+            style={styles.circle}
+            source={{ url: this.props.user.image_url }}
+          />
+
+          <Text style={[styles.name, styles.text]}>
+            {this.props.user.display_name}
+          </Text>
+          <Text style={styles.text}>@{this.props.user.spotify_id}</Text>
         </View>
 
         <View style={styles.settings}>
           <View style={styles.row}>
-            <Text style={[styles.settingText, styles.text]}>Notifications </Text>
+            <Text style={[styles.settingText, styles.text]}>
+              Notifications{" "}
+            </Text>
             <View style={styles.switchContainer}>
-              <Switch />
+              <Switch
+                onValueChange={this.toggleNotiSwitch}
+                value={this.state.notiSwitchValue}
+              />
             </View>
           </View>
 
           <View style={styles.row}>
             <Text style={[styles.settingText, styles.text]}>Location</Text>
             <View style={styles.switchContainer}>
-              <Switch />
+              <Switch
+                onValueChange={this.toggleLocSwitch}
+                value={this.state.locSwitchValue}
+              />
             </View>
           </View>
 
           <View style={styles.row}>
-            <Text style={[styles.settingText, styles.text]}>Import Playlist</Text>
+            <Text style={[styles.settingText, styles.text]}>
+              Import Playlist
+            </Text>
             <View style={styles.moveIcon}>
-            <ButtonIcon type="move" />
+              <ButtonIcon type="move" />
             </View>
           </View>
 
           <View style={styles.row}>
             <Text style={[styles.settingText, styles.text]}>Logout</Text>
             <View style={styles.moveIcon}>
-            <ButtonIcon type="move" />
+              <ButtonIcon type="move" />
             </View>
           </View>
 
           <View style={styles.row}>
-            <Text style={[styles.settingText, styles.text]}>Disconnect Account</Text>
+            <Text style={[styles.settingText, styles.text]}>
+              Disconnect Account
+            </Text>
             <View style={styles.moveIcon}>
-            <ButtonIcon type="move" />
+              <ButtonIcon type="move" />
             </View>
           </View>
         </View>
@@ -70,7 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.defaultBg,
     alignItems: "center"
   },
-  text:{
+  text: {
     fontFamily: "Avenir",
     color: Colors.defaultFont
   },
@@ -98,13 +124,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingVertical: 17
   },
-  anim: {
-    width: 250,
-    height: 250,
-    marginHorizontal: "auto"
-  },
   name: {
-    fontSize: 25,
+    fontSize: 25
   },
   circle: {
     width: 200,
@@ -115,8 +136,14 @@ const styles = StyleSheet.create({
     marginTop: 80
   },
   moveIcon: {
-    marginRight: 10
+    marginRight: 5
   }
 });
 
-export default Settings;
+function mapStateToProps(state) {
+  return {
+    user: state.user.userData
+  };
+}
+
+export default connect(mapStateToProps)(Settings);

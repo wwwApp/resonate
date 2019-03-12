@@ -6,7 +6,6 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import LinearGradient from "react-native-linear-gradient";
 import Create from "./Create";
-
 import Playlist from "./Playlist";
 import { togglePlaylistView } from "../redux/reducers/playlist.reducer";
 import { connect } from "react-redux";
