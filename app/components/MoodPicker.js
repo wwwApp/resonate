@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, TouchableHighlight, Modal, Dimensions } from "react-native";
-import { ColorWheel } from "./ColorWheel";
-import { Tag } from "./Tag";
+import React from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Modal,  Dimensions, ScrollView } from 'react-native';
+import { ColorWheel } from './ColorWheel';
+import { Tag } from './Tag';
 import { Colors } from "react-native-paper";
 
 class MoodPicker extends React.Component {
@@ -34,7 +34,6 @@ class MoodPicker extends React.Component {
 						<Text style={styles.label}>Calm</Text>
 					</View>
 				</View>
-
 				<Tag style={{flex:1, width:'100%', paddingHorizontal: 16}} isSelectable={true} tagData={this.props.tags} selectedTags={this.props.selectedTags} onTagPress={(tag) => this.props.onTagPress(tag)} />
 			</View>
 		);

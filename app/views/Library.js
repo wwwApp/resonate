@@ -1,18 +1,12 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ImageBackground,
-  TouchableOpacity
-} from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView, ImageBackground, TouchableOpacity, Image, Modal } from "react-native";
 import { ButtonIcon } from "./../components/ButtonIcon";
 import { Colors } from "./../styles/Colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import LinearGradient from "react-native-linear-gradient";
 import Create from "./Create";
+
 import Playlist from "./Playlist";
 import { togglePlaylistView } from "../redux/reducers/playlist.reducer";
 import { connect } from "react-redux";

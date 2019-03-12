@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import Playlist from "./app/views/Playlist";
 import Library from "./app/views/Library";
+import Settings from "./app/views/Settings";
 import Player from "./app/views/Player";
 import { Colors } from "./app/styles/Colors";
 import Home from "./app/views/Home";
