@@ -98,6 +98,8 @@ const Connected_Detail = connect(
 	mapDispatchToPropsDetails
 )(Create_Details);
 
+var title;
+
 class Create_Map extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerRight: (
@@ -114,6 +116,7 @@ class Create_Map extends Component {
 
 	onChangeText = text => {
 		this.props.requestAddr(text);
+		title = text;
 	};
 
 	onSubmit = text => {
@@ -185,7 +188,7 @@ class Create_Tracks extends Component {
 			// Change the color values based on mood calculated from server for bg color
 			<View style={[styles.bg, styles.padTop]}>
 				<Text style={[styles.h2, styles.margin, {marginBottom:10}]}>Add Tracks</Text>
-				<TrackStack title="Playlist title" styles={styles} />
+				<TrackStack title={title} styles={styles} />
 				<TouchableOpacity onPress={() => navigate("Location")} style={styles.continueWrapper}>
 					<Text style={styles.continueButton}>Continue</Text>
 				</TouchableOpacity>
