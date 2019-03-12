@@ -11,25 +11,31 @@ import { ButtonIcon } from "./ButtonIcon";
 import { Colors } from "./../styles/Colors";
 
 class TripleDotMenu extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <View style={styles.main}>
         <View style={{ width: "100%", height: 100, alignItems: "flex-end" }}>
-          <ButtonIcon type="close" onPress={this.props.onClose}/>
+          <ButtonIcon type="close" onPress={this.props.onClose} />
         </View>
 
         <View style={styles.songImage}>
           <ImageBackground
             style={styles.songImageBackground}
-            source={require("../assets/beatles.jpg")}
+            source={{ url: this.props.track.image_url }}
           >
             <View style={styles.songInfo}>
               <Text
                 style={{ color: "white", fontWeight: "bold", fontSize: 18 }}
               >
-                A Good Song
+                {this.props.track.title}
               </Text>
-              <Text style={{ color: "white" }}>The Beatles</Text>
+
+              <Text style={{ color: "white" }}>
+                {this.props.track.artists.join(", ")}
+              </Text>
             </View>
           </ImageBackground>
         </View>
@@ -38,7 +44,7 @@ class TripleDotMenu extends React.Component {
           <TouchableOpacity>
             <Text style={styles.optionText}>Add to Playlist</Text>
           </TouchableOpacity>
-          <TouchableOpacity >
+          <TouchableOpacity>
             <Text style={styles.optionText}>Save to Spotify</Text>
           </TouchableOpacity>
         </View>
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     padding: 35,
-		paddingTop: 50
+    paddingTop: 50
   },
   songImage: {
     width: 200,

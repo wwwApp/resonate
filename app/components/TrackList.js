@@ -15,7 +15,8 @@ class TrackList extends Component {
     super(props);
     this.state = {
       isStarred: this.setIsStarred(),
-      isModalVisible: false
+      isModalVisible: false,
+      selectedTrack: {}
     };
   }
 
@@ -37,6 +38,12 @@ class TrackList extends Component {
   toggleOptions() {
     const isModalVisible = !this.state.isModalVisible;
     this.setState({ isModalVisible });
+  }
+
+  getSelectedTrack(track) {
+    const selectedTrack = track;
+    this.setState({ selectedTrack });
+    this.toggleOptions()
   }
 
   render() {
@@ -63,7 +70,7 @@ class TrackList extends Component {
               <ButtonIcon
                 style={styles.trackItem}
                 type="track-more"
-                onPress={this.toggleOptions.bind(this)}
+                onPress={() => this.getSelectedTrack(item)}
               />
             </View>
           </View>
@@ -74,7 +81,7 @@ class TrackList extends Component {
           transparent={true}
         >
           <TripleDotMenu
-            trackData={this.state.track}
+            track={this.state.selectedTrack}
             onClose={this.toggleOptions.bind(this)}
           />
         </Modal>

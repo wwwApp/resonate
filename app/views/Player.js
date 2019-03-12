@@ -177,18 +177,8 @@ class Player extends Component {
                   {this.props.currentTrack.title}
                 </Text>
 
-                {/** FIX IT: MAP OF UNDEFINED ERROR */}
-                {/* {this.props.currentTrack.artists.map((item, index) => (
-                  <Text
-                    key={index}
-                    style={[styles.infoText, styles.artistText]}
-                  >
-                    {item}
-                  </Text>
-                ))} */}
-
                 <Text style={[styles.infoText, styles.artistText]}>
-                  {this.props.currentTrack.artists}
+                  {this.props.currentTrack.artists.join(", ")}
                 </Text>
               </View>
 
