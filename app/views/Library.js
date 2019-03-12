@@ -86,7 +86,7 @@ class PlaylistItem extends Component {
 		var baseUrl = "http://resonate.openode.io/api/";
 		return (
 			<View>
-				<ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ paddingVertical: 15,paddingHorizontal: 16, overflow:'visible'}}>
+				<ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ paddingVertical: 15,paddingHorizontal: 16, overflow:'visible', height:190}}>
 					{starred}
 					{this.props.playlistData.map((item, index) => (
 						<TouchableOpacity onPress={() => this.onPress(item)} key={index}>
