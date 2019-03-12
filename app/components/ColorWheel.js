@@ -8,8 +8,9 @@ import {
   PanResponder,
   StyleSheet,
   View,
-} from 'react-native'
-import colorsys from 'colorsys'
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import colorsys from 'colorsys';
 
 export class ColorWheel extends Component {
   static defaultProps = {
@@ -92,6 +93,8 @@ export class ColorWheel extends Component {
         x: absX + width / 2,
         y: y % window.height + height / 2,
       }
+      const y_fix = (y);
+      console.log(x,y,height, height/2, window.height, y % window.height + height / 2 + (y/2))
 
       this.setState({
         offset,
@@ -100,6 +103,7 @@ export class ColorWheel extends Component {
         width,
         top: y % window.height,
         left: absX,
+        y_fix
       })
       this.forceUpdate(this.state.currentColor)
     })
@@ -159,16 +163,14 @@ export class ColorWheel extends Component {
   }
 
   forceUpdate = (color) => {
-    
-    const {h, s, v} = colorsys.hex2Hsv(color)
+    const {h, s, v} = colorsys.hex2Hsv(color);
     const {left, top} = this.calcCartesian(h, s / 100)
     this.setState({currentColor: color})
     this.state.pan.setValue({
       x: left - this.props.thumbSize / 2,
       y: top - this.props.thumbSize / 2,
     })
-
-    this.props.onColorChange(color, {x: left - this.state.offset.x, y: top - this.state.offset.x});
+    this.props.onColorChange(color, {x: left - this.state.offset.x, y: (top - this.state.offset.y) + this.state.y_fix});
   }
 
   render () {
@@ -195,7 +197,7 @@ export class ColorWheel extends Component {
         {...panHandlers}
         onLayout={nativeEvent => this.onLayout(nativeEvent)}
         style={[styles.coverResponder, this.props.style]}>
-        <Image
+        <FastImage
           style={[styles.img, 
                   {
                     height: radius * 2 - this.props.thumbSize,

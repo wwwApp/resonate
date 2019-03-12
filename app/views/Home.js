@@ -6,7 +6,7 @@ import PlaylistCard from "../components/PlaylistCard";
 import Playlist from "./Playlist";
 import { Colors } from "../styles/Colors";
 import { getMapAddr, requestAddr } from "../redux/reducers/map.reducer";
-import { setMood, search } from "../redux/reducers/home.reducer";
+import { setMood, search, toggleTag } from "../redux/reducers/home.reducer";
 import { initialize } from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 import { ButtonIcon } from "../components/ButtonIcon";
@@ -124,9 +124,16 @@ class Home extends Component {
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
-							{this.props.playlists &&this.props.playlists.map((item,index) => (
-								<PlaylistCard onPress={()=>{this.props.navigation.navigate("Playlist", {data: item})}} playlist={item} key={index}/>
-							))}
+							{this.props.playlists &&
+								this.props.playlists.map((item, index) => (
+									<PlaylistCard
+										onPress={() => {
+											this.props.navigation.navigate("Playlist", { data: item });
+										}}
+										playlist={item}
+										key={index}
+									/>
+								))}
 						</ScrollView>
 
 						{/*********************************** SCROLLVIEW 2 *********************************************/}
@@ -136,9 +143,16 @@ class Home extends Component {
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
-							{this.props.playlists &&this.props.playlists.map((item,index) => (
-								<PlaylistCard onPress={()=>{this.props.navigation.navigate("Playlist", {data: item})}} playlist={item} key={index}/>
-							))}
+							{this.props.playlists &&
+								this.props.playlists.map((item, index) => (
+									<PlaylistCard
+										onPress={() => {
+											this.props.navigation.navigate("Playlist", { data: item });
+										}}
+										playlist={item}
+										key={index}
+									/>
+								))}
 						</ScrollView>
 					</ScrollView>
 				</View>
@@ -147,21 +161,29 @@ class Home extends Component {
 
 				<Modal animationType="slide" transparent={true} visible={this.state.modalVisible}>
 					<View style={{ paddingTop: 40, flex: 1, alignItems: "flex-end", backgroundColor: Colors.defaultBg + "EE" }}>
-						<ButtonIcon
-							type={"close"}
-							size={60}
-							onPress={() => {
-								this.setModalVisible(false);
-							}}
-						/>
+						<View style={{paddingRight:16, height:60, zIndex: 10}}>
+							<ButtonIcon
+								type={"close"}
+								size={60}
+								onPress={() => {
+									this.setModalVisible(false);
+								}}
+							/>
+						</View>
 						<MoodPicker
 							onColorChange={(color, coordinates) => {
 								this.props.setMood(color, coordinates);
 							}}
-							onColorChangeComplete={(color) => {
+							onColorChangeComplete={color => {
 								this.props.search();
 							}}
 							initialColor={this.props.color}
+							tags={this.props.tags}
+							selectedTags={this.props.selectedTags}
+							onTagPress={(tag) => {
+								this.props.toggleTag(tag);
+								this.props.search();
+							}}
 						/>
 					</View>
 				</Modal>
@@ -169,8 +191,6 @@ class Home extends Component {
 		);
 	}
 }
-
-
 
 const styles = StyleSheet.create({
 	container: {
@@ -238,7 +258,9 @@ const mapStateToProps = state => ({
 	locality: state.map.searchText,
 	coordinates: state.home.moodCoordinates,
 	color: state.home.moodColor,
-	playlists: state.home.playlists
+	playlists: state.home.playlists,
+	tags: state.home.tags,
+	selectedTags: state.home.selectedTags,
 });
 
 const mapDispatchToProps = {
@@ -246,7 +268,8 @@ const mapDispatchToProps = {
 	requestAddr,
 	setMood,
 	search,
-	initialize
+	initialize,
+	toggleTag
 };
 
 const Home_connected = connect(
@@ -273,6 +296,5 @@ const MainNavigator = createStackNavigator(
 		headerMode: "none"
 	}
 );
-
 
 export default MainNavigator;
