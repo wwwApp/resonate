@@ -75,13 +75,13 @@ class PlaylistItem extends Component {
 		} else {
 			starred = null;
 		}
-
+		var recentSorted = [...this.props.playlistData].sort(sortRecent);
 		var baseUrl = "http://resonate.openode.io/api/";
 		return (
 			<View>
 				<ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ paddingVertical: 15,paddingHorizontal: 16, overflow:'visible', height:190}}>
 					{starred}
-					{this.props.playlistData.map((item, index) => (
+					{recentSorted.map((item, index) => (
 						<TouchableOpacity onPress={() => this.onPress(item)} key={index}>
 							<ImageBackground source={{ uri: baseUrl + item.image_path }} style={[styles.playlistView, { maxWidth: "100%", maxHeight: "100%" }]}>
 								<LinearGradient
@@ -195,3 +195,14 @@ const MainNavigator = createStackNavigator(
 
 
 export default MainNavigator;
+
+
+function sortRecent(a,b) {
+	let aTimestamp = parseInt(a._id.toString().substring(0,8), 16);
+	let bTimestamp = parseInt(b._id.toString().substring(0,8), 16);
+	if (aTimestamp > bTimestamp)
+		return -1;
+	if (aTimestamp < bTimestamp)
+		return 1;
+	return 0;
+}

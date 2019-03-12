@@ -14,6 +14,7 @@ import { setMood,  setTitle, setDesc, setImg, uploadPhoto, uploadPlaylist, toggl
 import { fetchUserData } from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 
+
 class Create_Details extends Component {
 	// componentDidMount() {
 	//   this.props.navigation.setParams({dismiss: this.props.navigation.dismiss});
@@ -400,3 +401,5 @@ const MainNavigator = createStackNavigator(
 const Create = createAppContainer(MainNavigator);
 
 export default Create;
+
+
