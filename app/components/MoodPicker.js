@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Modal,  Dimensions, ScrollView } from 'react-native';
-import { ColorWheel } from 'react-native-color-wheel';
+import { ColorWheel } from './ColorWheel';
 import { Tag } from './Tag';
 import { Colors } from "react-native-paper";
 
