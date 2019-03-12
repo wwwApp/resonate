@@ -23,7 +23,7 @@ defaultStateHome = {
 		x: 0,
 		y: 0
 	},
-	loading: true,
+	loading: false,
 	playlists: [],
 	tags: tags.generic,
 	selectedTags: []
