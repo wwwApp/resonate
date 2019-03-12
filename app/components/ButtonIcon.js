@@ -69,6 +69,12 @@ const ButtonIcon = props => {
           <Icon style={styles.iconStyle} name="ios-add" size={40} />
         </TouchableOpacity>
       );
+    case "move":
+    return (
+      <TouchableOpacity onPress={props.onPress}>
+        <Icon style={[styles.iconStyle, styles.reverse]} name="ios-arrow-back" size={40} />
+      </TouchableOpacity>
+    );
     // Icons for track item
     case "track-star":
       return (
@@ -175,6 +181,9 @@ const styles = StyleSheet.create({
   },
   inactiveIconStyle: {
     color: Colors.defaultIconInactive
+  },
+  reverse: {
+    transform: [{ rotate: "180deg" }]
   },
   verticalIcon: {
     transform: [{ rotate: "270deg" }]

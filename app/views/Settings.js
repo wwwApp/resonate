@@ -1,58 +1,78 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ScrollView, ImageBackground, Image, TouchableOpacity, Modal, Dimensions, Animated, Switch } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Switch
+} from "react-native";
 import { Colors } from "./../styles/Colors";
+import { ButtonIcon } from "./../components/ButtonIcon";
 
 class Settings extends Component {
-  
-
-
   render() {
-    return(
+    return (
       <View style={styles.container}>
-      <View style={styles.user}>
-      <Image style={styles.anim}source={require('../assets/resonateAnim.gif')}/>
-      <Text style={styles.name}>John Smith</Text>
-      <Text style={styles.spotifyUserName}>@spotifyUsername</Text>
-      </View>
-
-      <View style={styles.settings}>
-        <View style={styles.row}><Text style={styles.settingText}>Notifications </Text>
-        <View style={styles.switchContainer}> 
-        <Switch></Switch>
-        
-            </View></View>
-
-        <View style={styles.row}><Text style={styles.settingText}>Location</Text>
-        <View style={styles.switchContainer}> 
-        <Switch></Switch>
-        </View>
+        <View style={styles.user}>
+          {/* <Image
+            style={styles.anim}
+            source={require("../assets/resonateAnim.gif")}
+          /> */}
+          <View style={styles.circle} />
+          <Text style={[styles.name, styles.text]}>John Smith</Text>
+          <Text style={styles.text}>@spotifyUsername</Text>
         </View>
 
-        <View style={styles.row}><Text style={styles.settingText}>Import Playlist</Text></View>
+        <View style={styles.settings}>
+          <View style={styles.row}>
+            <Text style={[styles.settingText, styles.text]}>Notifications </Text>
+            <View style={styles.switchContainer}>
+              <Switch />
+            </View>
+          </View>
 
-        <View style={styles.row}><Text style={styles.settingText}>Logout</Text></View>
-        <View style={styles.row}><Text style={styles.settingText}>Disconnect Account</Text></View>
-      
+          <View style={styles.row}>
+            <Text style={[styles.settingText, styles.text]}>Location</Text>
+            <View style={styles.switchContainer}>
+              <Switch />
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <Text style={[styles.settingText, styles.text]}>Import Playlist</Text>
+            <View style={styles.moveIcon}>
+            <ButtonIcon type="move" />
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <Text style={[styles.settingText, styles.text]}>Logout</Text>
+            <View style={styles.moveIcon}>
+            <ButtonIcon type="move" />
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <Text style={[styles.settingText, styles.text]}>Disconnect Account</Text>
+            <View style={styles.moveIcon}>
+            <ButtonIcon type="move" />
+            </View>
+          </View>
+        </View>
       </View>
-      </View>
-      
-      
     );
-    }
-   
-  
+  }
 }
- 
-    
-  
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
     backgroundColor: Colors.defaultBg,
-
-    
+    alignItems: "center"
+  },
+  text:{
+    fontFamily: "Avenir",
+    color: Colors.defaultFont
   },
   user: {
     flex: 1,
@@ -69,34 +89,34 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 50,
     borderTopColor: "white",
-    borderTopWidth: .5,
+    borderTopWidth: 0.5,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-between",
+    paddingHorizontal: 37
   },
   settingText: {
-    color: "white",
     fontSize: 18,
-    padding: 17
-    
+    paddingVertical: 17
   },
   anim: {
     width: 250,
     height: 250,
-    marginLeft: "auto",
-    marginRight: "auto"
-    
+    marginHorizontal: "auto"
   },
   name: {
-    fontSize: 20,
-    color: "white"
+    fontSize: 25,
   },
-  spotifyUserName: {
-    color: "white"
+  circle: {
+    width: 200,
+    height: 200,
+    borderRadius: 200 / 2,
+    backgroundColor: Colors.defaultIcon,
+    marginBottom: 30,
+    marginTop: 80
   },
-
-  
+  moveIcon: {
+    marginRight: 10
+  }
 });
 
 export default Settings;
-
-   

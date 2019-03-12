@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View, ScrollView } from "react-native";
+import { Text, StyleSheet, View, ScrollView, Modal } from "react-native";
 import { ButtonIcon } from "./ButtonIcon";
 import { Colors } from "./../styles/Colors";
+import { TripleDotMenu } from "./TripleDotMenu";
 
 class TrackList extends Component {
   /**
@@ -13,7 +14,8 @@ class TrackList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isStarred: this.setIsStarred()
+      isStarred: this.setIsStarred(),
+      isModalVisible: false
     };
   }
 
@@ -30,6 +32,11 @@ class TrackList extends Component {
     let isStarred = this.state.isStarred;
     isStarred[index] = !this.state.isStarred[index];
     this.setState({ isStarred });
+  }
+
+  toggleOptions() {
+    const isModalVisible = !this.state.isModalVisible;
+    this.setState({ isModalVisible });
   }
 
   render() {
@@ -53,10 +60,24 @@ class TrackList extends Component {
                 onPress={() => this.toggleStar(index)}
                 type="track-star"
               />
-              <ButtonIcon style={styles.trackItem} type="track-more" />
+              <ButtonIcon
+                style={styles.trackItem}
+                type="track-more"
+                onPress={this.toggleOptions.bind(this)}
+              />
             </View>
           </View>
         ))}
+        <Modal
+          visible={this.state.isModalVisible}
+          animationType="slide"
+          transparent={true}
+        >
+          <TripleDotMenu
+            trackData={this.state.track}
+            onClose={this.toggleOptions.bind(this)}
+          />
+        </Modal>
       </ScrollView>
     );
   }

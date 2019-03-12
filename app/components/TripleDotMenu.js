@@ -1,105 +1,92 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Modal,  Dimensions, ImageBackground, Button } from 'react-native';
-import { ColorWheel } from 'react-native-color-wheel';
-import { Tag } from './Tag';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground
+} from "react-native";
+import { ButtonIcon } from "./ButtonIcon";
+import { Colors } from "./../styles/Colors";
 
 class TripleDotMenu extends React.Component {
-
-
-
-  render(){
-    return(
-      
-
-      <View style={styles.trippleDotMain}> 
-        <View style={{width: "100%", height: 100, alignItems: "flex-end", }}>
-        
-              <TouchableOpacity
-                onPress={() => {this.props.closeTd()}}
-                style={{}}>
-                
-                        <Image
-                          source={require('../assets/close-button.png')}
-                          style={{
-                            
-                            marginRight: 30,
-                            marginTop: 55,
-                            
-                          }} />
-                            
-                          
-                  </TouchableOpacity>
-
+  render() {
+    return (
+      <View style={styles.main}>
+        <View style={{ width: "100%", height: 100, alignItems: "flex-end" }}>
+          <ButtonIcon type="close" onPress={this.props.onClose}/>
         </View>
 
-           
+        <View style={styles.songImage}>
+          <ImageBackground
+            style={styles.songImageBackground}
+            source={require("../assets/beatles.jpg")}
+          >
+            <View style={styles.songInfo}>
+              <Text
+                style={{ color: "white", fontWeight: "bold", fontSize: 18 }}
+              >
+                A Good Song
+              </Text>
+              <Text style={{ color: "white" }}>The Beatles</Text>
+            </View>
+          </ImageBackground>
+        </View>
 
-         <View style={styles.songImage}>
-         <ImageBackground style={styles.songImageBackground} source={require('../assets/beatles.jpg')}>
-
-      <View style={styles.songInfo}>
-        <Text style={{color: "white", fontWeight:"bold", fontSize: 18}}>A Good Song</Text>
-        <Text style={{color: "white"}}>The Beatles</Text>
+        <View style={styles.menuOptions}>
+          <TouchableOpacity>
+            <Text style={styles.optionText}>Add to Playlist</Text>
+          </TouchableOpacity>
+          <TouchableOpacity >
+            <Text style={styles.optionText}>Save to Spotify</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-         
-       
-         </ImageBackground>
-         
-                          
-         </View>
-
-         <View style={styles.menuOptions}>
-            <Button  color="#ffffff" style={styles.button} title="Add to Playlist"></Button>
-            <Button  color="#ffffff" style={styles.button}  title="Save in Spotify">Save in Spotify</Button>
-         </View>
-      </View>
-  
-    )
+    );
   }
-
-
 }
 
 const styles = StyleSheet.create({
-    
-    trippleDotMain: {
-      backgroundColor: "#312F2F",
-      height: 1000,
-      opacity: .95,
-      flex: 1,
-      flexDirection: "column",
-      alignItems: "flex-start"
-      
-  
-    },
-    songImage: {
-      width: 200,
-      height: 200,
-      backgroundColor: "black",
-      marginLeft: "auto",
-      marginRight: "auto",
-      marginTop: 50
-    },
-    menuOptions: {
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "center",
-      width: "100%",
-      alignItems: "center",
-      
-    },
-    songImageBackground: {
-      
-      color: "white",
-      
-      width: "100%",
-      height: "100%",
-    },
-    songInfo: {
-      marginTop: 150,
-      padding: 10
-    }
-    
-  });
+  main: {
+    backgroundColor: Colors.defaultBg,
+    height: 1000,
+    opacity: 0.95,
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+    padding: 35,
+		paddingTop: 50
+  },
+  songImage: {
+    width: 200,
+    height: 200,
+    backgroundColor: "black",
+    marginTop: 50
+  },
+  menuOptions: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    width: "100%",
+    alignItems: "center"
+  },
+  songImageBackground: {
+    color: "white",
+    width: "100%",
+    height: "100%"
+  },
+  songInfo: {
+    marginTop: 150,
+    padding: 10
+  },
+  optionText: {
+    color: Colors.defaultFont,
+    fontFamily: "Avenir",
+    fontSize: 23,
+    marginBottom: 15
+  }
+});
 
-  export { TripleDotMenu };
+export { TripleDotMenu };

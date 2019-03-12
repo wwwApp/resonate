@@ -27,9 +27,9 @@ class Tag extends Component {
   }
 
   render() {
-    const backgroundStyle = {
-      backgroundColor: this.state.background
-    }
+    // const backgroundStyle = {
+    //   backgroundColor: this.state.background
+    // }
     return (
       <View style={[styles.tagContainer, this.props.style]}>
         {this.props.tagData.map((item, index) => {

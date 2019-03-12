@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import { Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator, createAppContainer } from "react-navigation";
-import Playlist from "./app/views/Playlist";
 import Library from "./app/views/Library";
 import Settings from "./app/views/Settings";
 import Player from "./app/views/Player";
 import { Colors } from "./app/styles/Colors";
 import Home from "./app/views/Home";
+import { TripleDotMenu } from "./app/components/TripleDotMenu";
 
 /**
  * Some random pages for tab navigation demo
  */
-class Test1 extends Component {
+class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -44,8 +44,10 @@ class Test1 extends Component {
 
 const BottomNav = createBottomTabNavigator(
   {
+    // trIPEL : { screen: TripleDotMenu },
     Home: { screen: Home },
-    Library: { screen: Library }
+    Library: { screen: Library },
+    Setting: { screen: Settings }
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -57,7 +59,7 @@ const BottomNav = createBottomTabNavigator(
           iconName = "ios-home";
         } else if (routeName === "Library") {
           iconName = "ios-albums";
-        } else if (routeName === "Settings") {
+        } else if (routeName === "Setting") {
           iconName = "ios-settings";
         }
 
