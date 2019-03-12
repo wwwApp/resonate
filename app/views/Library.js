@@ -1,324 +1,193 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Button, ScrollView, ImageBackground, TouchableOpacity, Image, Modal } from "react-native";
+import { ButtonIcon } from "./../components/ButtonIcon";
 import { Colors } from "./../styles/Colors";
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import Icon from "react-native-vector-icons/Ionicons";
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import LinearGradient from "react-native-linear-gradient";
 import Create from "./Create";
-import { TrippleDotMenu } from "../components/TrippleDotMenu";
+
+import Playlist from "./Playlist";
+import { togglePlaylistView } from "../redux/reducers/playlist.reducer";
+import { connect } from "react-redux";
+import changeHue from "../styles/changeHue";
+
 class Lib extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-  
-  
-      modalVisible: false,
-    };
-  }
-
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      // Container View
-      // Change the color values based on mood calculated from server for bg color
-      <View style={styles.bg}>
-
-      <View style={{flex: .1, flexDirection: "row", height: 30}}>
-
-      <TouchableOpacity style={{height: 30, marginLeft: 30}} onPress={() => navigate('Create')}>
-        <Image source={require('../assets/add.png')} />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={{height: 30, marginLeft: 270}} onPress={() => {
-                  this.setModalVisible(true);
-                }}>
-        <Image source={require('../assets/settings.png')} />
-      </TouchableOpacity>
-      
-
-      </View>
-     
-      
-       <View style={styles.libraryWrapper}>
-       <View style={styles.libTitleWrapper}>
-      <Text style={{color: "white", marginLeft: 30, fontSize: 20}}>Saved Playlists</Text>
-      </View>
-{/*       
-              //////////////////////////////////  ROW 1 */}
-      <ScrollView style={styles.libraryRow} horizontal={true} showsHorizontalScrollIndicator={false}>
-      
-      <View style={styles.starredCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-            <Image style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 50}}source={require('../assets/star.png')}></Image>   
-            <Text style={styles.starredTitle}>Starred Songs</Text>
-            
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')}style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        
-
-
-      </ScrollView>
-
-      {/*       
-              //////////////////////////////////  ROW 2 */}
-
-<View style={styles.libTitleWrapper}>
-      <Text style={{color: "white", marginLeft: 30, fontSize: 20}}>Your Playlists</Text>
-      </View>
-      <ScrollView style={styles.libraryRow} horizontal={true} showsHorizontalScrollIndicator={false}>
-      
-      
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')}style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        <View style={styles.libCard} >
-        <ImageBackground source={require('../assets/playlistImage.png')} style={{width: '100%', height: '100%'}}>
-
-            <View style={styles.libCardWrapper}>
-
-                
-            <Text style={styles.playlistTitle}>Playlist Title</Text>
-
-
-            </View>
-
-          </ImageBackground>
-          
-        </View>
-        
-
-
-      </ScrollView>
-       
-       </View>
-      
-       <Modal
-        animationType="slide"
-        transparent={true}    
-        visible={this.state.modalVisible}  >
-
-
-        <TrippleDotMenu closeTd={() => {this.setModalVisible(false)} }/>
-
-        
-        </Modal>
-
-      </View>
-      
-    );
-  }
+	render() {
+		const { navigate } = this.props.navigation;
+		return (
+			// Container View
+			// Change the color values based on mood calculated from server for bg color
+			<View style={styles.bg}>
+				<View style={{ alignSelf: "flex-end", marginBottom: 30, marginRight: 16 }}>
+					<ButtonIcon type="create" onPress={() => navigate("Create")} />
+				</View>
+
+				<View style={styles.playlistWrapper}>
+					<View>
+						<Text style={styles.h2}>Saved Playlists</Text>
+						<Connected_PlaylistItem playlistData={this.props.saved} hasStarred={true} navigation={this.props.navigation} />
+					</View>
+
+					<View>
+						<Text style={styles.h2}>My Playlists</Text>
+						<Connected_PlaylistItem playlistData={this.props.created} hasStarred={false} navigation={this.props.navigation} />
+					</View>
+				</View>
+			</View>
+		);
+	}
 }
 
-const styles = StyleSheet.create({
-  bg: {
-    backgroundColor: Colors.defaultBg,
-    flex:1,
-    paddingTop:50
-  },
- 
-  libraryRow: {
-    flex: .5,
-    flexDirection: "row",
-    height: 170,
-    paddingTop: 30,
-    paddingLeft: 30,
-  
-   
-  },
-  libCard: {
-    width: 162, 
-    height: 162, 
-    backgroundColor: '#312F2F', 
-    marginRight: 30,
-    shadowOffset:{  width: 0,  height: 0,  },
-    shadowColor: 'black',
-    shadowOpacity: 1.0,
-    shadowRadius: 10,
-   
-  },
-  playlistTitle: {
-    marginTop: 130,
-    marginLeft: 10,
-    
-    color: "white"
-  },
-  starredCard: {
-    width: 162, 
-    height: 162, 
-    backgroundColor: '#312F2F', 
-    marginRight: 30,
-    shadowOffset:{  width: 0,  height: 0,  },
-    shadowColor: 'black',
-    shadowOpacity: 1.0,
-    shadowRadius: 10,
-   
-  },
-  starredTitle: {
-    marginLeft: 'auto', 
-    marginRight: 'auto',
-    marginTop: 10,
-    color: "white"
+var starred;
+class PlaylistItem extends Component {
+	constructor(props) {
+		super(props);
 
-  },
-  libraryWrapper: {
-    flex: 1,
-    
-    marginTop: 20
-  }
+		this.onPress = this.onPress.bind(this);
+	}
+
+	componentWillMount() {
+		if (this.props.hasStarred) {
+			starred = (
+				<TouchableOpacity
+					onPress={() => this.onPress("5c800e85ff50f6001e086bae")}
+				>
+					<LinearGradient
+						colors={["#E23955", "#553484"]}
+						style={{
+							width: 150,
+							height: 150,
+							justifyContent: "center",
+							padding: 10,
+							marginRight: 5,
+							shadowOffset: { width: 3, height: 3 },
+							shadowColor: "black",
+							shadowOpacity: 0.4
+						}}>
+						<Icon style={{ color: Colors.defaultIcon, textAlign: "center" }} name="ios-star" size={25} />
+						<Text style={[styles.title, { textAlign: "center" }]}>Starred</Text>
+					</LinearGradient>
+				</TouchableOpacity>
+			);
+		} else {
+			starred = null;
+		}
+	}
+
+	onPress(playlistData) {
+		this.props.navigation.navigate("Playlist", {data: playlistData})
+	}
+
+	render() {
+		var baseUrl = "http://resonate.openode.io/api/";
+		return (
+			<View>
+				<ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={{ paddingVertical: 15,paddingHorizontal: 16, overflow:'visible'}}>
+					{starred}
+					{this.props.playlistData.map((item, index) => (
+						<TouchableOpacity onPress={() => this.onPress(item)} key={index}>
+							<ImageBackground source={{ uri: baseUrl + item.image_path }} style={[styles.playlistView, { maxWidth: "100%", maxHeight: "100%" }]}>
+								<LinearGradient
+									colors={[changeHue(item.color, 40) + "AA", item.color + "CC"]}
+									style={{
+										width: "100%",
+										height: "100%",
+										flexDirection: "column-reverse",
+										padding: 10
+									}}>
+									<Text style={styles.title}>{item.title}</Text>
+								</LinearGradient>
+							</ImageBackground>
+						</TouchableOpacity>
+					))}
+				</ScrollView>
+			</View>
+		);
+	}
+}
+
+const mapStateToPropsLib = state => ({
+	saved: state.user.userData.saved_playlists,
+	created: state.user.userData.created_playlists
 });
 
+const mapDispatchToPropsLib = {
+};
+
+const Connected_Lib = connect(
+	mapStateToPropsLib,
+	mapDispatchToPropsLib
+)(Lib);
+
+class PlaylistView extends Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		return <Playlist navigation={this.props.navigation} />;
+	}
+}
+
+const mapStateToProps = state => ({
+	isVisible: state.playlist.isVisible
+});
+
+const mapDispatchToProps = {
+	togglePlaylistView
+};
+
+const Connected_PlaylistItem = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(PlaylistItem);
+
+const styles = StyleSheet.create({
+	bg: {
+		backgroundColor: Colors.defaultBg,
+		flex: 1,
+		paddingTop: 50
+	},
+	h2: {
+		color: Colors.defaultFont,
+		fontFamily: "Avenir",
+		fontWeight: "900",
+		fontSize: 26,
+		marginLeft: 16
+	},
+	playlistWrapper: {
+		flex: 1,
+		height: 150,
+		justifyContent: "space-around"
+	},
+	playlistView: {
+		backgroundColor: Colors.tintBottomGradient,
+		marginRight: 8,
+		width: 150,
+		height: 150,
+		shadowOffset: { width: 3, height: 3 },
+		shadowColor: "black",
+		shadowOpacity: 0.4
+	},
+	title: {
+		fontFamily: "Avenir",
+		color: "#FFF",
+		fontWeight: "700",
+		fontSize: 16
+	}
+});
 
 const MainNavigator = createStackNavigator(
-  {
-    Library: {screen: Lib},
-    Create: {screen: Create}
-  },
-  {
-    mode: 'modal',
-    headerMode: 'none',
-  }
+	{
+		Library: { screen: Connected_Lib },
+		Create: { screen: Create },
+		Playlist: { screen: PlaylistView }
+	},
+	{
+		mode: "modal",
+		headerMode: "none"
+	}
 );
 
-const Library = createAppContainer(MainNavigator);
 
-export default Library;
+export default MainNavigator;

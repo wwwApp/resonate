@@ -2,4 +2,7 @@
 target 'resonate' do
     # Pods for resonate
     pod 'GoogleMaps'
+
+      pod 'react-native-fast-image', :path => '../node_modules/react-native-fast-image'
+
     end

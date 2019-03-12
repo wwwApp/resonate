@@ -5,64 +5,8 @@ import {
 } from "react-native";
 import { Colors } from "../styles/Colors";
 import LinearGradient from "react-native-linear-gradient";
-
-
-var fakeData = {
-  trackListA: [
-    {
-      "artists": [
-        "Stevie Wonder"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5596",
-      "title": "Sir Duke",
-      "album": "Songs In The Key Of Life (Reissue)",
-      "image_url": "https://i.scdn.co/image/36241af268aef838a5f9aa6bd635a170adffbeee",
-      "spotify_id": "2udw7RDkldLFIPG9WYdVtT"
-    },
-    {
-      "artists": [
-        "Marvin Gaye"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5595",
-      "title": "What's Going On",
-      "album": "What's Going On",
-      "image_url": "https://i.scdn.co/image/79cc9cb5325ea22f480989045cf62e962822803a",
-      "spotify_id": "34b3a3Pz9Jlz0092LMyNAB"
-    },
-    {
-      "artists": [
-        "Janelle Monáe"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5594",
-      "title": "Make Me Feel",
-      "album": "Make Me Feel",
-      "image_url": "https://i.scdn.co/image/29979c0664b46f3e54b2a3f66f448c9df11f929f",
-      "spotify_id": "79GsUxLyzxgnN4I1E11dtO"
-    }
-  ],
-  trackListB: [
-    {
-      "artists": [
-        "Marvin Gaye"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5595",
-      "title": "What's Going On",
-      "album": "What's Going On",
-      "image_url": "https://i.scdn.co/image/79cc9cb5325ea22f480989045cf62e962822803a",
-      "spotify_id": "34b3a3Pz9Jlz0092LMyNAB"
-    },
-    {
-      "artists": [
-        "Janelle Monáe"
-      ],
-      "_id": "5c6ac32fe21c4e00360b5594",
-      "title": "Make Me Feel",
-      "album": "Make Me Feel",
-      "image_url": "https://i.scdn.co/image/29979c0664b46f3e54b2a3f66f448c9df11f929f",
-      "spotify_id": "79GsUxLyzxgnN4I1E11dtO"
-    }
-  ]
-}
+import { searchTrack, dragItem} from "../redux/reducers/create.reducer";
+import { connect } from "react-redux";
 
 class TrackView extends Component {
   constructor() {
@@ -140,8 +84,7 @@ class TrackView extends Component {
 
   render() {
     const panStyle = {
-      transform: this.state.pan.getTranslateTransform(),
-      zIndex: 2
+      transform: this.state.pan.getTranslateTransform()
     }
     var insertStyle = {}
     let fromOffset = (this.props.isBottom) ? this.props.offsets.listB : this.props.offsets.listA;
@@ -149,18 +92,15 @@ class TrackView extends Component {
     let increment = (this.props.transitioning) ? 1 : 0;
     if (!this.props.dragFrom && (this.props.dragData.index + fromOffset == this.props.i + toOffset - increment)) {
       insertStyle = {
-        marginLeft: this.props.dragData.marginLeft,
-        zIndex: 0
+        marginLeft: this.props.dragData.marginLeft
       }
     } if (this.props.dragFrom && (this.props.dragData.index - increment == this.props.i - 1)) {
       insertStyle = {
-        marginLeft: this.props.dragData.marginAdjacent,
-        zIndex: 0
+        marginLeft: this.props.dragData.marginAdjacent
       }
     } if (!this.props.dragFrom && (this.props.dragData.index + fromOffset == this.props.i + toOffset ) && (this.props.transitioning)) {
       insertStyle = {
-        marginRight: -1 * (styles.trackView.width),
-        zIndex: 2
+        marginRight: -1 * (styles.trackView.width)
       }
     }
 
@@ -181,9 +121,7 @@ class TrackStack extends Component {
   constructor() {
     super();
     this.state = {
-      listA: fakeData.trackListA,
-      listB: fakeData.trackListB,
-      totalDragDistance: (styles.trackView.height + styles.stack.marginTop + 60),
+      totalDragDistance: (styles.trackView.height + styles.stack.marginTop + 110),
       dragData: {
         index: 0,
         marginLeft: new Animated.Value(0),
@@ -228,17 +166,18 @@ class TrackStack extends Component {
         this.state.dragData.marginLeft.setValue(0);
         this.setState({insertTransitioning: false});
       })
-      let tempA = isBottom ? this.state.listB : this.state.listA;
-      let tempB = isBottom ? this.state.listA : this.state.listB;
-      let tempAOffset = isBottom ? this.state.offsets.listB : this.state.offsets.listA;
-      let tempBOffset = isBottom ? this.state.offsets.listA : this.state.offsets.listB;
-      let offset = index - tempAOffset + tempBOffset;
-      tempA.splice(index, 1);
-      tempB.splice(offset, 0, item);
+
+      let offset = 0;
+      if (!isBottom) {
+        offset = index - this.state.offsets.listA + this.state.offsets.listB;
+      } else {
+        offset = index - this.state.offsets.listB + this.state.offsets.listA;
+      }
+
+      this.props.dragItem(this.props.searchResults, this.props.trackQueue, index, offset, !isBottom);
+
       this.setState({
         insertTransitioning: true,
-        listA: isBottom ? tempB : tempA,
-        listB: isBottom ? tempA : tempB,
         dragging: false
       })
     }
@@ -270,15 +209,21 @@ class TrackStack extends Component {
     this.handleScrollTop(event, true);
   }
 
-
+  
   render() {
+    var paddingStyle = {
+      paddingLeft:16, 
+      paddingRight:16
+    };
     return (
-      <View style={{padding: 16}}>
-        <View style={this.props.styles.textInputWrapper} >
+      <View style={{backgroundColor: "#0004"}}>
+        <View style={[this.props.styles.textInputWrapper, paddingStyle, {backgroundColor: Colors.defaultBg, paddingBottom: 16, marginBottom:0}]} >
           <TextInput 
             style={this.props.styles.textInput} 
             placeholder="search for artist, album ..."
             placeholderTextColor={Colors.defaultFont}
+            onChangeText={this.props.searchTrack}
+            value={this.props.term}
           />
           <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={[Colors.tintTopGradient, Colors.tintBottomGradient]} style={{width: '100%', height: 4}} />
         </View>
@@ -286,39 +231,39 @@ class TrackStack extends Component {
           snapToAlignment='right' 
           snapToInterval={styles.trackView.width + styles.trackView.marginRight} 
           horizontal={true} 
-          style={styles.stack} 
+          style={[styles.stack, paddingStyle]} 
           scrollEnabled={true} 
           onScroll={this.handleScrollTop} 
           scrollEventThrottle={64}
         >
-          {this.state.listA.map((item, index) => (
+          {this.props.searchResults.map((item, index) => (
             <TrackView 
               transitioning={this.state.insertTransitioning} 
               track={item} 
               offsets={this.state.offsets} 
               isBottom={false} 
               dragFrom={this.state.dragFromTop} 
-              key={item.spotify_id} i={index} 
+              key={item.spotify_id} 
+              i={index} 
               dragData={this.state.dragData} 
               onDrag={this.onDrag} 
               onStopDrag={(item, index, distance) => {this.onStopDrag(item, index, false, distance)}} 
             />
           ))}
         </ScrollView>
-        <View style={styles.text}>
-          <Text style={this.props.styles.h3}>songs currently saved in</Text>
-          <Text style={this.props.styles.h2}>{this.props.title}</Text>
+        <View style={[styles.text, paddingStyle,{backgroundColor: Colors.defaultBg}, {paddingBottom:5, paddingTop:10}]}>
+          <Text style={this.props.styles.h3}>tracks in {this.props.title}</Text>
         </View>
         <ScrollView 
           snapToAlignment='right' 
           snapToInterval={styles.trackView.width + styles.trackView.marginRight} 
           horizontal={true} 
-          style={styles.stack} 
+          style={[styles.stack, paddingStyle]} 
           scrollEnabled={true} 
           onScroll={this.handleScrollBottom} 
           scrollEventThrottle={64}
         >
-          {this.state.listB.map((item, index) => (
+          {this.props.trackQueue.map((item, index) => (
             <TrackView 
               transitioning={this.state.insertTransitioning} 
               track={item} 
@@ -347,12 +292,14 @@ const styles = StyleSheet.create({
     shadowOffset:{  width: 3,  height: 3,  },
     shadowColor: 'black',
     shadowOpacity: 0.4,
+    zIndex: 10
   },
   stack: {
     overflow: "visible",
-    marginTop: 5,
+    marginTop: 15,
     marginBottom: 15,
-    zIndex: 10
+    zIndex: 5,
+    height: 150,
   },
   title: {
     fontFamily: "Avenir",
@@ -371,4 +318,18 @@ const styles = StyleSheet.create({
   }
 });
 
-export { TrackStack };
+const mapStateToProps = state => ({
+  term: state.create.term,
+  searchResults: state.create.searchResults,
+  trackQueue: state.create.trackQueue
+});
+
+const mapDispatchToProps = {
+  searchTrack,
+  dragItem
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(TrackStack);

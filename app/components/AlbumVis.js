@@ -1,42 +1,31 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Image } from "react-native";
-
+import FastImage from 'react-native-fast-image';
 class AlbumVis extends Component {
-  /**
-   *
-   * @param {required} props
-   * Use the class constructor to set the initial state
-   * for your component.
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageURI: props.albumSource,
-      imageSize: props.size
-    };
-  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          source={require("./../assets/resonateAnim.gif")}
+        <FastImage
+          source={require("./../assets/resonateAnim_2.gif")}
           resizeMode="cover"
-          style={{
-            width: this.state.imageSize * 1.3,
-            height: this.state.imageSize * 1.3
-          }}
+          style={[
+            this.props.isPlaying
+              ? { width: this.props.size * 1.3, height: this.props.size * 1.3 }
+              : { width: 0 }
+          ]}
         />
-        <Image
-          source={{ uri: this.state.imageURI }}
+        <FastImage
+          source={{ uri: this.props.albumSource }
+          }
           style={[
             styles.top,
             {
-              width: this.state.imageSize,
-              height: this.state.imageSize,
-              borderRadius: this.state.imageSize / 2,
-              left: '50%',
-              marginLeft: -this.state.imageSize/2
+              width: this.props.size,
+              height: this.props.size,
+              borderRadius: this.props.size / 2,
+              left: "50%",
+              marginLeft: -this.props.size / 2
             }
           ]}
         />
@@ -48,7 +37,8 @@ class AlbumVis extends Component {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    position: "relative"
+    position: "relative",
+    height: 80
   },
   top: {
     position: "absolute"

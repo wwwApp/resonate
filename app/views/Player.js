@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Modal } from "react-native";
 import { ButtonIcon } from "../components/ButtonIcon";
 import { AlbumVis } from "../components/AlbumVis";
-/* import PlayControl from "./PlayControl"; */
-import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "../styles/Colors";
 import { PlayerBar } from "../components/PlayerBar";
 import { Seeker } from "../components/Seeker";
@@ -11,24 +9,40 @@ import GestureRecognizer from "react-native-swipe-gestures";
 import { connect } from "react-redux";
 import {
   togglePlayerView,
+  togglePlay,
   incrementSeeker,
   resetSeeker,
-  togglePlay
+  getCurrentTrack,
+  replay,
+  replay_back,
+  forward,
+  backward,
+  toggleShuffle,
+  shuffle
 } from "../redux/reducers/player.reducer";
-/* import Modal from "react-native-modal"; */
 
 class Player extends Component {
+
   /**
-   *
-   * @param {required} props
-   * Use the class constructor to set the initial state
-   * for your component.
+   * Handle sync of seeker from playlist play action
    */
+  // componentDidUpdate(prevProps, prevState) {
+  //   // only update chart if the data has changed
+  //   if (prevProps.isPlaying !== this.props.isPlaying) {
+  //     this.progressSeeker();
+  //   }
+  // }
+
+  componentDidMount() {
+    // this.play();
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      toggleIcon: "ios-play",
-      timer: null
+      timer: null,
+      isStarred: false
+      // isPlaying: this.props.isPlaying
     };
   }
 
@@ -43,22 +57,8 @@ class Player extends Component {
    * Handle the play/pause button press event.
    */
   async play() {
-    await this.togglePlay();
+    await this.props.togglePlay();
     await this.progressSeeker();
-  }
-
-  /**
-   * Handle toggle of play state and icon
-   */
-  async togglePlay() {
-    this.props.togglePlay();
-    let toggleIcon = "";
-    if (this.state.toggleIcon == "ios-play") {
-      toggleIcon = "ios-pause";
-    } else {
-      toggleIcon = "ios-play";
-    }
-    this.setState({ toggleIcon });
   }
 
   /**
@@ -70,9 +70,12 @@ class Player extends Component {
         this.props.increment();
 
         // When it reaches the end of the current track
-        if (this.props.counter === this.props.duration) {
-          return;
+        if (
+          this.props.counter ===
+          Math.floor(this.props.currentTrack.duration / 1000)
+        ) {
           // Make some call for next track
+          this.forward();
         }
       }, 1000);
     } else {
@@ -86,9 +89,19 @@ class Player extends Component {
   forward() {
     this.props.reset();
     clearInterval(this.state.timer);
-    this.progressSeeker();
 
     // Code for go forward
+    if (!this.props.isShuffle) {
+      if (this.props.currentTrackIndex === this.props.tracks.length - 1) {
+        this.props.replay();
+      } else {
+        this.props.forward();
+      }
+    } else {
+      this.props.shuffle();
+    }
+
+    this.progressSeeker();
   }
 
   /**
@@ -97,25 +110,47 @@ class Player extends Component {
   backward() {
     this.props.reset();
     clearInterval(this.state.timer);
-    this.progressSeeker();
 
     // Code for go backward
+    if (!this.props.isShuffle) {
+      if (this.props.currentTrackIndex === 0) {
+        this.props.replay_back();
+      } else {
+        this.props.backward();
+      }
+    } else {
+      this.props.shuffle();
+    }
+
+    this.progressSeeker();
+  }
+
+  toggleStar() {
+    const isStarred = !this.state.isStarred;
+    this.setState({ isStarred });
   }
 
   render() {
+
+    if (this.props.currentTrackIndex == -1) {
+      return (
+        <View style={this.props.style}></View>
+      )
+    }
+    
     return (
       // Container View
-      <View>
+      <View style={this.props.style}>
         <GestureRecognizer onSwipeUp={() => this.toggleView()}>
           <PlayerBar
             isVisible={!this.props.isFull}
-            albumSource
+            albumSource={this.props.currentTrack.image_url}
             play={() => this.play()}
             forward={() => this.forward()}
             backward={() => this.backward()}
             percentage={this.props.percentage}
-            currentTrack={this.props.currentTrack}
-            toggleIcon={this.state.toggleIcon}
+            toggleIcon={this.props.toggleIcon}
+            isPlaying={this.props.isPlaying}
           />
         </GestureRecognizer>
 
@@ -123,13 +158,17 @@ class Player extends Component {
           <Modal visible={this.props.isFull} animationType={"slide"}>
             <View style={styles.container}>
               <View style={{ alignSelf: "flex-end" }}>
-                <ButtonIcon type="minimize" onPress={this.toggleView.bind(this)} />
+                <ButtonIcon
+                  type="minimize"
+                  onPress={this.toggleView.bind(this)}
+                />
               </View>
 
               <View style={styles.trackImage}>
                 <AlbumVis
-                  albumSource={this.props.currentTrack.album}
+                  albumSource={this.props.currentTrack.image_url}
                   size={200}
+                  isPlaying={this.props.isPlaying}
                 />
               </View>
 
@@ -137,17 +176,36 @@ class Player extends Component {
                 <Text style={[styles.infoText, styles.titleText]}>
                   {this.props.currentTrack.title}
                 </Text>
+
+                {/** FIX IT: MAP OF UNDEFINED ERROR */}
+                {/* {this.props.currentTrack.artists.map((item, index) => (
+                  <Text
+                    key={index}
+                    style={[styles.infoText, styles.artistText]}
+                  >
+                    {item}
+                  </Text>
+                ))} */}
+
                 <Text style={[styles.infoText, styles.artistText]}>
-                  {this.props.currentTrack.artist}
+                  {this.props.currentTrack.artists}
                 </Text>
               </View>
 
               <View style={styles.row}>
                 <TouchableOpacity>
-                  <ButtonIcon type="pl-star" />
+                  <ButtonIcon
+                    type="pl-star"
+                    isStarred={this.state.isStarred}
+                    onPress={this.toggleStar.bind(this)}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <ButtonIcon type="pl-shuffle" />
+                  <ButtonIcon
+                    type="pl-shuffle"
+                    isActive={this.props.isShuffle}
+                    onPress={this.props.toggleShuffle}
+                  />
                 </TouchableOpacity>
               </View>
 
@@ -174,7 +232,7 @@ class Player extends Component {
                   <ButtonIcon
                     type="pc-play"
                     size={70}
-                    toggleIcon={this.state.toggleIcon}
+                    toggleIcon={this.props.toggleIcon}
                     onPress={this.play.bind(this)}
                   />
 
@@ -202,7 +260,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.defaultBg
   },
   trackImage: {
-    marginVertical: 75
+    marginVertical: 150
   },
   trackInfo: {
     marginTop: 10
@@ -252,7 +310,14 @@ function mapDispatchToProps(dispatch) {
     toggleView: () => dispatch(togglePlayerView()),
     increment: () => dispatch(incrementSeeker()),
     reset: () => dispatch(resetSeeker()),
-    togglePlay: () => dispatch(togglePlay())
+    getCurrentTrack: () => dispatch(getCurrentTrack()),
+    forward: () => dispatch(forward()),
+    backward: () => dispatch(backward()),
+    replay: () => dispatch(replay()),
+    replay_back: () => dispatch(replay_back()),
+    togglePlay: () => dispatch(togglePlay()),
+    toggleShuffle: () => dispatch(toggleShuffle()),
+    shuffle: () => dispatch(shuffle())
   };
 }
 
@@ -261,12 +326,15 @@ function mapDispatchToProps(dispatch) {
 // As the count value in the Redux state
 function mapStateToProps(state) {
   return {
+    tracks: state.player.tracks,
+    currentTrackIndex: state.player.currentTrackIndex,
+    currentTrack: state.player.currentTrack,
     isFull: state.player.isFull,
-    currentTrack: state.player.currentTrack,
     isPlaying: state.player.isPlaying,
-    currentTrack: state.player.currentTrack,
     counter: state.player.counter,
-    percentage: state.player.percentage
+    percentage: state.player.percentage,
+    toggleIcon: state.player.toggleIcon,
+    isShuffle: state.player.isShuffle
   };
 }
 

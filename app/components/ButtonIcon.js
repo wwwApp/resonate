@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "../styles/Colors";
 
 const ButtonIcon = props => {
+
   switch (props.type) {
     // Icons for general purpose (nav, etc)
     case "return":
@@ -15,7 +16,7 @@ const ButtonIcon = props => {
     case "close":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={[styles.iconStyle]} name="ios-close" size={50} />
+          <Icon style={[styles.iconStyle]} name="ios-close" size={props.size ? props.size : 50} />
         </TouchableOpacity>
       );
     case "more":
@@ -25,7 +26,7 @@ const ButtonIcon = props => {
             style={[
               styles.iconStyle,
               styles.verticalIcon,
-              { marginLeft: 10, marginRight: -10 }
+              { marginLeft: 5, marginRight: -5 }
             ]}
             name="ios-more"
             size={35}
@@ -35,7 +36,11 @@ const ButtonIcon = props => {
     case "heart":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={styles.iconStyle} name="md-heart-empty" size={35} />
+          <Icon
+            style={styles.iconStyle}
+            size={props.size ? props.size : 35}
+            name={props.toggleIcon}
+          />
         </TouchableOpacity>
       );
     case "minimize":
@@ -48,18 +53,34 @@ const ButtonIcon = props => {
           />
         </TouchableOpacity>
       );
+    case "maximize":
+      return (
+        <TouchableOpacity onPress={props.onPress}>
+          <Icon
+            style={[styles.iconStyle, styles.verticalIcon_reverse]}
+            name="ios-arrow-back"
+            size={35}
+          />
+        </TouchableOpacity>
+          );
+    case "create":
+      return (
+        <TouchableOpacity onPress={props.onPress}>
+          <Icon style={styles.iconStyle} name="ios-add" size={40} />
+        </TouchableOpacity>
+      );
     // Icons for track item
     case "track-star":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={styles.iconStyle} name="ios-star-outline" size={25} />
+          <Icon style={styles.iconStyle} name={props.isStarred ? "ios-star" : "ios-star-outline"} size={25} />
         </TouchableOpacity>
       );
     case "track-more":
       return (
         <TouchableOpacity onPress={props.onPress}>
           <Icon
-            style={[styles.iconStyle, styles.verticalIcon]}
+            style={[styles.iconStyle, styles.verticalIcon, { marginLeft: 5 }]}
             name="ios-more"
             size={25}
           />
@@ -69,13 +90,27 @@ const ButtonIcon = props => {
     case "pl-star":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={styles.iconStyle} name="ios-star-outline" size={35} />
+          <Icon style={styles.iconStyle} name={props.isStarred ? "ios-star" : "ios-star-outline"} size={35} />
         </TouchableOpacity>
       );
     case "pl-shuffle":
       return (
         <TouchableOpacity onPress={props.onPress}>
-          <Icon style={styles.iconStyle} name="ios-repeat" size={35} />
+          <Icon
+            style={[props.isActive ? styles.iconStyle : styles.inactiveIconStyle]}
+            name="ios-shuffle"
+            size={35}
+          />
+        </TouchableOpacity>
+      );
+      case "play":
+      return (
+        <TouchableOpacity onPress={props.onPress}>
+          <Icon
+            style={styles.iconStyle}
+            name="ios-play"
+            size={props.size}
+          />
         </TouchableOpacity>
       );
     // Icons from play controls
@@ -138,8 +173,14 @@ const styles = StyleSheet.create({
   iconStyle: {
     color: Colors.defaultIcon
   },
+  inactiveIconStyle: {
+    color: Colors.defaultIconInactive
+  },
   verticalIcon: {
     transform: [{ rotate: "270deg" }]
+  },
+  verticalIcon_reverse: {
+    transform: [{ rotate: "90deg" }]
   }
 });
 

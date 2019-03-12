@@ -2,84 +2,62 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Modal,  Dimensions, ScrollView } from 'react-native';
 import { ColorWheel } from 'react-native-color-wheel';
 import { Tag } from './Tag';
+import { Colors } from "react-native-paper";
 
 class MoodPicker extends React.Component {
+	static defaultProps = {
+		onColorChange: () => {},
+		onColorChangeComplete: () => {},
+		initialColor: "#ffffff"
+	};
 
-
-
-  render(){
-    return(
-      
-
-      <View style={styles.moodPicker}> 
-        <View style={{width: "100%", height: 100, alignItems: "flex-end", }}>
-        
-              <TouchableOpacity
-                onPress={() => {this.props.closeMp()}}
-                style={{}}>
-                
-                        <Image
-                          source={require('../assets/close-button.png')}
-                          style={{
-                            
-                            marginRight: 30,
-                            marginTop: 55,
-                            padding: 20
-                          }} />
-                            
-                          
-                  </TouchableOpacity>
-
-        </View>
-
-          <View style={{flex: 2, height: 300, }}>
-            
-          <ColorWheel
-              initialColor="#ffffff"
-              onColorChange={color => console.log({color})}
-              onColorChangeComplete={color => onChange(color)}
-              style={{marginTop: 20,
-              width: Dimensions.get('window').width,
-              maxHeight: 400
-                        }}
-              thumbStyle={{ height: 30, width: 30, borderRadius: 30}}
-                  />
-
-
-
-
-            </View>   
-
-            <ScrollView style={styles.tags} horizontal={true} showsHorizontalScrollIndicator={false}> 
-              <Tag tagData={["Holiday", "Vacation", "Late Night", "Early Morning", "Celebration", "Classical", "Driving", "Home", "2000's", "1960's", "1980's", "International", "Religious"]} />
-            </ScrollView>
-            
-      </View>
-  
-    )
-  }
-
-
+	render() {
+		return (
+			<View style={[styles.moodPicker, this.props.style]}>
+				<View style={{ flex: 2, maxHeight: Dimensions.get("window").width }}>
+					<View style={[styles.labelGroup, { transform: [{ translateY: 45 }] }]}>
+						<Text style={styles.label}>Energetic</Text>
+						<Text style={styles.label}>Happy</Text>
+					</View>
+					<ColorWheel
+						initialColor={this.props.initialColor}
+						onColorChange={(color, coordinates) => this.props.onColorChange(color, coordinates)}
+						onColorChangeComplete={color => this.props.onColorChangeComplete(color)}
+						style={{
+							width: Dimensions.get("window").width,
+							maxHeight: Dimensions.get("window").width
+						}}
+						thumbStyle={{ height: 30, width: 30, borderRadius: 30 }}
+					/>
+					<View style={[styles.labelGroup, { transform: [{ translateY: -45 }] }]}>
+						<Text style={styles.label}>Sad</Text>
+						<Text style={styles.label}>Calm</Text>
+					</View>
+				</View>
+				<Tag style={{flex:1, width:'100%', paddingHorizontal: 16}} isSelectable={true} tagData={this.props.tags} selectedTags={this.props.selectedTags} onTagPress={(tag) => this.props.onTagPress(tag)} />
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-    
-    moodPicker: {
-      backgroundColor: "#312F2F",
-      height: 1000,
-      opacity: .95,
-      flex: 1,
-      flexDirection: "column",
-      alignItems: "flex-start"
-      
-  
-    },
-    tags: {
-    marginLeft: 30,
-    marginTop: 30
-    
-    }
-    
-  });
+	moodPicker: {
+		height: 1000,
+		flex: 1,
+		flexDirection: "column",
+		alignItems: "flex-start",
+		marginTop: -40
+	},
+	label: {
+		color: "white",
+		fontFamily: "Avenir",
+		fontSize: 18
+	},
+	labelGroup: {
+		flexDirection: "row",
+		paddingHorizontal: 16,
+		justifyContent: "space-between"
+	}
+});
 
-  export { MoodPicker };
+export { MoodPicker };

@@ -1,21 +1,12 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Text, Animated, TouchableOpacity } from "react-native";
+
+import React, { Component } from "react";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Colors } from "./../styles/Colors";
 
 class Tag extends Component {
-  /**
-   *
-   * @param {required} props
-   * Use the class constructor to set the initial state
-   * for your component.
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      tagData: props.tagData,
-      isChosen: false,
-      background: new Animated.Value("white")
-    };
+  static defaultProps = {
+    onTagPress: () => {},
+    selectedTags: []
   }
 
   onChoose = () => {
@@ -40,40 +31,61 @@ class Tag extends Component {
       backgroundColor: this.state.background
     }
     return (
-     
-      <Animated.View style={styles.tagContainer}>
-        {this.state.tagData.map((item, index) => (
-           <TouchableOpacity onPress={this.onChoose}>
-           <View style={backgroundStyle}>
-            <Text key={index} style={styles.tagName}>
-              {item}
-            </Text>
-           </View>
-          
-          </TouchableOpacity>
-        ))}
-      </Animated.View>
-      
+      <View style={[styles.tagContainer, this.props.style]}>
+        {this.props.tagData.map((item, index) => {
+          let selectIndex = this.props.selectedTags.indexOf(item);
+          return(
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.tagStyle,
+                selectIndex >= 0 ? styles.selectedStyle : {}
+              ]}
+              onPress={() => this.props.onTagPress(item)}
+            >
+              <Text
+                style={[
+                  styles.tagText,
+                  selectIndex >= 0 ? styles.selectedText : {}
+                ]}
+              >
+                {item}
+              </Text>
+            </TouchableOpacity>
+          )}
+        )}
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   tagContainer: {
-    flexDirection: "row",
-    maxHeight: 25
+    flexDirection: 'row',
+  flexWrap: 'wrap',
+    alignItems: 'flex-start'
   },
-  tagName: {
+  tagText: {
     color: Colors.defaultFont,
-    fontSize: 10,
-    fontFamily: "Avenir",
+    fontSize: 14,
+    fontFamily: "Avenir"
+  },
+  tagStyle: {
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 13,
+    borderRadius: 18,
     paddingVertical: 5,
     paddingHorizontal: 15,
-    marginRight: 10
+    marginRight: 12,
+    marginBottom: 12,
+  },
+  selectedStyle: {
+    backgroundColor: "white"
+  },
+  selectedText: {
+    color: Colors.selectedFont
   }
 });
+
 
 export { Tag };
