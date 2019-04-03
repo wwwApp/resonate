@@ -14,6 +14,7 @@ import { setMood,  setTitle, setDesc, setImg, uploadPhoto, uploadPlaylist, toggl
 import { fetchUserData } from "../redux/reducers/user.reducer";
 import { connect } from "react-redux";
 
+
 class Create_Details extends Component {
 	// componentDidMount() {
 	//   this.props.navigation.setParams({dismiss: this.props.navigation.dismiss});
@@ -97,6 +98,7 @@ const Connected_Detail = connect(
 	mapStateToPropsDetails,
 	mapDispatchToPropsDetails
 )(Create_Details);
+
 
 class Create_Map extends Component {
 	static navigationOptions = ({ navigation }) => ({
@@ -185,7 +187,7 @@ class Create_Tracks extends Component {
 			// Change the color values based on mood calculated from server for bg color
 			<View style={[styles.bg, styles.padTop]}>
 				<Text style={[styles.h2, styles.margin, {marginBottom:10}]}>Add Tracks</Text>
-				<TrackStack title="Playlist title" styles={styles} />
+				<TrackStack title={"\"" + this.props.title + "\""} styles={styles} />
 				<TouchableOpacity onPress={() => navigate("Location")} style={styles.continueWrapper}>
 					<Text style={styles.continueButton}>Continue</Text>
 				</TouchableOpacity>
@@ -193,6 +195,15 @@ class Create_Tracks extends Component {
 		);
 	}
 }
+
+const mapStateToPropsTracks = state => ({
+	title: state.create.title
+});
+ 
+const Connected_Tracks = connect(
+	mapStateToPropsTracks
+)(Create_Tracks);
+
 
 
 
@@ -378,7 +389,7 @@ const styles = StyleSheet.create({
 const MainNavigator = createStackNavigator(
 	{
 		Details: { screen: Connected_Detail },
-		Tracks: { screen: Create_Tracks },
+		Tracks: { screen: Connected_Tracks },
 		Location: { screen: Connected_Map },
 		Mood: { screen: Connnected_Mood },
 	},
@@ -397,3 +408,5 @@ const MainNavigator = createStackNavigator(
 const Create = createAppContainer(MainNavigator);
 
 export default Create;
+
+

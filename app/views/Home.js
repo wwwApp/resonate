@@ -64,6 +64,8 @@ class Home extends Component {
 		const moodOffset = {
 			transform: [{ translateX: this.props.coordinates.x / 10 }, { translateY: this.props.coordinates.y / 10 }]
 		};
+		var heartsSorted = [...this.props.playlists].sort(sortHearts);
+		var recentSorted = [...this.props.playlists].sort(sortRecent);
 
 		return (
 			<Animated.View style={[styles.container, paddingStyle]}>
@@ -141,7 +143,7 @@ class Home extends Component {
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
 							{this.props.playlists &&
-								this.props.playlists.map((item, index) => (
+								heartsSorted.map((item, index) => (
 									<PlaylistCard
 										onPress={() => {
 											this.props.navigation.navigate("Playlist", { data: item });
@@ -155,12 +157,12 @@ class Home extends Component {
 						{/*********************************** SCROLLVIEW 2 *********************************************/}
 
 						<View>
-							<Text style={[{ color: "white", fontSize: 24, fontFamily:'Avenir', fontWeight:"700" }, styles.sidePadding]}>Recommended</Text>
+							<Text style={[{ color: "white", fontSize: 24, fontFamily:'Avenir', fontWeight:"700" }, styles.sidePadding]}>Recent</Text>
 						</View>
 
 						<ScrollView style={[styles.playlistRow, styles.sidePadding]} horizontal={true}>
 							{this.props.playlists &&
-								this.props.playlists.map((item, index) => (
+								recentSorted.map((item, index) => (
 									<PlaylistCard
 										onPress={() => {
 											this.props.navigation.navigate("Playlist", { data: item });
@@ -319,4 +321,24 @@ const MainNavigator = createStackNavigator(
 	}
 );
 
+
+
 export default MainNavigator;
+
+function sortHearts(a,b) {
+	if (a.hearts < b.hearts)
+		return -1;
+	if (a.hearts > b.hearts)
+		return 1;
+	return 0;
+}
+
+function sortRecent(a,b) {
+	let aTimestamp = parseInt(a._id.toString().substring(0,8), 16);
+	let bTimestamp = parseInt(b._id.toString().substring(0,8), 16);
+	if (aTimestamp > bTimestamp)
+		return -1;
+	if (aTimestamp < bTimestamp)
+		return 1;
+	return 0;
+}
